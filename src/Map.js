@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker, Popup ,Tooltip} from 'react-leaflet';
 import './Map.css';
 
 class Map extends React.Component {
@@ -27,6 +27,9 @@ class Map extends React.Component {
           <Popup>
             Popup for any custom information.
           </Popup>
+          <Tooltip>
+            Tooltip for any custom information.
+          </Tooltip>
         </Marker>
       </LeafletMap>
     );
