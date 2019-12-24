@@ -1,0 +1,45 @@
+.App-header {
+    background-color:#FFD700;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  ul#nav {
+    min-height: 48px;
+    width: auto;
+ 
+    /* center align the menu */
+    text-align: center;
+ }
+ ul#nav li {
+    position: relative;
+    list-style: none;
+    height: 48px;
+    display: inline-block;
+ }
+ 
+ /* Links */
+ ul#nav li a {
+    display: inline-block;
+    padding: 8px 13px;
+    line-height: 32px;
+    text-decoration: none;
+    text-align: left;
+    color: #fff;
+     -webkit-transition: color .2s ease-in-out;
+     -moz-transition: color .2s ease-in-out;
+     -o-transition: color .2s ease-in-out;
+     -ms-transition: color .2s ease-in-out;
+     transition: color .2s ease-in-out;
+ }
+ 
+ 
+ ul#nav li a:active { background-color: transparent !important; }
+ ul#nav li.current a { 
+     color:#8080ff;
+}
