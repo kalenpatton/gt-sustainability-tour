@@ -3,24 +3,46 @@ import pic from '../images/gtlogo.png';
 import '../styles/PopupWindow.css';
 import '../styles/Audio.scss';
 import H5AudioPlayer from 'react-h5-audio-player';
-
+import Modal from 'react-responsive-modal';
+import CC from './CC';
+import Gallery from './Gallery';
 
 class PopupWindow extends React.Component{
 
     constructor(props) {
         super(props);
+        this.state = {
+            openCC:false,
+            openGallery:false
+          };
         this.onClick = this.onClick.bind(this);
     }
 
     onClick(){
         console.log("click");
     }
+
+    onOpenModalCC = () => {
+        this.setState({ openCC: true });
+    };
+    
+    onCloseModalCC = () => {
+        this.setState({ openCC: false });
+    };
+
+    onOpenModalGallery = () => {
+        this.setState({ openGallery: true });
+    };
+    
+    onCloseModalGallery = () => {
+        this.setState({ openGallery: false });
+    };
     
 
     render(){
         return(
             <div className="popupwindow">
-                <h3>name of the stop</h3>
+                <h3>(Name of the stop)</h3>
                 <img src={pic} id="pic"/>
                 <div className="buttons">
                     <button onClick={this.onClick}>Prev</button>
@@ -43,15 +65,18 @@ class PopupWindow extends React.Component{
                         <li>blablabla</li>
                     </ul>
                 </div>
-                <button onClick={this.onClick}>View Image Gallery</button>
+                <button onClick={this.onOpenModalGallery}>View Image Gallery</button>
+                <Modal open={this.state.openGallery} onClose={this.onCloseModalGallery} >
+                    <Gallery/>
+                    <button onClick={this.onCloseModalGallery}>Back</button>
+                </Modal>
 
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
                
 
                 <div className = "audio" style={{ width: '90%' }}>
                     <H5AudioPlayer
-                    autoPlay={true}
-                    className=""
+                    autoPlay={false}
                     listenInterval={1000}
                     loop={false}
                     muted={false}
@@ -71,7 +96,11 @@ class PopupWindow extends React.Component{
                     />
                 </div>
 
-                <button onClick={this.onClick}>CC</button>
+                <button onClick={this.onOpenModalCC}>CC</button>
+                <Modal open={this.state.openCC} onClose={this.onCloseModalCC} >
+                    <CC/>
+                    <button onClick={this.onCloseModalCC}>Back</button>
+                </Modal>
             </div>
         );
     }

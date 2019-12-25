@@ -9,7 +9,7 @@ export default class Header extends Component {
                 
                 <h3>Settings</h3>
                 <ul>
-                    <li> <button>Filter Sustainability Types</button></li><hr/>
+                    <li><button>Filter Sustainability Types</button></li><hr/>
                     <li><button>Change Order of Stops</button></li><hr/>
                     <li><button>Enable Text Directions</button></li><hr/>
                     <li><button>Enable Info along Routes</button></li><hr/>
@@ -17,9 +17,6 @@ export default class Header extends Component {
                     <li><button>Restart Tour</button></li>
 
                 </ul>
-
-
-
             </div>
         );
     }

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker ,Popup, Tooltip} from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker ,Popup} from 'react-leaflet';
 import '../styles/Map.css';
 import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
@@ -44,8 +44,10 @@ class Map extends React.Component {
         />
         <Marker position={[33.775620, -84.396286]}>
           <Popup >   {/* Popup for any custom information. */}
-            <p>name of the stop</p>
+            <p>(Name of the stop)</p>
             <button onClick={this.onOpenModal}>See details</button>
+
+            {/* https://github.com/reactjs/react-modal */}
             <Modal open={this.state.open} onClose={this.onCloseModal} >
              <PopupWindow/>
             </Modal>

@@ -5,7 +5,7 @@ export default class Footer extends Component {
     render() {
       return (
         <footer className="App-footer">
-          <p>Copyright © 2019 TreeSearchers. All rights reserved.</p>
+          <p>Copyright © 2020 Georgia Tech TreeSearchers. All rights reserved.</p>
         </footer>
       );
     }
