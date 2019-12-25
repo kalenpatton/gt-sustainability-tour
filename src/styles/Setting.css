@@ -1,0 +1,10 @@
+.settingWindow{
+    height: 90%;
+    width: 100%;
+    max-height: fit-content;
+    align-content: center;
+    
+    /* background: chocolate;
+    border: solid 3px #cccccc; */
+}
+

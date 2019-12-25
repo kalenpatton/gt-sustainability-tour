@@ -1,4 +1,13 @@
 .leaflet-container {
     height: 700px;
-    width: 1500px;
+    width: 100%;
+    align-content: center;
+}
+
+/* Modal {
+   align-content: center;
+} */
+
+button {
+    background-color: #FFD700;
 }
