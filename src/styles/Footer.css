@@ -1,12 +1,20 @@
 .App-footer{
+    position: fixed;
+    width: 100%;
     background-color:#FFD700;
     height:40px;
+    bottom: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+
+    /*Shadow*/
+    z-index: 10;
+    box-shadow: 0px 0px 10px rgba(30, 45, 70, .5);
+
 }
 p{
     font-size: 15px;

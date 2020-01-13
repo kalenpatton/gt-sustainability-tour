@@ -4,12 +4,12 @@
     max-height: fit-content;
     max-width: fit-content;
     align-content: center;
-    
+
     /* background: chocolate;
     border: solid 3px #cccccc; */
 }
 
-img{
+img.bordered{
     height: 900%;
     width: 90%;
     border: solid 1px #cccccc;
@@ -27,5 +27,5 @@ img{
     border: solid 1px #cccccc;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
     height:200px;
-    overflow:scroll;
+    overflow-y:scroll;
 }

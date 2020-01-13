@@ -25,7 +25,7 @@ class PopupWindow extends React.Component{
     onOpenModalCC = () => {
         this.setState({ openCC: true });
     };
-    
+
     onCloseModalCC = () => {
         this.setState({ openCC: false });
     };
@@ -33,17 +33,17 @@ class PopupWindow extends React.Component{
     onOpenModalGallery = () => {
         this.setState({ openGallery: true });
     };
-    
+
     onCloseModalGallery = () => {
         this.setState({ openGallery: false });
     };
-    
+
 
     render(){
         return(
             <div className="popupwindow">
                 <h3>(Name of the stop)</h3>
-                <img src={pic} id="pic"/>
+                <img src={pic} id="pic" class="bordered"/>
                 <div className="buttons">
                     <button onClick={this.onClick}>Prev</button>
                     <button onClick={this.onClick}>Make Next Stop</button>
@@ -72,7 +72,7 @@ class PopupWindow extends React.Component{
                 </Modal>
 
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
-               
+
 
                 <div className = "audio" style={{ width: '90%' }}>
                     <H5AudioPlayer

@@ -9,10 +9,10 @@ export default class Gallery extends React.Component{
         return(
             <div className='gallery'>
                 <h3>image gallery</h3>
-                <img src={pic} id="pic"/>
-                <img src={pic} id="pic"/>
-                <img src={pic} id="pic"/>
-                <img src={pic} id="pic"/>
+                <img src={pic} id="pic" class="bordered"/>
+                <img src={pic} id="pic" class="bordered"/>
+                <img src={pic} id="pic" class="bordered"/>
+                <img src={pic} id="pic" class="bordered"/>
             </div>
         );
     }

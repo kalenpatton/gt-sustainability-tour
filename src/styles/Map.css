@@ -1,7 +1,11 @@
 .leaflet-container {
-    height: 700px;
+    position: fixed;
+    top: 50px;
+    bottom: 40px;
     width: 100%;
     align-content: center;
+
+/*    z-index: 1;*/
 }
 
 /* Modal {
