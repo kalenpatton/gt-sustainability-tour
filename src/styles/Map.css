@@ -8,10 +8,16 @@
 /*    z-index: 1;*/
 }
 
-/* Modal {
-   align-content: center;
-} */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
 
 button {
     background-color: #FFD700;
+    margin-left: 10px;
+    margin-right: 10px;
 }

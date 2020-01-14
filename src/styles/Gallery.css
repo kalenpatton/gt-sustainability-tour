@@ -5,3 +5,8 @@
     align-content: center;
     overflow: scroll;
 }
+
+img.bordered{
+    width: 100%;
+    border: solid 1px #cccccc;
+}

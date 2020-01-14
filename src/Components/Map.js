@@ -14,7 +14,7 @@ class Map extends React.Component {
     };
   }
 
-  
+
   onOpenModal = () => {
     this.setState({ open: true });
   };
@@ -48,12 +48,12 @@ class Map extends React.Component {
             <button onClick={this.onOpenModal}>See details</button>
 
             {/* https://github.com/reactjs/react-modal */}
-            <Modal open={this.state.open} onClose={this.onCloseModal} >
+            <Modal open={this.state.open} onClose={this.onCloseModal} className="centered">
              <PopupWindow/>
             </Modal>
           </Popup>
 
-         
+
 
         </Marker>
       </LeafletMap>

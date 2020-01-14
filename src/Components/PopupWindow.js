@@ -42,8 +42,8 @@ class PopupWindow extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h3>(Name of the stop)</h3>
-                <img src={pic} id="pic" class="bordered"/>
+                <h2>(Name of the stop)</h2>
+                <img src={pic} id="pic" className="cover-image"/>
                 <div className="buttons">
                     <button onClick={this.onClick}>Prev</button>
                     <button onClick={this.onClick}>Make Next Stop</button>
@@ -74,8 +74,8 @@ class PopupWindow extends React.Component{
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
 
 
-                <div className = "audio" style={{ width: '90%' }}>
-                    <H5AudioPlayer
+                <div className = "audio">
+                    <H5AudioPlayer className = "audio-player"
                     autoPlay={false}
                     listenInterval={1000}
                     loop={false}

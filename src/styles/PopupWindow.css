@@ -1,31 +1,46 @@
 .popupwindow{
-    height: 90%;
+    height: 100%;
     width: 100%;
     max-height: fit-content;
-    max-width: fit-content;
-    align-content: center;
+    max-width: 400px;
+    text-align: center;
 
     /* background: chocolate;
     border: solid 3px #cccccc; */
 }
 
-img.bordered{
-    height: 900%;
-    width: 90%;
+img.cover-image{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
     border: solid 1px #cccccc;
 
 }
 
 .buttons{
     align-content: center;
-    margin-right: 5px;
+    width: 100%
+/*    margin-right: 5px;*/
+}
+
+.audio{
+    width: 100%;
+    text-align: center;
+}
+
+.audio-player{
+    min-width: 200px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
 .descriptions{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
     border: solid 1px #cccccc;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
-    height:200px;
+    height:75px;
     overflow-y:scroll;
 }
