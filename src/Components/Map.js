@@ -10,17 +10,60 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open:false
+
+      open : false,
+      // Eventually, this hard code should be replaced with a call to backend
+      sites : [
+        {
+          name:"Test Site 1",
+          position:[33.775620, -84.396286]
+        },
+        {
+          name:"Test Site 2",
+          position:[33.776620, -84.396286]
+        },
+        {
+          name:"Test Site 3",
+          position:[33.777620, -84.396286]
+        }
+      ],
+
+      //site to open the popupwindow on
+      targetSite : null
+
     };
   }
 
 
-  onOpenModal = () => {
-    this.setState({ open: true });
+  onOpenModal = (site) => {
+    this.setState({
+      targetSite: site,
+      open: true
+    });
+    console.log(site);
   };
 
   onCloseModal = () => {
     this.setState({ open: false });
+  };
+
+  // Returns UI elements for all site markers
+  addMarkers = () => {
+    var markers = [];
+    for (var i=0; i<this.state.sites.length; i++) {
+      let site = this.state.sites[i];
+      markers.push(
+        <Marker position={site.position} key={i}>
+          <Popup>   {/* Popup for any custom information. */}
+            <div className="center-text">
+              <p>{site.name}</p>
+              <button onClick={() => this.onOpenModal(site)}>See details</button>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    }
+    return markers
   };
 
   render() {
@@ -42,20 +85,12 @@ class Map extends React.Component {
         <TileLayer
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
         />
-        <Marker position={[33.775620, -84.396286]}>
-          <Popup >   {/* Popup for any custom information. */}
-            <p>(Name of the stop)</p>
-            <button onClick={this.onOpenModal}>See details</button>
+        {this.addMarkers()}
 
-            {/* https://github.com/reactjs/react-modal */}
-            <Modal open={this.state.open} onClose={this.onCloseModal} className="centered">
-             <PopupWindow/>
-            </Modal>
-          </Popup>
-
-
-
-        </Marker>
+        {/* https://github.com/reactjs/react-modal */}
+        <Modal open={this.state.open} onClose={this.onCloseModal} className="centered">
+          <PopupWindow site = {this.state.targetSite} />
+        </Modal>
       </LeafletMap>
     );
   }

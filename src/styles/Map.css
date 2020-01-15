@@ -15,6 +15,10 @@
   transform: translate(-50%, -50%) !important;
 }
 
+.center-text {
+    text-align: center;
+}
+
 
 button {
     background-color: #FFD700;

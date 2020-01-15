@@ -42,7 +42,7 @@ class PopupWindow extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h2>(Name of the stop)</h2>
+                <h2>{this.props.site.name}</h2>
                 <img src={pic} id="pic" className="cover-image"/>
                 <div className="buttons">
                     <button onClick={this.onClick}>Prev</button>
