@@ -11,6 +11,7 @@ class PopupWindow extends React.Component{
 
     constructor(props) {
         super(props);
+        this.mapHandler = this.props.mapHandler;
         this.state = {
             openCC:false,
             openGallery:false
@@ -39,6 +40,11 @@ class PopupWindow extends React.Component{
     };
 
 
+    onMakeNextStop = () => {
+        this.mapHandler.setNextStop(this.props.site);
+    };
+
+
     render(){
         return(
             <div className="popupwindow">
@@ -46,7 +52,7 @@ class PopupWindow extends React.Component{
                 <img src={pic} id="pic" className="cover-image"/>
                 <div className="buttons">
                     <button onClick={this.onClick}>Prev</button>
-                    <button onClick={this.onClick}>Make Next Stop</button>
+                    <button onClick={this.onMakeNextStop}>Make Next Stop</button>
                     <button onClick={this.onClick}>Next</button>
                 </div>
                 <div className="descriptions">
