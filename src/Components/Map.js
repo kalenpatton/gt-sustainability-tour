@@ -5,6 +5,7 @@ import '../styles/Map.css';
 import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
+import LocateControl from './LocateControl';
 
 class Map extends React.Component {
 
@@ -38,7 +39,9 @@ class Map extends React.Component {
             //the site currently in focus in the popup window
             focusedSite : null,
             //the next site the user is being routed to
-            nextStop: null
+            nextStop: null,
+            // the starting point of the route
+            routeState: null
 
         };
 
@@ -52,6 +55,10 @@ class Map extends React.Component {
         // logic for setting the next stop on the tour
         setNextStop : (site) => {
             this.setState({ nextStop: site});
+        },
+
+        setRouteStart : (location) =>  {
+            this.setState({ routeStart: location })
         }
     };
 
@@ -89,10 +96,10 @@ class Map extends React.Component {
 
     // Returns the UI element for the direction routing
     addRouting = () => {
-        if (this.state.isMapInit) {
+        if (this.state.isMapInit && this.state.routeStart) {
             return ( <RoutingMachine
                 //Hard code for proof of concept. Change once we have user location data.
-                from={[33.774620, -84.397286]}
+                from={this.state.routeStart}
                 to={this.state.nextStop.position}
                 map={this.map}
                 show={this.state.showDirectionText}
@@ -133,6 +140,10 @@ class Map extends React.Component {
                 {/* Add a bunch of things to the map here */}
                 {this.addRouting()}
                 {this.addMarkers()}
+
+                <LocateControl
+                    startDirectly
+                    mapHandler={this.mapHandler}/>
 
                 {/* https://github.com/reactjs/react-modal */}
                 <Modal
