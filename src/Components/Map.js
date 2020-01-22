@@ -33,7 +33,13 @@ class Map extends React.Component {
                 { name:"McCamish Pavillion", position:[33.78068, -84.39278] },
                 { name:"Zelnak Basketball Practice Facility", position:[33.77993, -84.39226] },
                 { name:"Mewborn Field", position:[33.77928, -84.39323] },
-                { name:"North Avenue Apartments and Dining Hall", position:[33.77091, -84.39167] }
+                { name:"North Avenue Apartments and Dining Hall", position:[33.77091, -84.39167] },
+                { name:"Chapin Building", position:[33.77332, -84.39527] },
+                { name:"Fitten, Freeman, and Montag Halls", position:[33.77803, -84.40408] },
+                { name:"Joseph B. Whitehead Student Health Center", position:[33.77480, -84.40287] },
+                { name:"Campus Recreation Center (CRC)", position:[33.77549, -84.40344] },
+                { name:"Mason Building", position:[33.77663, -84.39884] }
+
             ],
 
             //the site currently in focus in the popup window
@@ -107,6 +113,11 @@ class Map extends React.Component {
         }
     };
 
+    // What to do when the map is clicked
+    handleClick = (e) => {
+        console.log(e.latlng);
+    }
+
     // saves the map to this.map. Used for objects which need the map opject
     saveMap = (map) => {
         this.map = map;
@@ -130,6 +141,7 @@ class Map extends React.Component {
                         dragging={true}
                         animate={true}
                         easeLinearity={0.35}
+                        onClick={this.handleClick}
                         ref={this.saveMap}
             >
                 <TileLayer
