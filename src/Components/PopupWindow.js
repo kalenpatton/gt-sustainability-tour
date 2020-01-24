@@ -16,12 +16,10 @@ class PopupWindow extends React.Component{
             openCC:false,
             openGallery:false
           };
-        this.onClick = this.onClick.bind(this);
+        
     }
 
-    onClick(){
-        console.log("click");
-    }
+   
 
     onOpenModalCC = () => {
         this.setState({ openCC: true });
