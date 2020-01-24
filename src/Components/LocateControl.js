@@ -7,10 +7,19 @@ class LocateControl extends Component {
 
 
   componentDidMount() {
-    const { options, startDirectly, mapHandler} = this.props;
+    const { startDirectly, mapHandler} = this.props;
     const { map } = this.props.leaflet;
 
-    const lc = new Locate(options);
+    const lc = new Locate({
+        keepCurrentZoomLevel: true,
+        flyTo: true,
+        setView: 'untilPan',
+        clickBehavior: {
+            inView: 'setView',
+            outOfView: 'setView',
+            inViewNotFollowing: 'setView'
+        }
+    });
     lc.addTo(map);
 
     map.on('locationfound', (e) => {

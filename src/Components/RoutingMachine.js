@@ -7,6 +7,7 @@ class Routing extends MapLayer {
         const { map, from, to, show} = this.props
         this.control = L.Routing.control({
             show: show,
+            autoRoute: false,
             collapsible: true,
             draggableWaypoints: false,
             addWaypoints: false,
@@ -21,19 +22,22 @@ class Routing extends MapLayer {
                 useHints: false
             })
         });
+        this.control.route();
         this.control.addTo(map.leafletElement);
         this.plan = this.control.getPlan();
-        console.log(this.control)
 
         return this.plan;
     }
 
     updateLeafletElement(fromProps, toProps) {
-        const { from, to, show } = this.props;
+        const { from, to, show } = toProps;
         this.plan.setWaypoints([
             L.latLng(from[0], from[1]),
             L.latLng(to[0], to[1]),
         ]);
+        if (fromProps.to[0] != to[0] || fromProps.to[1] != to[1]) {
+            this.control.route();
+        }
         if (show) {
             this.control.show();
         } else {
