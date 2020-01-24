@@ -15,7 +15,7 @@ export default class Header extends Component {
     onOpenModal = () => {
       this.setState({ open: true });
     };
-  
+
     onCloseModal = () => {
       this.setState({ open: false });
     };
@@ -23,12 +23,12 @@ export default class Header extends Component {
     render() {
       return (
          <header className="App-header">
-            <p onClick={this.onOpenModal} id="setting"><i class="fas fa-cog"></i> Settings</p>
+            <p onClick={this.onOpenModal} id="setting"><i className="fas fa-cog"></i> Settings</p>
             <Modal open={this.state.open} onClose={this.onCloseModal} >
                <Setting/>
             </Modal>
 
-      
+
          </header>
       );
     }
