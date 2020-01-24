@@ -82,7 +82,7 @@ class PopupWindow extends React.Component{
 
                 <div className = "audio">
                     <H5AudioPlayer className = "audio-player"
-                    autoPlay={false}
+                    autoPlay={true}
                     listenInterval={1000}
                     loop={false}
                     muted={false}

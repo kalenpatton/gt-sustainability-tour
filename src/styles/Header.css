@@ -2,12 +2,13 @@
     position: fixed;
     width: 100%;
     background-color:#FFD700;
-    height: 50px;
+    height: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(10px + 2vmin);
+    font-size: calc(5px + 2vmin);
+    font-weight:bold;
     color: white;
 
     /*Shadow*/
@@ -15,37 +16,7 @@
     box-shadow: 0px 0px 10px rgba(30, 45, 70, .5);
   }
 
-  ul#nav {
-    min-height: 48px;
-    width: auto;
-
-    /* center align the menu */
-    text-align: center;
- }
- ul#nav li {
-    position: relative;
-    list-style: none;
-    height: 48px;
-    display: inline-block;
- }
-
- /* Links */
- ul#nav li a {
-    display: inline-block;
-    padding: 8px 13px;
-    line-height: 32px;
-    text-decoration: none;
-    text-align: left;
-    color: #fff;
-     -webkit-transition: color .2s ease-in-out;
-     -moz-transition: color .2s ease-in-out;
-     -o-transition: color .2s ease-in-out;
-     -ms-transition: color .2s ease-in-out;
-     transition: color .2s ease-in-out;
- }
 
 
- ul#nav li a:active { background-color: transparent !important; }
- ul#nav li.current a {
-     color:#8080ff;
-}
+
+  

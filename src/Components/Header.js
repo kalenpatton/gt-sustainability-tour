@@ -23,16 +23,12 @@ export default class Header extends Component {
     render() {
       return (
          <header className="App-header">
-         <ul id="nav" className="nav">
-            <li className="current"><a href="#map">Map</a></li>
-
-            <li><a href="#Home">Home</a></li>
-
-            <li  onClick={this.onOpenModal}><a href="#Setting"> Settings</a></li>
+            <p onClick={this.onOpenModal} id="setting"><i class="fas fa-cog"></i> Settings</p>
             <Modal open={this.state.open} onClose={this.onCloseModal} >
                <Setting/>
             </Modal>
-         </ul>
+
+      
          </header>
       );
     }
