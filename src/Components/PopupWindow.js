@@ -16,12 +16,10 @@ class PopupWindow extends React.Component{
             openCC:false,
             openGallery:false
           };
-        this.onClick = this.onClick.bind(this);
+        
     }
 
-    onClick(){
-        console.log("click");
-    }
+   
 
     onOpenModalCC = () => {
         this.setState({ openCC: true });
@@ -82,7 +80,7 @@ class PopupWindow extends React.Component{
 
                 <div className = "audio">
                     <H5AudioPlayer className = "audio-player"
-                    autoPlay={false}
+                    autoPlay={true}
                     listenInterval={1000}
                     loop={false}
                     muted={false}
