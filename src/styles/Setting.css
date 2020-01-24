@@ -1,0 +1,25 @@
+.settingWindow{
+    height: 90%;
+    width: 100%;
+    max-height: fit-content;
+    align-content: center;
+}
+
+ul {
+    list-style: none;
+    
+}
+
+#admin-button{
+
+    background-color:red;
+}
+
+/* admin button only visible for laptop users */
+@media (max-width: 800px) {
+    #admin-button{
+        display: none;
+    }
+  }
+
+

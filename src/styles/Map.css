@@ -1,0 +1,31 @@
+.leaflet-container {
+    position: fixed;
+    top: 35px;
+    bottom: 35px;
+    width: 100%;
+    align-content: center;
+
+/*    z-index: 1;*/
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.leaflet-routing-container-hide {
+    display: none;
+}
+
+
+button {
+    background-color: #FFD700;
+    margin-left: 10px;
+    margin-right: 10px;
+}

@@ -1,0 +1,181 @@
+$rhap_theme-color: #868686 !default;
+$rhap_background-color: #fff !default;
+$rhap_bar-color: #e4e4e4 !default;
+$rhap_time-color: #000 !default; 
+
+.rhap_container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  width: 100%;
+  min-width: 300px;
+  padding: 7px 13px;
+  background-color: $rhap_background-color;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+}
+
+.rhap_progress-section {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.rhap_progress-container {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  flex: 1 0 auto;
+  align-self: center;
+  margin: 0 3%;
+  cursor: pointer;
+  -webkit-user-select: none; 
+}
+
+.rhap_time {
+  color: $rhap_time-color;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none; 
+}
+
+.rhap_progress-bar {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 5px;
+  background: $rhap_bar-color;
+  border-radius: 2px;
+}
+
+.rhap_progress-indicator {
+  box-sizing: border-box;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  top: -8px;
+  background: $rhap_theme-color;
+  opacity: 0.9;
+  border-radius: 50px;
+  box-shadow: rgba($rhap_theme-color, .5) 0 0 5px;
+}
+
+.rhap_controls-section {
+  display: flex;
+  flex: 1 0;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.rhap_additional-controls {
+  display: flex;
+  flex: 1 0;
+  align-items: center;
+}
+
+.rhap_repeat-button {
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: $rhap_theme-color;
+  margin-right: 6px;
+}
+
+.rhap_main-controls {
+  flex: 0 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rhap_main-controls-button {
+  margin: 0 3px;
+  color: $rhap_theme-color;
+  font-size: 35px;
+  width: 35px;
+  height: 35px;
+}
+
+.rhap_play-pause-button {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  
+}
+
+.rhap_volume-controls {
+  display: flex;
+  flex: 1 0;
+  justify-content: flex-end;
+}
+
+.rhap_volume-button {
+  flex: 0 0 26px;
+  font-size: 26px;
+  width: 26px;
+  height: 26px;
+  color: $rhap_theme-color;
+  margin-right: 6px;
+}
+
+.rhap_volume-container {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  flex: 0 1 100px;
+  -webkit-user-select: none; 
+}
+
+.rhap_volume-bar-area {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+}
+
+.rhap_volume-bar {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: $rhap_bar-color;
+  border-radius: 2px;
+}
+
+.rhap_volume-indicator {
+  box-sizing: border-box;
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  left: 0;
+  top: -4px;
+  background: $rhap_theme-color;
+  opacity: 0.9;
+  border-radius: 50px;
+  box-shadow: rgba($rhap_theme-color, .5) 0 0 3px;
+  cursor: pointer;
+  :hover {
+    opacity: .9;
+    transition-duration: .2s;
+  }
+}
+
+/* Utils */
+.rhap_button-clear {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  :hover {
+    opacity: .9;
+    transition-duration: .2s;
+  }
+  :active {
+    opacity: .95;
+  }
+}
