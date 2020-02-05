@@ -6,7 +6,6 @@
     "leaflet": "^1.6.0",
     "leaflet-routing-machine": "^3.2.12",
     "leaflet.locatecontrol": "^0.70.0",
-    "mysql": "^2.18.1",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
     "react": "^16.11.0",
