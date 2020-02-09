@@ -40,8 +40,8 @@ class PopupWindow extends React.Component{
 
     onMakeNextStop = () => {
         //this.mapHandler.setNextStop(this.props.site);
-        //console.log(this.props.site.position);
-        this.mapHandler.addToRoutine(this.props.site.position);
+        console.log(this.props.site);
+        this.mapHandler.addToRoute(this.props.site.position);
        
     };
 

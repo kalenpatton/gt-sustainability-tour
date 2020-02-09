@@ -7,6 +7,7 @@ import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
 import SuspendButton from 'suspend-button';
+import { Draggable } from 'react-beautiful-dnd';
 
 
 
@@ -19,6 +20,7 @@ class Map extends React.Component {
             isMapInit : false,
             showDirectionText: true,
             open : false,
+            openList:false,
             // Eventually, this hard code should be replaced with a call to backend
             sites : [
                 { name:"Engineered Biosystems Building (EBB)", position:[33.7807, -84.3980] },
@@ -53,7 +55,7 @@ class Map extends React.Component {
             // the starting point of the route
             routeState: null,
 
-            routineList:[],
+            routeList:[],
             
 
         };
@@ -80,17 +82,17 @@ class Map extends React.Component {
 
         },
 
-        addToRoutine:(pos) => {
+        addToRoute:(pos) => {
 
             this.setState((prevState) => {
                
                 return {
-                    routineList: [...prevState.routineList, pos]
+                    routeList: [...prevState.routeList, pos]
                 };
                 
             });
            
-            console.log(this.state.routineList);
+            console.log(this.state.routeList);
            
         }
     };
@@ -107,6 +109,14 @@ class Map extends React.Component {
     onCloseModal = () => {
         this.setState({ open: false });
     };
+
+    onCloseList=() => {
+        this.setState({openList:false});
+    }
+
+    onOpenList=()=>{
+        this.setState({openList:true});
+    }
 
     // Returns UI elements for all site markers
     addMarkers = () => {
@@ -135,8 +145,8 @@ class Map extends React.Component {
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
 
-                routines={this.state.routineList}
-                //routines={list}
+                route={this.state.routeList}
+                
                 
                 map={this.map}
                 show={this.state.showDirectionText}
@@ -197,7 +207,13 @@ class Map extends React.Component {
                     mapHandler={this.mapHandler}/>
 
                 {/* https://github.com/reactjs/react-modal */}
-                <SuspendButton onClick={()=> console.log('kkk')}></SuspendButton>
+
+                <SuspendButton onClick={this.onOpenList}></SuspendButton>
+                <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
+                    <p>{this.state.routeList}</p>
+                   
+                </Modal>
+      
                 
                 <Modal
                     open={this.state.open}

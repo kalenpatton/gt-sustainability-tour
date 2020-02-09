@@ -4,7 +4,7 @@ import 'leaflet-routing-machine';
 
 class Routing extends MapLayer {
     createLeafletElement() {
-        const { map, from, to, show,routines} = this.props
+        const { map, from, to, show,route} = this.props
         this.control = L.Routing.control({
             show: true,
             
@@ -23,7 +23,7 @@ class Routing extends MapLayer {
             //     L.latLng(from[0], from[1]),
             //     L.latLng(to[0], to[1]),    
             // ],
-            waypoints:[L.latLng(from[0], from[1]),...routines],
+            waypoints:[L.latLng(from[0], from[1]),...route],
 
             lineOptions: {
                 styles: [{color: '#3388ff', opacity: 0.8, weight: 5}]
@@ -63,8 +63,8 @@ class Routing extends MapLayer {
     // }
 
     updateLeafletElement(toProps) {
-            const { from,routines } = toProps;
-            this.plan.setWaypoints([L.latLng(from[0], from[1]),...routines]);
+            const { from,route } = toProps;
+            this.plan.setWaypoints([L.latLng(from[0], from[1]),...route]);
             //console.log([L.latLng(from[0], from[1]),...routines]);
             this.control.route();
             this.control.show();
