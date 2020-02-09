@@ -4,14 +4,16 @@ import 'leaflet-routing-machine';
 
 class Routing extends MapLayer {
     createLeafletElement() {
-        const { map, from, to, show,route} = this.props
+        const { map, from, to, show,route} = this.props;
+        
+
         this.control = L.Routing.control({
             show: true,
             
             autoRoute: true,
             collapsible: true,
             collapseBtnClass:'leaflet-routing-collapse-btn',
-            showAlternatives:true,
+            showAlternatives:false,
             draggableWaypoints: false,
             addWaypoints: false,
             createMarker: (() => null),
@@ -26,7 +28,7 @@ class Routing extends MapLayer {
             waypoints:[L.latLng(from[0], from[1]),...route],
 
             lineOptions: {
-                styles: [{color: '#3388ff', opacity: 0.8, weight: 5}]
+                styles: [{color: '#EAAA00', opacity: 1, weight: 5}]
              },
 
             router: L.Routing.osrmv1({
@@ -37,7 +39,7 @@ class Routing extends MapLayer {
         });
         
         
-       
+        
         this.control.route();
         this.control.addTo(map.leafletElement);
         this.plan = this.control.getPlan();

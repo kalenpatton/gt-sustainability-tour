@@ -7,7 +7,8 @@ import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
 import SuspendButton from 'suspend-button';
-import { Draggable } from 'react-beautiful-dnd';
+
+import RoutingList from './RoutingList';
 
 
 
@@ -65,6 +66,7 @@ class Map extends React.Component {
 
 
         this.addRouting = this.addRouting.bind(this);
+       
 
     }
 
@@ -83,17 +85,16 @@ class Map extends React.Component {
         },
 
         addToRoute:(pos) => {
-
-            this.setState((prevState) => {
-               
+            this.setState((prevState) => {  
                 return {
                     routeList: [...prevState.routeList, pos]
-                };
-                
+                };  
             });
-           
+        },
+
+        changeOrder:(newRoute)=>{
+            this.setState({routeList:newRoute}); //mei bian
             console.log(this.state.routeList);
-           
         }
     };
 
@@ -103,7 +104,7 @@ class Map extends React.Component {
             focusedSite: site,
             open: true,
         });
-        console.log(site);
+        //console.log(site);
     };
 
     onCloseModal = () => {
@@ -139,13 +140,19 @@ class Map extends React.Component {
 
     // Returns the UI element for the direction routing
     addRouting = () => {
+
+        var list=[];
+        this.state.routeList.forEach((e)=>{list.push(e.position);});
+        //console.log(list);
+
         if (this.state.isMapInit && this.state.routeStart) {
             return ( <RoutingMachine
                 //Hard code for proof of concept. Change once we have user location data.
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
 
-                route={this.state.routeList}
+               
+                route={list}
                 
                 
                 map={this.map}
@@ -210,7 +217,8 @@ class Map extends React.Component {
 
                 <SuspendButton onClick={this.onOpenList}></SuspendButton>
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
-                    <p>{this.state.routeList}</p>
+                   
+                    <RoutingList stops={this.state.routeList} mapHandler = {this.mapHandler}/>
                    
                 </Modal>
       

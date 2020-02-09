@@ -17,6 +17,7 @@
     "react-responsive-modal": "^4.0.1",
     "react-scripts": "^3.3.1",
     "reactjs-popup": "^1.5.0",
+    "styled-components": "^5.0.1",
     "suspend-button": "^0.1.1"
   },
   "scripts": {
