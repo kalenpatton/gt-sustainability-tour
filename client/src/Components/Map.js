@@ -6,15 +6,22 @@ import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
+import SuspendButton from 'suspend-button';
+
+import RoutingList from './RoutingList';
+
+
 
 class Map extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            
             isMapInit : false,
-            showDirectionText: false,
+            showDirectionText: true,
             open : false,
+            openList:false,
             // Eventually, this hard code should be replaced with a call to backend
             sites : [
                 { name:"Engineered Biosystems Building (EBB)", position:[33.7807, -84.3980] },
@@ -47,12 +54,20 @@ class Map extends React.Component {
             //the next site the user is being routed to
             nextStop: null,
             // the starting point of the route
-            routeState: null
+            routeState: null,
+
+            routeList:[],
+            
 
         };
 
         this.state.focusedSite = this.state.sites[0];
         this.state.nextStop = this.state.focusedSite;
+
+
+        this.addRouting = this.addRouting.bind(this);
+       
+
     }
 
     // Object that contains methods to edit the map. Can be passed to children
@@ -63,8 +78,23 @@ class Map extends React.Component {
             this.setState({ nextStop: site});
         },
 
+        //route start: current pos
         setRouteStart : (location) =>  {
             this.setState({ routeStart: location })
+
+        },
+
+        addToRoute:(pos) => {
+            this.setState((prevState) => {  
+                return {
+                    routeList: [...prevState.routeList, pos]
+                };  
+            });
+        },
+
+        changeOrder:(newRoute)=>{
+            this.setState({routeList:newRoute}); //mei bian
+            console.log(this.state.routeList);
         }
     };
 
@@ -72,14 +102,22 @@ class Map extends React.Component {
     onOpenModal = (site) => {
         this.setState({
             focusedSite: site,
-            open: true
+            open: true,
         });
-        console.log(site);
+        //console.log(site);
     };
 
     onCloseModal = () => {
         this.setState({ open: false });
     };
+
+    onCloseList=() => {
+        this.setState({openList:false});
+    }
+
+    onOpenList=()=>{
+        this.setState({openList:true});
+    }
 
     // Returns UI elements for all site markers
     addMarkers = () => {
@@ -102,17 +140,28 @@ class Map extends React.Component {
 
     // Returns the UI element for the direction routing
     addRouting = () => {
+
+        var list=[];
+        this.state.routeList.forEach((e)=>{list.push(e.position);});
+
         if (this.state.isMapInit && this.state.routeStart) {
             return ( <RoutingMachine
                 //Hard code for proof of concept. Change once we have user location data.
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
+
+                route={list}
+                
                 map={this.map}
                 show={this.state.showDirectionText}
+
             />);
         }
     };
 
+   
+
+  
     // What to do when the map is clicked
     handleClick = (e) => {
         console.log(e.latlng);
@@ -128,6 +177,7 @@ class Map extends React.Component {
 
     render() {
         return (
+           
             <LeafletMap
             // This is the default lon and lat of GT
                         center={[33.775620, -84.396286]}
@@ -141,23 +191,36 @@ class Map extends React.Component {
                         dragging={true}
                         animate={true}
                         easeLinearity={0.35}
-                        onClick={this.handleClick}
+                        // onClick={this.handleClick}
                         ref={this.saveMap}
             >
+                
                 <TileLayer
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                    attribution='© OpenStreetMap contributors'
                 />
 
                 {/* Add a bunch of things to the map here */}
                 {this.addRouting()}
                 {this.addMarkers()}
 
+                
+               
+
                 <LocateControl
                     startDirectly
                     mapHandler={this.mapHandler}/>
 
                 {/* https://github.com/reactjs/react-modal */}
+
+                {/* <SuspendButton onClick={this.onOpenList}></SuspendButton> */}
+                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg"></i></button>
+                <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
+                   
+                    <RoutingList stops={this.state.routeList} mapHandler = {this.mapHandler}/>
+                   
+                </Modal>
+      
+                
                 <Modal
                     open={this.state.open}
                     onClose={this.onCloseModal}
@@ -166,7 +229,9 @@ class Map extends React.Component {
                         site = {this.state.focusedSite}
                         mapHandler = {this.mapHandler}/>
                 </Modal>
+                
             </LeafletMap>
+            
         );
     }
 }

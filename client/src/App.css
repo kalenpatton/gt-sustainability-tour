@@ -2,7 +2,7 @@
   text-align: center;
 }
 .App-header {
-  background-color:#FFD700;
+  background-color:#B3A369;
   height: 50px;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
   color: white;
 }
 .App-footer{
-  background-color:#FFD700;
+  background-color:#B3A369;
   height:45px;
   display: flex;
   flex-direction: column;

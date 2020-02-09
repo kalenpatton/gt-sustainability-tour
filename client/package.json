@@ -10,12 +10,15 @@
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
     "react": "^16.11.0",
+    "react-beautiful-dnd": "^12.2.0",
     "react-dom": "^16.11.0",
     "react-h5-audio-player": "^2.0.1",
     "react-leaflet": "^2.6.0",
     "react-responsive-modal": "^4.0.1",
     "react-scripts": "^3.3.1",
-    "reactjs-popup": "^1.5.0"
+    "reactjs-popup": "^1.5.0",
+    "styled-components": "^5.0.1",
+    "suspend-button": "^0.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
