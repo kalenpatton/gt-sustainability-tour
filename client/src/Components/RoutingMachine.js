@@ -6,14 +6,17 @@ class Routing extends MapLayer {
     createLeafletElement() {
         const { map, from, to, show,routines} = this.props
         this.control = L.Routing.control({
-            show: show,
+            show: true,
+            
             autoRoute: true,
             collapsible: true,
             collapseBtnClass:'leaflet-routing-collapse-btn',
-            
+            showAlternatives:true,
             draggableWaypoints: false,
             addWaypoints: false,
             createMarker: (() => null),
+
+            
             
             position: 'bottomleft',
             // waypoints: [
@@ -26,13 +29,13 @@ class Routing extends MapLayer {
                 styles: [{color: '#3388ff', opacity: 0.8, weight: 5}]
              },
 
-            
-
             router: L.Routing.osrmv1({
                 serviceUrl: 'https://routing.openstreetmap.de/routed-foot/route/v1',
-                useHints: false
+                useHints: false,
+                show:true
             })
         });
+        
         
        
         this.control.route();

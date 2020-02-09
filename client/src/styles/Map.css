@@ -29,3 +29,13 @@ button {
     margin-left: 10px;
     margin-right: 10px;
 }
+
+/* todo: make it prettier */
+.t-suspend-button{
+    width: 2.5rem !important; 
+    height: 2.5rem !important;
+    border-radius: 2rem !important;
+    background-color: #B3A369; 
+    z-index: 1000000;
+}
+

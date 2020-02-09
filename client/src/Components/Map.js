@@ -6,6 +6,8 @@ import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
+import SuspendButton from 'suspend-button';
+
 
 
 class Map extends React.Component {
@@ -13,6 +15,7 @@ class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            
             isMapInit : false,
             showDirectionText: true,
             open : false,
@@ -160,6 +163,7 @@ class Map extends React.Component {
 
     render() {
         return (
+           
             <LeafletMap
             // This is the default lon and lat of GT
                         center={[33.775620, -84.396286]}
@@ -173,9 +177,10 @@ class Map extends React.Component {
                         dragging={true}
                         animate={true}
                         easeLinearity={0.35}
-                        onClick={this.handleClick}
+                        // onClick={this.handleClick}
                         ref={this.saveMap}
             >
+                
                 <TileLayer
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
@@ -192,6 +197,8 @@ class Map extends React.Component {
                     mapHandler={this.mapHandler}/>
 
                 {/* https://github.com/reactjs/react-modal */}
+                <SuspendButton onClick={()=> console.log('kkk')}></SuspendButton>
+                
                 <Modal
                     open={this.state.open}
                     onClose={this.onCloseModal}
@@ -200,7 +207,9 @@ class Map extends React.Component {
                         site = {this.state.focusedSite}
                         mapHandler = {this.mapHandler}/>
                 </Modal>
+                
             </LeafletMap>
+            
         );
     }
 }
