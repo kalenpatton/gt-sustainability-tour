@@ -132,8 +132,7 @@ class Map extends React.Component {
                         ref={this.saveMap}
             >
                 <TileLayer
-                    url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-                    attribution='© OpenStreetMap contributors'
+                    url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
 
                 {/* Add a bunch of things to the map here */}
