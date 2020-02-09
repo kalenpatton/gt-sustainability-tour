@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
-import withAuth from './components/WithAuth';
+import Login from './Components/Login';
+import Dashboard from './Components/Dashboard';
+import withAuth from './Components/WithAuth';
+import './style.css';
 
 import {
   BrowserRouter as Router,

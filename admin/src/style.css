@@ -1,0 +1,31 @@
+.optionBtn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.toolbar {
+    width: 100%;
+/*    padding-left: 100px;
+    padding-right: 100px;
+    text-align: left;*/
+}
+
+.center-text {
+    text-align: center;
+}
+
+.leaflet-container {
+    position: fixed;
+    width: 100%;
+    top: 150px;
+    bottom: 100px;
+    align-content: center;
+
+    z-index: 1;
+}
+
+.popupwindow {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
