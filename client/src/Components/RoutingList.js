@@ -3,11 +3,6 @@ import '../styles/RoutingList.css';
 import { Draggable, Droppable,DragDropContext } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 
-
-
-
-
-
 const Container=styled.div`
     margin: 4px;
     padding:2px;
@@ -56,10 +51,8 @@ class Column extends React.Component{
 class Task extends React.Component{
     constructor(props){
         super(props);
-        console.log(this.props)
     }
     render(){
-        //console.log(this.props.key);//undefined
         return (
             
             <Draggable draggableId={this.props.task.name} index={this.props.num}>
@@ -82,53 +75,53 @@ class Task extends React.Component{
     }
 }
 
-
-const result ={
-    draggableId:'Marcus Nanotechnology Building',
-    type:"TYPE",
-    reason:'DROP',
-    source:{
-        droppableId:'col',
-        index:0,
-    },
-    destination:{
-        droppableId:'col',
-        index:1,
-    }
-}
+// sample result of react dnd
+// const result ={
+//     draggableId:'Marcus Nanotechnology Building',
+//     type:"TYPE",
+//     reason:'DROP',
+//     source:{
+//         droppableId:'col',
+//         index:0,
+//     },
+//     destination:{
+//         droppableId:'col',
+//         index:1,
+//     }
+// }
 
 class RoutingList extends React.Component{
 
     constructor(props) {
         super(props);
         this.state={stops:this.props.stops};
-
-        // var list=[];
-        // this.props.stops.forEach((e)=>{list.push(e.name);});
-        // this.state={stops:list};
-        // //console.log(this.state.stops);
     }
 
     onDragEnd = result =>{
-        const {destination, source,  draggableId}=result;
+        const {destination, source}=result;
         if(!destination){
             return;
         }
 
-        //new list for testing
-        var list=[{name:"Marcus Nanotechnology Building", position:[33.77881, -84.39854]},{ name:"Mewborn Field", position:[33.77928, -84.39323] },{ name:"Engineered Biosystems Building (EBB)", position:[33.7807, -84.3980]}];
+        //console.log(result);
+        var i=source.index;
+        var j=destination.index;
+        var newl=this.state.stops;
+        var temp=newl[i];
+        newl[i]=newl[j];
+        newl[j]=temp;
+
         
-        this.props.mapHandler.changeOrder(list);    
-        this.setState({stops:list});
-        //console.log(this.state.stops);
-        
+        this.props.mapHandler.changeOrder(newl);    
+        this.setState({stops:newl});
+   
     }
 
 
     render(){
         return(
             <div className="popupwindow">
-                <h4>Drag to reorder the stops</h4>
+                <h4>drag to reorder the stops</h4>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Column tasks={this.state.stops}/>
                 </DragDropContext>

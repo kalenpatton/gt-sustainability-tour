@@ -25,7 +25,7 @@
 
 
 button {
-    background-color: #FFD700;
+    background-color: #B3A369;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -35,8 +35,19 @@ button {
     width: 2.5rem !important; 
     height: 2.5rem !important;
     border-radius: 2rem !important;
-    background-color: #B3A369; 
+    background-color: #EAAA00; 
     z-index: 1000000;
+}
+
+#route-button{
+    width: 2.5rem !important; 
+    height: 2.5rem !important;
+    border-radius: 1rem !important;
+    background-color: #EAAA00; 
+    z-index: 1000000;
+    position: fixed;
+    right: 10px;
+    top: 50px;
 }
 
 

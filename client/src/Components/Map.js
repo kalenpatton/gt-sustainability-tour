@@ -143,7 +143,6 @@ class Map extends React.Component {
 
         var list=[];
         this.state.routeList.forEach((e)=>{list.push(e.position);});
-        //console.log(list);
 
         if (this.state.isMapInit && this.state.routeStart) {
             return ( <RoutingMachine
@@ -151,9 +150,7 @@ class Map extends React.Component {
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
 
-               
                 route={list}
-                
                 
                 map={this.map}
                 show={this.state.showDirectionText}
@@ -215,7 +212,8 @@ class Map extends React.Component {
 
                 {/* https://github.com/reactjs/react-modal */}
 
-                <SuspendButton onClick={this.onOpenList}></SuspendButton>
+                {/* <SuspendButton onClick={this.onOpenList}></SuspendButton> */}
+                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg"></i></button>
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
                    
                     <RoutingList stops={this.state.routeList} mapHandler = {this.mapHandler}/>
