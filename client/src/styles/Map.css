@@ -30,15 +30,8 @@ button {
     margin-right: 10px;
 }
 
-/* todo: make it prettier */
-.t-suspend-button{
-    width: 2.5rem !important; 
-    height: 2.5rem !important;
-    border-radius: 2rem !important;
-    background-color: #EAAA00; 
-    z-index: 1000000;
-}
 
+/* todo: make it prettier */
 #route-button{
     width: 2.5rem !important; 
     height: 2.5rem !important;

@@ -24,6 +24,7 @@ class Column extends React.Component{
     render(){
         return(
             <Container>
+                <h5>Your routes:</h5>
                 <Droppable droppableId={'col'}>
                     {(provided)=>( 
                     <TaskList
@@ -31,7 +32,7 @@ class Column extends React.Component{
                         {...provided.droppableProps}
                     >
                         {this.props.tasks.map((task,index)=> {
-                             console.log(index);
+                             //console.log(index);
                              return <Task task={task} key={index} num={index}/>
                         
                         })}
@@ -98,22 +99,32 @@ class RoutingList extends React.Component{
     }
 
     onDragEnd = result =>{
-        const {destination, source}=result;
+        const {destination, draggableId,source}=result;
+
         if(!destination){
+            return;
+        }
+        if(source.index===destination.index){
+            var i=source.index;
+            var newlist=this.state.stops;
+            newlist.splice(i,i+1);
+            this.props.mapHandler.changeOrder(newlist);    
+            this.setState({stops:newlist});
             return;
         }
 
         //console.log(result);
         var i=source.index;
         var j=destination.index;
-        var newl=this.state.stops;
-        var temp=newl[i];
-        newl[i]=newl[j];
-        newl[j]=temp;
+        var newlist=this.state.stops;
+
+        var temp=newlist[i];
+        newlist.splice(i,i+1);
+        newlist.splice(j,0,temp);
 
         
-        this.props.mapHandler.changeOrder(newl);    
-        this.setState({stops:newl});
+        this.props.mapHandler.changeOrder(newlist);    
+        this.setState({stops:newlist});
    
     }
 
@@ -121,7 +132,8 @@ class RoutingList extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h4>drag to reorder the stops</h4>
+                <h4><i className="far fa-hand-point-up fa-lg"></i> drag to reorder <i className="fas fa-map-marker-alt fa-lg"></i></h4>
+                <h5>(long click to delete)</h5>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Column tasks={this.state.stops}/>
                 </DragDropContext>
