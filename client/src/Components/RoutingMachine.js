@@ -8,7 +8,7 @@ class Routing extends MapLayer {
         
 
         this.control = L.Routing.control({
-            show: true,
+            show: show,
             
             autoRoute: true,
             collapsible: true,

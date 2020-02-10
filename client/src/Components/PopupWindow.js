@@ -11,6 +11,7 @@ class PopupWindow extends React.Component{
 
     constructor(props) {
         super(props);
+        //console.log(this.props.autoplay);
         this.mapHandler = this.props.mapHandler;
         this.state = {
             openCC:false,
@@ -83,7 +84,7 @@ class PopupWindow extends React.Component{
 
                 <div className = "audio">
                     <H5AudioPlayer className = "audio-player"
-                    autoPlay={false}
+                    autoPlay={this.props.autoplay}
                     listenInterval={1000}
                     loop={false}
                     muted={false}

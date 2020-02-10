@@ -6,7 +6,7 @@ import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
-import SuspendButton from 'suspend-button';
+
 
 import RoutingList from './RoutingList';
 
@@ -227,7 +227,8 @@ class Map extends React.Component {
                     className="centered">
                     <PopupWindow
                         site = {this.state.focusedSite}
-                        mapHandler = {this.mapHandler}/>
+                        mapHandler = {this.mapHandler}
+                        autoplay={this.props.autoplay}/>
                 </Modal>
                 
             </LeafletMap>
