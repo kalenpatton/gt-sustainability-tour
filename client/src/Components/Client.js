@@ -23,7 +23,7 @@ function checkStatus(response) {
     throw error
 }
 
-// Removes all but name and location fields from locations json
+// Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = []
     for (let i = 0; i < 22; i++) {
