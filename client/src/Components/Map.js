@@ -153,7 +153,7 @@ class Map extends React.Component {
                 route={list}
                 
                 map={this.map}
-                show={this.state.showDirectionText}
+                show={this.props.textDirection}
 
             />);
         }

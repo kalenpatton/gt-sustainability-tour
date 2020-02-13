@@ -5,17 +5,24 @@ import ToggleButton from 'react-toggle-button'
 export default class Header extends Component {
     constructor(props){
         super(props);
-        this.state={value:this.props.value}
+        this.state={
+            autoplay:this.props.autoplay,
+            textDirection:this.props.textDirection,
+        }
     }
 
 
 
     componentDidUpdate(prevState) {
-        console.log(prevState.value);
+        //console.log(prevState.autoplay);
     }
      
-    changeValue=(value)=>{
+    changeAutoPlay=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
+    }
+
+    changeTextDirection=(value)=>{
+        this.props.settingHandler.changeTextDirection(value);
     }
 
 
@@ -26,21 +33,21 @@ export default class Header extends Component {
                 <h3>Settings</h3>
                
                 <h5>Enable Media Autoplay</h5><ToggleButton 
-                value={ this.state.value}
+                value={ this.state.autoplay}
                 onToggle={(value) => {
                     this.setState({
-                    value: !value,
+                        autoplay: !value,
                     });
-                    this.changeValue(value);
+                    this.changeAutoPlay(value);
                 }} />
 
                 <h5>Enable Text Direction</h5><ToggleButton 
-                value={ this.state.value}
+                value={ this.state.textDirection}
                 onToggle={(value) => {
                     this.setState({
-                    value: !value,
+                        textDirection: !value,
                     });
-                    this.changeValue(value);
+                    this.changeTextDirection(value);
                 }} />
                 
                 <hr/>

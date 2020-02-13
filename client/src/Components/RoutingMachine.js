@@ -18,7 +18,7 @@ class Routing extends MapLayer {
 
             
             
-            // position: 'bottomleft',
+            position: 'bottomleft',
             // waypoints: [
             //     L.latLng(from[0], from[1]),
             //     L.latLng(to[0], to[1]),    

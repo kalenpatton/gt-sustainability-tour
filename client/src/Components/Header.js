@@ -25,7 +25,7 @@ export default class Header extends Component {
          <header className="App-header">
             <p onClick={this.onOpenModal} id="setting"><i className="fas fa-cog"></i> Settings</p>
             <Modal open={this.state.open} onClose={this.onCloseModal} >
-               <Setting settingHandler={this.props.settingHandler} value={this.props.value}/>
+               <Setting settingHandler={this.props.settingHandler} autoplay={this.props.autoplay} textDirection={this.props.textDirection}/>
             </Modal>
 
 

@@ -29,7 +29,7 @@ class App extends React.Component {
     return (
       <div className="App">
         
-        <Header settingHandler={this.settingHandler} value={this.state.autoplay}/>
+        <Header settingHandler={this.settingHandler} autoplay={this.state.autoplay} textDirection={this.state.textDirection}/>
         <Map autoplay={this.state.autoplay} textDirection={this.state.textDirection}/>
         <Footer/>
         
