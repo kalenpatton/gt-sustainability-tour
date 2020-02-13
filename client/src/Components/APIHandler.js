@@ -1,14 +1,15 @@
-// Handles requests to the backend server
+// Handles requests to the backend server and promise resolution
 
-
-// Fetches locations as list of objects with only name and location
-function getLocations() {
-    return fetch('locations/', {
+// GETs an array of locations with latitude and longitude arranged as a
+// position array like this.state.sites expects// Fetches locations as list of objects with only name and location
+function getLocations(callback) {
+    return fetch('/locations', {
         accept: "application/json"
     })
         .then(checkStatus)
         .then(response => response.json())
         .then(convertToMapObject)
+        .then(callback)
 }
 
 // Verifies successful response and throws error otherwise
@@ -25,19 +26,8 @@ function checkStatus(response) {
 
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
-    let map_response = []
-    for (let i = 0; i < 22; i++) {
-        let location_obj = response[i]
-        console.log(location_obj)
-        let location = {
-            name: location_obj.name,
-            description: location_obj.dest,
-            transcript: location_obj.transcript,
-            filters: location_obj.filters,
-            location: [location_obj.latitude, location_obj.longitude]
-        }
-        map_response.push(location)
-    }
+    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) => 
+        ({name, description, transcript, filters, location: [latitude, longitude]}))
     return map_response
 }
 

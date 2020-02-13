@@ -7,6 +7,7 @@ router.get('/:loc_id', (req, res) => {
   const locationId = req.params.loc_id
   console.log("Fetching location with id: " + locationId)
 
+  // THIS IS WILDLY UNSAFE CHANGE THIS ASAP
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -21,13 +22,15 @@ router.get('/:loc_id', (req, res) => {
       res.sendStatus(500) // Internal Server Error
       return
     }
-    console.log("Fetched locations")
+    console.log("Fetched location")
     res.json(rows)
   })
 })
 
 /* GET locations listing. */
 router.get('/', function(req, res, next) {
+
+  // THIS IS WILDLY UNSAFE CHANGE THIS ASAP
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
