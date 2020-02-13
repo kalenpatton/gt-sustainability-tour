@@ -8,6 +8,12 @@ export default class Header extends Component {
         this.state={value:this.props.value}
     }
 
+
+
+    componentDidUpdate(prevState) {
+        console.log(prevState.value);
+    }
+     
     changeValue=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
     }
@@ -20,7 +26,16 @@ export default class Header extends Component {
                 <h3>Settings</h3>
                
                 <h5>Enable Media Autoplay</h5><ToggleButton 
-                value={ this.state.value || false }
+                value={ this.state.value}
+                onToggle={(value) => {
+                    this.setState({
+                    value: !value,
+                    });
+                    this.changeValue(value);
+                }} />
+
+                <h5>Enable Text Direction</h5><ToggleButton 
+                value={ this.state.value}
                 onToggle={(value) => {
                     this.setState({
                     value: !value,

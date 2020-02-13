@@ -11,14 +11,18 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      autoplay:false,
+      autoplay:true,
+      textDirection:true,
     }
   }
 
   settingHandler={
     changeAutoplay:(value)=>{
-      this.setState({autoplay:value});
+      this.setState({autoplay:!value});
+    },
 
+    changeTextDirection:(value)=>{
+      this.setState({textDirection:!value});
     }
   }
   render(){
@@ -26,7 +30,7 @@ class App extends React.Component {
       <div className="App">
         
         <Header settingHandler={this.settingHandler} value={this.state.autoplay}/>
-        <Map autoplay={this.state.autoplay}/>
+        <Map autoplay={this.state.autoplay} textDirection={this.state.textDirection}/>
         <Footer/>
         
       </div>

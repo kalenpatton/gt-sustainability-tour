@@ -9,10 +9,8 @@ class Routing extends MapLayer {
 
         this.control = L.Routing.control({
             show: show,
-            
             autoRoute: true,
             collapsible: true,
-            collapseBtnClass:'leaflet-routing-collapse-btn',
             showAlternatives:false,
             draggableWaypoints: false,
             addWaypoints: false,
@@ -20,7 +18,7 @@ class Routing extends MapLayer {
 
             
             
-            position: 'bottomleft',
+            // position: 'bottomleft',
             // waypoints: [
             //     L.latLng(from[0], from[1]),
             //     L.latLng(to[0], to[1]),    
@@ -34,7 +32,7 @@ class Routing extends MapLayer {
             router: L.Routing.osrmv1({
                 serviceUrl: 'https://routing.openstreetmap.de/routed-foot/route/v1',
                 useHints: false,
-                show:true
+                // show:true
             })
         });
         
@@ -65,11 +63,15 @@ class Routing extends MapLayer {
     // }
 
     updateLeafletElement(toProps) {
-            const { from,route } = toProps;
+            const { from,route,show } = toProps;
             this.plan.setWaypoints([L.latLng(from[0], from[1]),...route]);
             //console.log([L.latLng(from[0], from[1]),...routines]);
             this.control.route();
-            this.control.show();
+            if(show){
+                this.control.show();
+            }else{
+                this.control.hide();
+            }
     }
 
 }
