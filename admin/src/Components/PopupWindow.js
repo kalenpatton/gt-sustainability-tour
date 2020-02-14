@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
+import LocationSelect from './LocationSelect';
 
 class PopupWindow extends React.Component{
 
@@ -8,9 +9,11 @@ class PopupWindow extends React.Component{
         this.isNewStop = this.props.site ? false : true;
         this.state = {
             name: '',
-            location: [33.775620, -84.396286]
+            position: [33.775620, -84.396286],
+            desc: ''
         };
         if (!this.isNewStop) this.state={...this.props.site};
+        this.saveSite = this.props.onSaveSite;
 
     }
 
@@ -18,6 +21,7 @@ class PopupWindow extends React.Component{
         event.preventDefault();
         // TODO: Add call to backend to post changes.
         console.log(this.state);
+        this.saveSite({...this.state}, this.isNewStop);
     };
 
     handleInputChange = (event) => {
@@ -30,20 +34,35 @@ class PopupWindow extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h2>{this.isNewStop ? "Add Stop" : "Edit Stop"}</h2>
+                <h2>{this.isNewStop ? "Add Site" : "Edit Site"}</h2>
 
                 <form onSubmit={this.onSubmit}>
-                    <div>
-                        {'Name: '}
-                        <input
-                            className="form-text-in"
-                            type="text"
-                            name="name"
-                            placeholder="Enter site name"
-                            value={this.state.name}
-                            onChange={this.handleInputChange}
-                            required
-                        />
+                    <div className='left-text'>
+                        <div>
+                            {'Name: '}
+                            <input
+                                className="form-text-in"
+                                type="text"
+                                name="name"
+                                placeholder="Enter site name"
+                                value={this.state.name}
+                                onChange={this.handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div>
+                            {'Description: '}
+                            <textarea
+                                className='form-desc-in'
+                                name='desc'
+                                onChange={this.handleInputChange}/>
+                        </div>
+                        <div>
+                            <LocationSelect
+                                position = {this.state.position}
+                                onChangeLocation={(newLocation) => this.setState({position: newLocation})}
+                            />
+                        </div>
                     </div>
                     <input type="submit" value="Save"/>
                 </form>

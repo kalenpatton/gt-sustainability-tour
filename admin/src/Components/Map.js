@@ -9,7 +9,6 @@ class Map extends React.Component {
         this.state = {
             isMapInit : false,
             showDirectionText: false,
-            isModalOpen : false,
             // Eventually, this hard code should be replaced with a call to backend
 
         };
@@ -67,19 +66,20 @@ class Map extends React.Component {
         return (
             <LeafletMap
             // This is the default lon and lat of GT
-                        center={[33.775620, -84.396286]}
-                        zoom={17}
-                        maxZoom={19}
-                        minZoom={14}
-                        attributionControl={true}
-                        zoomControl={true}
-                        doubleClickZoom={true}
-                        scrollWheelZoom={true}
-                        dragging={true}
-                        animate={true}
-                        easeLinearity={0.35}
-                        onClick={this.handleClick}
-                        ref={this.saveMap}
+                className="main-map"
+                center={[33.775620, -84.396286]}
+                zoom={17}
+                maxZoom={19}
+                minZoom={14}
+                attributionControl={true}
+                zoomControl={true}
+                doubleClickZoom={true}
+                scrollWheelZoom={true}
+                dragging={true}
+                animate={true}
+                easeLinearity={0.35}
+                onClick={this.handleClick}
+                ref={this.saveMap}
             >
                 <TileLayer
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

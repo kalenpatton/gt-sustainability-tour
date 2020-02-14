@@ -46,20 +46,19 @@ export default class Dashboard extends Component {
         this.state.focusedSite = this.state.sites[0];
     }
 
-    onOpenModal = (site) => {
+    openModal = (site) => {
         this.setState({
             focusedSite: site,
             isModalOpen: true
         });
-        console.log(site);
     };
 
-    onCloseModal = () => {
+    closeModal = () => {
         this.setState({ isModalOpen: false });
     };
 
     handleAddStop = () => {
-        this.onOpenModal(false);
+        this.openModal(false);
     };
 
     handleEditIntro = () => {
@@ -67,12 +66,22 @@ export default class Dashboard extends Component {
     };
 
     handleEditSite = (site) => {
-        this.onOpenModal(site);
+        this.openModal(site);
     };
 
     handleDeleteSite = (site) => {
 
     };
+
+    onSaveSite = (site, isNew) => {
+        if (isNew) {
+            let newSites = [...this.state.sites];
+            newSites.push(site);
+            this.setState({sites: newSites});
+            this.closeModal();
+        }
+
+    }
 
     render() {
         return (
@@ -92,9 +101,10 @@ export default class Dashboard extends Component {
                 </div>
                 <Modal
                     open={this.state.isModalOpen}
-                    onClose={this.onCloseModal}
+                    onClose={this.closeModal}
                     className="centered">
                     <PopupWindow
+                        onSaveSite = {this.onSaveSite}
                         site = {this.state.focusedSite}
                         mapHandler = {this.mapHandler}/>
                 </Modal>
