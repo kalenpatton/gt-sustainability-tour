@@ -14,6 +14,15 @@ import RoutingList from './RoutingList';
 
 class Map extends React.Component {
 
+    // componentDidUpdate(prevState) {
+    //     //console.log(this.state.routeList);
+    //     if(this.state.routeList.length>0 && prevState.routingList[0].name!=this.state.routeList[0].name){
+    //         console.log(this.state.routeList[0].name);
+    //         this.props.settingHandler.showNextStop(this.state.routeList[0].name);
+    //     }
+        
+    // }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -90,13 +99,23 @@ class Map extends React.Component {
                     routeList: [...prevState.routeList, pos]
                 };  
             });
+            // console.log(this.state.routeList);//现在的问题：点完add to route之后stop加不进来,routeList没有，直到下一个stop加进来
+            // if(this.state.routeList.length === 0){
+            //     this.changeShowNextStop();
+            // }
         },
 
         changeOrder:(newRoute)=>{
-            this.setState({routeList:newRoute}); //mei bian
-            console.log(this.state.routeList);
+            this.setState({routeList:newRoute}); 
+            this.changeShowNextStop();
         }
     };
+
+    changeShowNextStop=()=>{
+        //console.log("hhh")
+        //console.log(this.state.routeList);
+        this.props.settingHandler.showNextStop(this.state.routeList[0].name);
+    }
 
 
     onOpenModal = (site) => {
@@ -143,7 +162,6 @@ class Map extends React.Component {
 
         var list=[];
         this.state.routeList.forEach((e)=>{list.push(e.position);});
-
         if (this.state.isMapInit && this.state.routeStart) {
             return ( <RoutingMachine
                 //Hard code for proof of concept. Change once we have user location data.
@@ -191,7 +209,9 @@ class Map extends React.Component {
                         dragging={true}
                         animate={true}
                         easeLinearity={0.35}
-                        // onClick={this.handleClick}
+                        //onClick={this.handleClick}
+                        maxBounds={ [[33.75,-84.41],[33.8, -84.38]]} //southWest,northEast
+                        maxBoundsViscosity={1.0}
                         ref={this.saveMap}
             >
                 

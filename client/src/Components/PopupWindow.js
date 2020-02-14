@@ -54,7 +54,8 @@ class PopupWindow extends React.Component{
                 <img src={pic} id="pic" className="cover-image"/>
                 <div className="buttons">
                   
-                    <button onClick={this.onMakeNextStop}>Make Next Stop</button>
+                    {/* <button onClick={this.onMakeNextStop}>Make Next Stop</button> */}
+                    <button onClick={this.onMakeNextStop}>Add To My Route</button>
                    
                 </div>
                 <div className="descriptions">

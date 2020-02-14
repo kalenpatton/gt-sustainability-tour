@@ -23,10 +23,15 @@ class Routing extends MapLayer {
             //     L.latLng(from[0], from[1]),
             //     L.latLng(to[0], to[1]),    
             // ],
-            waypoints:[L.latLng(from[0], from[1]),...route],
+
+            //all routes
+             waypoints:[L.latLng(from[0], from[1]),...route],
+             //only route to the next stop
+            waypoints:[L.latLng(from[0], from[1]),route[0]],
 
             lineOptions: {
-                styles: [{color: '#EAAA00', opacity: 1, weight: 5}]
+                styles: [{color: '#EAAA00', opacity: 1, weight: 5}],
+                missingRouteStyles:[{color: 'black', opacity: 0.8, weight: 2, dashArray: '7,12'}]
              },
 
             router: L.Routing.osrmv1({
@@ -36,12 +41,11 @@ class Routing extends MapLayer {
             })
         });
         
-        
-        
+        console.log(this.waypoints);
+       
         this.control.route();
         this.control.addTo(map.leafletElement);
         this.plan = this.control.getPlan();
-        
 
         return this.plan;
     }
@@ -64,8 +68,12 @@ class Routing extends MapLayer {
 
     updateLeafletElement(toProps) {
             const { from,route,show } = toProps;
-            this.plan.setWaypoints([L.latLng(from[0], from[1]),...route]);
-            //console.log([L.latLng(from[0], from[1]),...routines]);
+
+            //all route
+            //this.plan.setWaypoints([L.latLng(from[0], from[1]),...route]);
+
+            //route to next stop
+            this.plan.setWaypoints([L.latLng(from[0], from[1]),route[0]]);
             this.control.route();
             if(show){
                 this.control.show();

@@ -24,7 +24,7 @@ class Column extends React.Component{
     render(){
         return(
             <Container>
-                <h5>Your routes:</h5>
+                <p>Your routes:</p>
                 <Droppable droppableId={'col'}>
                     {(provided)=>( 
                     <TaskList
@@ -58,13 +58,14 @@ class Task extends React.Component{
             
             <Draggable draggableId={this.props.task.name} index={this.props.num}>
                 {(provided)=>(
-
                 <Container
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
+
+                    id="task"
                 >
-                    {this.props.task.name}
+                    <i className="fas fa-map-marker-alt fa-lg"></i> {this.props.task.name}
                 </Container>
 
                 )}
@@ -132,7 +133,7 @@ class RoutingList extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h4><i className="far fa-hand-point-up fa-lg"></i> drag to reorder <i className="fas fa-map-marker-alt fa-lg"></i></h4>
+                <h4><i className="far fa-hand-point-up fa-lg"></i> drag to reorder </h4>
                 <h5>(long click to delete)</h5>
                 <DragDropContext onDragEnd={this.onDragEnd}>
                     <Column tasks={this.state.stops}/>

@@ -8,7 +8,8 @@ export default class Header extends Component {
    constructor(props) {
       super(props);
       this.state = {
-        open:false
+        open:false,
+        nextStop:"N/A",
       };
     }
 
@@ -23,7 +24,8 @@ export default class Header extends Component {
     render() {
       return (
          <header className="App-header">
-            <p onClick={this.onOpenModal} id="setting"><i className="fas fa-cog"></i> Settings</p>
+            <span id="nextStop">Next Stop: {this.props.nextStop}</span>
+            <span onClick={this.onOpenModal} id="setting"><i className="fas fa-cog"></i></span>
             <Modal open={this.state.open} onClose={this.onCloseModal} >
                <Setting settingHandler={this.props.settingHandler} autoplay={this.props.autoplay} textDirection={this.props.textDirection}/>
             </Modal>

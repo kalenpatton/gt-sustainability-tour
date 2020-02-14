@@ -13,9 +13,9 @@ export default class Header extends Component {
 
 
 
-    componentDidUpdate(prevState) {
-        //console.log(prevState.autoplay);
-    }
+    // componentDidUpdate(prevState) {
+    //     console.log(prevState.autoplay);
+    // }
      
     changeAutoPlay=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
@@ -45,7 +45,7 @@ export default class Header extends Component {
                     this.changeAutoPlay(value);
                 }} />
 
-                <h5>Enable Text Direction</h5><ToggleButton 
+                <h5>Enable Text Directions</h5><ToggleButton 
                 value={ this.state.textDirection}
                 onToggle={(value) => {
                     this.setState({
