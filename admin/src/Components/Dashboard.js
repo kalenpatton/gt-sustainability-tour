@@ -37,6 +37,7 @@ export default class Dashboard extends Component {
                 { name:"Mason Building", position:[33.77663, -84.39884] }
 
             ],
+            isModalOpen: false,
 
             //the site currently in focus in the popup window
             focusedSite : null
@@ -58,7 +59,7 @@ export default class Dashboard extends Component {
     };
 
     handleAddStop = () => {
-
+        this.onOpenModal(false);
     };
 
     handleEditIntro = () => {
