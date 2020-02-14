@@ -25,6 +25,10 @@ export default class Header extends Component {
         this.props.settingHandler.changeTextDirection(value);
     }
 
+    restart=()=>{
+        window.location.reload();
+    }
+
 
     render(){
         return(
@@ -52,7 +56,7 @@ export default class Header extends Component {
                 
                 <hr/>
                 <button>Filter Sustainability Types</button><hr/>
-                <button>Restart Tour</button><hr/>
+                <button onClick={this.restart}>Restart Tour</button><hr/>
                 <button id="admin-button">Admin Login</button>
             </div>
         );
