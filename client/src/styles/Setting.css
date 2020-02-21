@@ -3,6 +3,7 @@
     width: 100%;
     max-height: fit-content;
     align-content: center;
+    
 }
 
 ul {
@@ -21,5 +22,8 @@ ul {
         display: none;
     }
   }
+
+
+
 
 

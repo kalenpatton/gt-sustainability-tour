@@ -1,0 +1,57 @@
+.optionBtn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.toolbar {
+    width: 100%;
+/*    padding-left: 100px;
+    padding-right: 100px;
+    text-align: left;*/
+}
+
+.center-text {
+    width: 100%;
+    text-align: center;
+}
+
+.left-text {
+    width: 100%;
+    text-align: left;
+}
+
+.main-map {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 150px;
+    bottom: 100px;
+    align-content: center;
+
+    z-index: 1;
+}
+
+.locate-select-map {
+    position: relative;
+    left: 0px;
+    right: 0px;
+    height: 300px;
+}
+
+.popupwindow {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.form-text-in {
+    width: 100%;
+}
+.form-num-in {
+    width: 100px;
+}
+.form-desc-in {
+    position: relative;
+    width: 100%;
+    resize: vertical;
+}
