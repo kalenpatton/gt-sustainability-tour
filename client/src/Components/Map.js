@@ -99,22 +99,20 @@ class Map extends React.Component {
                     routeList: [...prevState.routeList, pos]
                 };  
             });
-            // console.log(this.state.routeList);//现在的问题：点完add to route之后stop加不进来,routeList没有，直到下一个stop加进来
-            // if(this.state.routeList.length === 0){
-            //     this.changeShowNextStop();
-            // }
+            console.log(this.state.routeList.length);
+            if(this.state.routeList.length === 0){
+                this.changeShowNextStop(pos.name);
+            }
         },
 
         changeOrder:(newRoute)=>{
             this.setState({routeList:newRoute}); 
-            this.changeShowNextStop();
+            this.changeShowNextStop(this.state.routeList[0].name);
         }
     };
 
-    changeShowNextStop=()=>{
-        //console.log("hhh")
-        //console.log(this.state.routeList);
-        this.props.settingHandler.showNextStop(this.state.routeList[0].name);
+    changeShowNextStop=(name)=>{ 
+        this.props.settingHandler.showNextStop(name);
     }
 
 

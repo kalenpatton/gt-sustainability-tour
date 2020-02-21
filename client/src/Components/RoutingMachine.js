@@ -41,7 +41,6 @@ class Routing extends MapLayer {
             })
         });
         
-        console.log(this.waypoints);
        
         this.control.route();
         this.control.addTo(map.leafletElement);
