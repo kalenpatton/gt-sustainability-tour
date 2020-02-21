@@ -3,9 +3,7 @@ import '../styles/Gallery.css';
 import pic from '../images/gtlogo.png';
 
 
-export default class Gallery extends React.Component{
-
-    render(){
+export default function Gallery(props){
         return(
             <div className='gallery'>
                 <h3>image gallery</h3>
@@ -15,6 +13,4 @@ export default class Gallery extends React.Component{
                 <img src={pic} id="pic" className="bordered"/>
             </div>
         );
-    }
-
 }
