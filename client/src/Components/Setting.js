@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/Setting.css';
-import ToggleButton from 'react-toggle-button'
+import ToggleButton from 'react-toggle-button';
+
+import history from '../history';
 
 export default class Header extends Component {
     constructor(props){
@@ -11,11 +13,6 @@ export default class Header extends Component {
         }
     }
 
-
-
-    // componentDidUpdate(prevState) {
-    //     console.log(prevState.autoplay);
-    // }
      
     changeAutoPlay=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
@@ -26,6 +23,7 @@ export default class Header extends Component {
     }
 
     restart=()=>{
+        history.push('/');
         window.location.reload();
     }
 
