@@ -3,7 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  console.log("Responding to root route")
+  res.render('index', {
+    title: 'GT Sustainability Self-guided Tour Backend',
+    routes: '/locations, /locations/:id'
+  });
 });
 
 module.exports = router;
