@@ -107,7 +107,13 @@ class Map extends React.Component {
 
         changeOrder:(newRoute)=>{
             this.setState({routeList:newRoute}); 
-            this.changeShowNextStop(this.state.routeList[0].name);
+            if(this.state.routeList.length==0){
+                this.changeShowNextStop("N/A");
+            }
+            else{
+                this.changeShowNextStop(this.state.routeList[0].name);
+            }
+            //this.changeShowNextStop(this.state.routeList[0].name);
         }
     };
 
