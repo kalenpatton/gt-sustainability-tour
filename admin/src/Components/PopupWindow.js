@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
 import LocationSelect from './LocationSelect';
+import ImageEdit from './ImageEdit';
 
 class PopupWindow extends React.Component{
 
@@ -13,6 +14,10 @@ class PopupWindow extends React.Component{
             desc: ''
         };
         if (!this.isNewStop) this.state={...this.props.site};
+        // Remove later. Just for dev
+        this.state.imageList=[];
+        for (let i=1; i<=5; i++) this.state.imageList.push(i);
+        //
         this.saveSite = this.props.onSaveSite;
 
     }
@@ -29,7 +34,11 @@ class PopupWindow extends React.Component{
         this.setState({
             [name]: value
         });
-    }
+    };
+
+    handleEditImages = (event) => {
+        event.preventDefault();
+    };
 
     render(){
         return(
@@ -37,31 +46,42 @@ class PopupWindow extends React.Component{
                 <h2>{this.isNewStop ? "Add Site" : "Edit Site"}</h2>
 
                 <form onSubmit={this.onSubmit}>
-                    <div className='left-text'>
-                        <div>
-                            {'Name: '}
-                            <input
-                                className="form-text-in"
-                                type="text"
-                                name="name"
-                                placeholder="Enter site name"
-                                value={this.state.name}
-                                onChange={this.handleInputChange}
-                                required
-                            />
+                    <div className='column-container center-text'>
+                        <div className='left-text column'>
+                            <div>
+                                {'Name: '}
+                                <input
+                                    className="form-text-in"
+                                    type="text"
+                                    name="name"
+                                    placeholder="Enter site name"
+                                    value={this.state.name}
+                                    onChange={this.handleInputChange}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                {'Description: '}
+                                <textarea
+                                    className='form-desc-in'
+                                    name='desc'
+                                    onChange={this.handleInputChange}/>
+                            </div>
+                            <div>
+                                <LocationSelect
+                                    position = {this.state.position}
+                                    onChangeLocation={(newLocation) => this.setState({position: newLocation})}
+                                />
+                            </div>
                         </div>
-                        <div>
-                            {'Description: '}
-                            <textarea
-                                className='form-desc-in'
-                                name='desc'
-                                onChange={this.handleInputChange}/>
-                        </div>
-                        <div>
-                            <LocationSelect
-                                position = {this.state.position}
-                                onChangeLocation={(newLocation) => this.setState({position: newLocation})}
-                            />
+                        <div className='left-text column'>
+                            <div>
+                                <div>{'Images: '}</div>
+                                <ImageEdit
+                                    imageList={this.state.imageList}
+                                    onChange={(e, newList) => this.setState({imageList: newList})}
+                                />
+                            </div>
                         </div>
                     </div>
                     <input type="submit" value="Save"/>
