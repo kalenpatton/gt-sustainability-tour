@@ -25,8 +25,14 @@ class PopupWindow extends React.Component{
     onSubmit = (event) => {
         event.preventDefault();
         // TODO: Add call to backend to post changes.
-        console.log(this.state);
-        this.saveSite({...this.state}, this.isNewStop);
+        let newSite = {
+            name: this.state.name,
+            position: this.state.position,
+            desc: this.state.desc,
+            imageList: this.state.imageList
+        };
+        console.log(newSite);
+        this.saveSite(newSite, this.isNewStop);
     };
 
     handleInputChange = (event) => {
@@ -34,10 +40,6 @@ class PopupWindow extends React.Component{
         this.setState({
             [name]: value
         });
-    };
-
-    handleEditImages = (event) => {
-        event.preventDefault();
     };
 
     render(){
@@ -51,7 +53,7 @@ class PopupWindow extends React.Component{
                             <div>
                                 {'Name: '}
                                 <input
-                                    className="form-text-in"
+                                    className="form-in"
                                     type="text"
                                     name="name"
                                     placeholder="Enter site name"
@@ -65,6 +67,7 @@ class PopupWindow extends React.Component{
                                 <textarea
                                     className='form-desc-in'
                                     name='desc'
+                                    value={this.state.desc}
                                     onChange={this.handleInputChange}/>
                             </div>
                             <div>

@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker ,Popup} from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker} from 'react-leaflet';
 
 export default class LocationSelect extends React.Component {
 
@@ -48,8 +48,8 @@ export default class LocationSelect extends React.Component {
         const { value, name } = event.target;
         let newPosition = [...this.props.position]
 
-        if (name == 'lat') newPosition[0] = value;
-        else if (name == 'lng') newPosition[1] = value;
+        if (name === 'lat') newPosition[0] = value;
+        else if (name === 'lng') newPosition[1] = value;
 
         this.props.onChangeLocation(newPosition);
     };
