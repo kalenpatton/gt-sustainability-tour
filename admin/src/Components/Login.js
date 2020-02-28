@@ -23,6 +23,11 @@ export default class Login extends Component {
     onSubmit = (event) => {
         event.preventDefault();
 
+            var allusers = APIhandler.getUsers(event);
+
+            for (user a in allusers) {
+                console.log(a);
+            }
         // TODO: Use fetch to authenticate. For now, just log in
 
         // fetch(AUTH_URL, {
