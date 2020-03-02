@@ -17,7 +17,7 @@ export default class Homepage extends Component{
         return (
        
             <div id="Homepage">
-                <p className='center'>GT-Sustainability-Tour </p>
+                <p className='center'>Georgia Tech Campus Sustainability Tour</p>
                 <img src={pic} className='center'/>
                 <p>some info</p>
                 <button onClick={this.redirect}><i className="fas fa-walking"></i> Start Tour</button>
