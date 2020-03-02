@@ -13,6 +13,7 @@
     "react-beautiful-dnd": "^12.2.0",
     "react-dom": "^16.11.0",
     "react-h5-audio-player": "^2.0.1",
+    "react-image-lightbox": "^5.1.1",
     "react-leaflet": "^2.6.0",
     "react-responsive-modal": "^4.0.1",
     "react-router-dom": "^5.1.2",

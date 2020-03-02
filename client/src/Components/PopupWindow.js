@@ -6,6 +6,7 @@ import H5AudioPlayer from 'react-h5-audio-player';
 import Modal from 'react-responsive-modal';
 import CC from './CC';
 import Gallery from './Gallery';
+import ImageGallery from './ImageGallery';
 
 class PopupWindow extends React.Component{
 
@@ -16,11 +17,10 @@ class PopupWindow extends React.Component{
         this.state = {
             openCC:false,
             openGallery:false
-          };
-        
+        };
     }
 
-   
+
 
     onOpenModalCC = () => {
         this.setState({ openCC: true });
@@ -43,7 +43,7 @@ class PopupWindow extends React.Component{
         //this.mapHandler.setNextStop(this.props.site);
         //console.log(this.props.site);
         this.mapHandler.addToRoute(this.props.site);
-       
+
     };
 
 
@@ -51,12 +51,12 @@ class PopupWindow extends React.Component{
         return(
             <div className="popupwindow">
                 <h2>{this.props.site.name}</h2>
-                <img src={pic} id="pic" className="cover-image"/>
+                <ImageGallery cover={pic} />
                 <div className="buttons">
-                  
+
                     {/* <button onClick={this.onMakeNextStop}>Make Next Stop</button> */}
                     <button onClick={this.onMakeNextStop}>Add To My Route</button>
-                   
+
                 </div>
                 <div className="descriptions">
                     <ul>
