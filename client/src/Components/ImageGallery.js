@@ -31,9 +31,11 @@ export default class ImageGallery extends Component {
 
         {isOpen && (
           <Lightbox
+            animationDuration={200}
             mainSrc={images[photoIndex]}
             nextSrc={images[(photoIndex + 1) % images.length]}
             prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            imageCaption={'This is an image of cat ' + photoIndex + '. This caption can be really long and can be used to offer more information about the image at hand.'}
             onCloseRequest={() => this.setState({ isOpen: false })}
             onMovePrevRequest={() =>
               this.setState({
