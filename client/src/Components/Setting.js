@@ -3,16 +3,23 @@ import '../styles/Setting.css';
 import ToggleButton from 'react-toggle-button';
 
 import history from '../history';
+import Filter from '../Components/Filter';
+
+
 
 export default class Header extends Component {
     constructor(props){
         super(props);
+       
         this.state={
             autoplay:this.props.autoplay,
             textDirection:this.props.textDirection,
+
+           
         }
     }
 
+    
      
     changeAutoPlay=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
@@ -29,10 +36,15 @@ export default class Header extends Component {
 
 
     render(){
+       
         return(
             <div className='settingWindow'>
                 
                 <h3>Settings</h3>
+
+                <h5>Filter Sustainability Types</h5>
+                <Filter/>
+                <hr/>
                
                 <h5>Enable Media Autoplay</h5><ToggleButton 
                 value={ this.state.autoplay}
@@ -53,8 +65,10 @@ export default class Header extends Component {
                 }} />
                 
                 <hr/>
-                <button>Filter Sustainability Types</button><hr/>
-                <button onClick={this.restart}>Restart Tour</button><hr/>
+                
+
+                
+                <button onClick={this.restart} id="restart">Restart Tour</button>
                 <button id="admin-button">Admin Login</button>
             </div>
         );

@@ -11,8 +11,8 @@ router.get('/:loc_id', (req, res) => {
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1 Love GT Sustainability.',
-    database: 'location_info',
+    password:'password',
+    database: 'location_info'
   })
 
   const queryString = "SELECT * FROM locations WHERE id = ?"
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1 Love GT Sustainability.',
+    password: 'password',
     database: 'location_info',
   })
 
