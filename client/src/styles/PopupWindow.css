@@ -41,6 +41,6 @@ img.cover-image{
     text-align: left;
     border: solid 1px #cccccc;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
-    height:75px;
+    height:150px;
     overflow-y:scroll;
 }
