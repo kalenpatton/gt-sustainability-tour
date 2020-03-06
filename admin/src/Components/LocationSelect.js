@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker ,Popup} from 'react-leaflet';
+import { Map as LeafletMap, TileLayer, Marker} from 'react-leaflet';
 
 export default class LocationSelect extends React.Component {
 
@@ -13,7 +13,14 @@ export default class LocationSelect extends React.Component {
         };
         this.startPosition = this.props.position;
 
-    }
+    };
+
+    // Necessary for fixing map bug
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!prevState.isMapInit && this.state.isMapInit) {
+            this.map.leafletElement.invalidateSize();
+        }
+    };
 
     addMarker = () => {
         return (
@@ -26,7 +33,7 @@ export default class LocationSelect extends React.Component {
 
     // What to do when the map is clicked
     handleClick = (e) => {
-        this.map.leafletElement.invalidateSize();
+
     };
 
     // saves the map to this.map. Used for objects which need the map opject
@@ -41,8 +48,8 @@ export default class LocationSelect extends React.Component {
         const { value, name } = event.target;
         let newPosition = [...this.props.position]
 
-        if (name == 'lat') newPosition[0] = value;
-        else if (name == 'lng') newPosition[1] = value;
+        if (name === 'lat') newPosition[0] = value;
+        else if (name === 'lng') newPosition[1] = value;
 
         this.props.onChangeLocation(newPosition);
     };
@@ -60,6 +67,7 @@ export default class LocationSelect extends React.Component {
                         className="form-num-in"
                         type="number"
                         name="lat"
+                        step={0.00001}
                         placeholder="Latitude"
                         value={this.props.position[0]}
                         onChange={this.handleInputChange}
@@ -70,6 +78,7 @@ export default class LocationSelect extends React.Component {
                         className="form-num-in"
                         type="number"
                         name="lng"
+                        step={0.00001}
                         placeholder="Longitude"
                         value={this.props.position[1]}
                         onChange={this.handleInputChange}
