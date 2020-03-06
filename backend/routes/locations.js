@@ -11,7 +11,7 @@ router.get('/:loc_id', (req, res) => {
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1 Love GT Sustainability.',
+    password: '',
     database: 'location_info',
   })
 
@@ -34,7 +34,7 @@ router.get('/', function(req, res, next) {
   const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '1 Love GT Sustainability.',
+    password: '',
     database: 'location_info',
   })
 
