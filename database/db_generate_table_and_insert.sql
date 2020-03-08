@@ -32,7 +32,14 @@ CREATE TABLE `locations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users`;
 
+CREATE TABLE `users` (
+  `idusers` int NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`idusers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='users for login\n';
 --
 -- Data for table `locations`
 --
@@ -42,7 +49,11 @@ INSERT INTO `locations` VALUES (1,'Caddell Building','No description provided.',
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
+LOCK TABLES `users` WRITE;
+/*!1 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'gtsustain','12345');
 
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

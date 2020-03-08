@@ -11,6 +11,7 @@ class PopupWindow extends React.Component{
 
     constructor(props) {
         super(props);
+        //console.log(this.props.autoplay);
         this.mapHandler = this.props.mapHandler;
         this.state = {
             openCC:false,
@@ -39,7 +40,10 @@ class PopupWindow extends React.Component{
 
 
     onMakeNextStop = () => {
-        this.mapHandler.setNextStop(this.props.site);
+        //this.mapHandler.setNextStop(this.props.site);
+        //console.log(this.props.site);
+        this.mapHandler.addToRoute(this.props.site);
+       
     };
 
 
@@ -49,9 +53,10 @@ class PopupWindow extends React.Component{
                 <h2>{this.props.site.name}</h2>
                 <img src={pic} id="pic" className="cover-image"/>
                 <div className="buttons">
-                    <button onClick={this.onClick}>Prev</button>
-                    <button onClick={this.onMakeNextStop}>Make Next Stop</button>
-                    <button onClick={this.onClick}>Next</button>
+                  
+                    {/* <button onClick={this.onMakeNextStop}>Make Next Stop</button> */}
+                    <button onClick={this.onMakeNextStop}>Add To My Route</button>
+                   
                 </div>
                 <div className="descriptions">
                     {/* {this.state.site.description} */}
@@ -67,7 +72,7 @@ class PopupWindow extends React.Component{
 
                 <div className = "audio">
                     <H5AudioPlayer className = "audio-player"
-                    autoPlay={true}
+                    autoPlay={this.props.autoplay}
                     listenInterval={1000}
                     loop={false}
                     muted={false}

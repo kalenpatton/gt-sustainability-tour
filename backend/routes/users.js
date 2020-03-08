@@ -18,6 +18,7 @@ router.get('/', (req, res) => {
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users\n\t" + err)
+
       res.sendStatus(500) // Internal Server Error
       return
     }
