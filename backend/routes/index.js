@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     title: 'GT Sustainability Self-guided Tour Backend',
     routes: '/locations, /locations/:id'
   }); */
-  res.send("string")
+  res.send("HOME PAGE")
 });
 
 module.exports = router;

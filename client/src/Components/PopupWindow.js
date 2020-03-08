@@ -54,20 +54,7 @@ class PopupWindow extends React.Component{
                     <button onClick={this.onClick}>Next</button>
                 </div>
                 <div className="descriptions">
-                    <ul>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                        <li>blablabla</li>
-                    </ul>
+                    {/* {this.state.site.description} */}
                 </div>
                 <button onClick={this.onOpenModalGallery}>View Image Gallery</button>
                 <Modal open={this.state.openGallery} onClose={this.onCloseModalGallery} >
