@@ -22,6 +22,10 @@ export default class Login extends Component {
     }
     onSubmit = (event) => {
         event.preventDefault();
+            const{username, password} = this.state;
+            console.log(this.APIHandler.getUsers());
+
+                    
 
         // TODO: Use fetch to authenticate. For now, just log in
 
