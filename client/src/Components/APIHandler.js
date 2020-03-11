@@ -31,5 +31,5 @@ function convertToMapObject(response) {
     return map_response;
 }
 
-const Client = { getLocations };
-export default Client;
+const APIHandler = { getLocations };
+export default APIHandler;
