@@ -5,6 +5,7 @@ export default class PopupWindow extends React.Component{
     constructor(props) {
         super(props);
         this.isNew = this.props.imageId < 0;
+        this.imageRef = React.createRef();
         this.state = {
             id: -1,
             image: null,
@@ -25,13 +26,27 @@ export default class PopupWindow extends React.Component{
         event.stopPropagation();
         if (this.state.changed) {
             // TODO: Add call to backend to post changes.
-            let image = {
-                id: this.state.id,
-                image: this.state.image,
-                caption: this.state.caption,
-            };
-            console.log(image);
+
+            // console.log(this.imageRef.current.files[0]);
+            let data = new FormData();
+            data.append('id', this.state.id);
+            data.append('image', this.imageRef.current.files[0]);
+            data.append('caption', this.state.caption);
+
+            console.log(data);
             // Send image to database here
+            fetch('/images/upload', {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.error(error)
+            });
+
             this.save(event, this.state.id, this.isNew);
         }
     };
@@ -64,6 +79,7 @@ export default class PopupWindow extends React.Component{
                                 <input
                                     className="form-file-upload"
                                     type="file"
+                                    ref={this.imageRef}
                                     name="image"
                                     accept="image/*"
                                     onChange={this.handleFileChange}

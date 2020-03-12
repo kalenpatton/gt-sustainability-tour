@@ -3,10 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var locationsRouter = require('./routes/locations');
 var filtersRouter = require('./routes/filters');
+var imagesRouter = require('./routes/images');
 var userRouter = require('./routes/users');
 
 var app = express();
@@ -17,13 +19,14 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/locations', locationsRouter);
 app.use('/filters', filtersRouter);
+app.use('/images', imagesRouter);
 app.use('/users', userRouter);
 
 // catch 404 and forward to error handler

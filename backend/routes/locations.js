@@ -5,8 +5,8 @@ const mysql = require('mysql')
 // THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '1 Love GT Sustainability.',
+  user: 'gttourapp',
+  password: 'gttourapp',
   database: 'location_info',
 })
 
@@ -43,7 +43,7 @@ router.get('/:loc_id', (req, res) => {
   })
 })
 
-/* POST specific location by id 
+/* POST specific location by id
 
   req.body should be json of format:
   {
