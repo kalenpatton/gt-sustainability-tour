@@ -9,6 +9,7 @@ class PopupWindow extends React.Component{
         super(props);
         this.isNewStop = this.props.site ? false : true;
         this.state = {
+            id: -1,
             name: '',
             position: [33.775620, -84.396286],
             desc: ''
@@ -81,6 +82,7 @@ class PopupWindow extends React.Component{
                             <div>
                                 <div>{'Images: '}</div>
                                 <ImageEdit
+                                    siteId={this.state.id}
                                     imageList={this.state.imageList}
                                     onChange={(e, newList) => this.setState({imageList: newList})}
                                 />

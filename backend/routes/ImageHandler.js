@@ -6,8 +6,7 @@ class ImageHandler {
   constructor(folder) {
     this.folder = folder;
   }
-  async save(buffer) {
-    const id = uuid.v4();
+  async save(buffer, id) {
     const filename = `${id}.jpg`;
     const thumbnailname = `thumb_${id}.jpg`
     const filepath = this.makeFilePath(filename);
@@ -24,8 +23,6 @@ class ImageHandler {
           })
           .toFile(thumbpath)
         ]);
-
-    return id;
   }
   makeFilePath(filename) {
     return path.resolve(`${this.folder}/${filename}`)
