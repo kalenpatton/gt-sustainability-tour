@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
     }
     console.log("Location created")
     console.log(result)
-    res.end("replace this with return of new location id")
+    res.status(201).send('Location added with ID: ' + result.insertId)
   })
 })
 
@@ -108,7 +108,7 @@ router.put('/:loc_id', (req, res) => {
       return
     }
     console.log("Location updated")
-    res.end("send something useful here maybe?")
+    res.end("Location updated")
   })
 })
 
