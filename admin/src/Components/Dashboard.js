@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
                 <Modal
                     open={this.state.isModalOpen}
                     onClose={this.closeModal}
-                    className="centered">
+                    className="centered editSiteModal">
                     <PopupWindow
                         onSaveSite = {this.onSaveSite}
                         site = {this.state.focusedSite}

@@ -50,7 +50,6 @@ INSERT INTO `locations` VALUES (1,'Caddell Building','No description provided.',
 UNLOCK TABLES;
 
 LOCK TABLES `users` WRITE;
-
 INSERT INTO `users` VALUES (1,'gtsustain','12345');
 
 UNLOCK TABLES;

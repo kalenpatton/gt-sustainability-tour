@@ -1,11 +1,11 @@
 // Login.js
 // Adapted from https://medium.com/@faizanv/authentication-for-your-react-and-express-application-w-json-web-tokens-923515826e0
-
+import APIHandler from './APIHandler';
 import React, { Component } from 'react';
 
 const AUTH_URL = '/api/authenticate';
 
-export default class Login extends Component {
+export default class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -13,7 +13,7 @@ export default class Login extends Component {
             password: ''
         };
     }
-
+    //controls login and fixes input change
     handleInputChange = (event) => {
         const { value, name } = event.target;
         this.setState({
@@ -22,7 +22,12 @@ export default class Login extends Component {
     }
     onSubmit = (event) => {
         event.preventDefault();
+            // const{email, password} = this.state;
+            //         var users = this.APIHandler.getUsers(this.state);
 
+                    
+
+            };
         // TODO: Use fetch to authenticate. For now, just log in
 
         // fetch(AUTH_URL, {
@@ -44,10 +49,6 @@ export default class Login extends Component {
         //     console.error(err);
         //     alert('Error logging in please try again');
         // });
-
-        this.props.history.push('/dashboard')
-
-    }
 
     render() {
         return (
