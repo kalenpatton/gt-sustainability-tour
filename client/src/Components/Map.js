@@ -223,7 +223,7 @@ class Map extends React.Component {
 
                
                 {/* change order */}
-                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg"></i></button>
+                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg" style={{color:'#404040'}}></i></button>
 
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
                    

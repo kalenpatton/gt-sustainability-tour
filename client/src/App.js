@@ -30,9 +30,9 @@ class App extends React.Component {
       this.setState({nextStop:value});
     },
 
-    filterStops:(choosedFilter)=>{        
-      var newList=this.state.routeList.filter(e => e[filter]==choosedFilter );  
-    }
+    // filterStops:(choosedFilter)=>{        
+    //   var newList=this.state.routeList.filter(e => e[filter]==choosedFilter );  
+    // }
     
   }
   render(){
