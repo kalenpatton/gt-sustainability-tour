@@ -24,6 +24,7 @@ export default class Filter extends Component{
         this.setState(
           { selectedOption },
         //   () => console.log(`Option selected:`, this.state.selectedOption)
+       
         );
       };
    

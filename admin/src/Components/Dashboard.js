@@ -73,6 +73,10 @@ export default class Dashboard extends Component {
 
     };
 
+    handleEditFilters = () =>{
+        console.log('back to backend to get filters');
+    };
+
     onSaveSite = (site, isNew) => {
         if (isNew) {
             let newSites = [...this.state.sites];
@@ -91,6 +95,7 @@ export default class Dashboard extends Component {
                     <div className="toolbar">
                         <button onClick={this.handleAddStop} className="optionBtn">Add Site</button>
                         <button onClick={this.handleEditIntro} className="optionBtn">Edit Intro</button>
+                        <button onClick={this.handleEditFilters} className="optionBtn">Edit Filters</button>
                     </div>
                 </header>
                 <div className="map-container">

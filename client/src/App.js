@@ -28,7 +28,12 @@ class App extends React.Component {
 
     showNextStop:(value)=>{
       this.setState({nextStop:value});
+    },
+
+    filterStops:(choosedFilter)=>{        
+      var newList=this.state.routeList.filter(e => e[filter]==choosedFilter );  
     }
+    
   }
   render(){
     return (

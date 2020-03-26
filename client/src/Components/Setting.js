@@ -43,7 +43,10 @@ export default class Header extends Component {
                 <h3>Settings</h3>
 
                 <h5>Filter Sustainability Types</h5>
-                <Filter/>
+
+                <Filter filterHander={this.props.settingHandler}/>
+
+
                 <hr/>
                
                 <h5>Enable Media Autoplay</h5><ToggleButton 

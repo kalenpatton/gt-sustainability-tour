@@ -73,7 +73,8 @@ class Map extends React.Component {
                 this.changeShowNextStop(this.state.routeList[0].name);
             }
             //this.changeShowNextStop(this.state.routeList[0].name);
-        }
+        },
+
     };
 
     updateOnLocationLoad = (location_arr) => {
