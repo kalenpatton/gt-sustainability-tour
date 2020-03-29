@@ -89,6 +89,7 @@
     border: solid;
     margin: 2px;
     z-index: 9;
+    background-size: contain;
 }
 .close {
   cursor: pointer;

@@ -65,17 +65,21 @@ export default class Dashboard extends Component {
     };
 
     handleDeleteSite = (site) => {
-
+        APIHandler.deleteSite(site, (response) => {
+            APIHandler.getLocations(this.updateOnLocationLoad)
+        });
     };
 
     onSaveSite = (site, isNew) => {
         if (isNew) {
-            let newSites = [...this.state.sites];
-            newSites.push(site);
-            this.setState({sites: newSites});
+            // let newSites = [...this.state.sites];
+            // newSites.push(site);
+            // this.setState({sites: newSites});
+            APIHandler.postSite(site, (response) => {
+                APIHandler.getLocations(this.updateOnLocationLoad)
+            });
             this.closeModal();
         }
-
     }
 
     render() {

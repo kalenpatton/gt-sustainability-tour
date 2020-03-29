@@ -1,6 +1,10 @@
 var express = require('express')
 var router = express.Router()
 const mysql = require('mysql')
+var multer = require('multer');
+var upload = multer();
+
+const ImageHandler = require('./ImageHandler');
 
 // THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
@@ -8,6 +12,7 @@ const connection = mysql.createConnection({
   user: 'gttourapp',
   password: 'gttourapp',
   database: 'location_info',
+  multipleStatements: true
 })
 
 
@@ -52,31 +57,44 @@ router.get('/:loc_id', (req, res) => {
 	    "transcript":"loctrans",
 	    "latitude":30.000,
 	    "longitude":-84.000,
-	    "filters":null
+      "filters":null,
+
+      "newImgs":[img1, img2] //images must include a caption field.
   }
 
   Returns the auto-generated id of the new location
 */
-router.post('/', (req, res) => {
-  console.log("Creating new location")
-  console.log(req.body)
-  const location = req.body
-  console.log("New location info: " + location)
+router.post('/', upload.any(), async (req, res) => {
+  // Set up variables
+  console.log("Creating new location");
+  console.log(req.body);
+  console.log(req.files);
+  const location = req.body;
+  const newImgs = req.files;
+  var site_id = -1;
 
-  const queryString = "INSERT INTO locations (name, description, transcript, latitude, longitude, filters) VALUES (?, ?, ?, ?, ?, ?)"
+  // Insert location data into locations table
+  let queryString = "INSERT INTO locations (name, description, transcript, latitude, longitude, filters) VALUES (?, ?, ?, ?, ?, ?); SELECT LAST_INSERT_ID() AS `newId`"
   connection.query(queryString,
                   [location.name, location.description, location.transcript, location.latitude, location.longitude, location.filters],
                   (err, result, fields) => {
     if (err) {
-      console.log("Failed to create location\n\t" + err)
-      res.sendStatus(500) // Internal Server Error
-      return
+      console.log("Failed to create location\n\t" + err);
+      res.sendStatus(500); // Internal Server Error
+    } else {
+      site_id = result[1][0].newId;
+      console.log(site_id);
+
+      // Add images
+      const imageHandler = new ImageHandler(site_id, connection);
+      for (var i = 0; i < newImgs.length; i++) {
+        imageHandler.add(newImgs[i].buffer, i, newImgs[i].caption);
+      }
+      console.log("Location created");
+      res.json({site_id: site_id});
     }
-    console.log("Location created")
-    console.log(result)
-    res.end("replace this with return of new location id")
-  })
-})
+  });
+});
 
 /* PUT specific location by id
 

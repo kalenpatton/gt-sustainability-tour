@@ -2,9 +2,12 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import LocationSelect from './LocationSelect';
 import ImageEdit from './ImageEdit';
+import APIHandler from './APIHandler';
 
 class PopupWindow extends React.Component{
-
+    // Required props:
+    // onSaveSite
+    // site
     constructor(props) {
         super(props);
         this.isNewStop = this.props.site ? false : true;
@@ -12,29 +15,49 @@ class PopupWindow extends React.Component{
             id: -1,
             name: '',
             position: [33.775620, -84.396286],
-            desc: ''
+            description: ''
         };
-        if (!this.isNewStop) this.state={...this.props.site};
+        if (!this.isNewStop) this.state = {...this.props.site};
         // Remove later. Just for dev
-        this.state.imageList=[];
-        for (let i=1; i<=5; i++) this.state.imageList.push(i);
-        //
+        this.state.imageList = [];
+        APIHandler.getImageList(this.props.site, this.updateOnImageListLoad);
+        // for (let i=1; i<=5; i++) this.state.imageList.push(i);
+        // //
         this.saveSite = this.props.onSaveSite;
 
     }
 
+    // Run on submission of popup
     onSubmit = (event) => {
         event.preventDefault();
         // TODO: Add call to backend to post changes.
+
+        // Format imageList
+        let imageList = this.state.imageList.slice();
+        let newImgs = [];
+        for (var i = 0; i < imageList.length; i++) {
+            if (!Number.isInteger(imageList[i])) {
+                newImgs.push(imageList[i]);
+                imageList[i] = -1;
+            }
+        }
         let newSite = {
             name: this.state.name,
             position: this.state.position,
-            desc: this.state.desc,
-            imageList: this.state.imageList
+            description: this.state.description,
+            imageList: imageList,
+            newImgs: newImgs
         };
         console.log(newSite);
         this.saveSite(newSite, this.isNewStop);
     };
+
+    // update the list of images after fetching the from backend
+    updateOnImageListLoad = (imageList) => {
+        this.setState({
+            imageList: imageList
+        });
+    }
 
     handleInputChange = (event) => {
         const { value, name } = event.target;
@@ -67,8 +90,8 @@ class PopupWindow extends React.Component{
                                 {'Description: '}
                                 <textarea
                                     className='form-desc-in'
-                                    name='desc'
-                                    value={this.state.desc}
+                                    name='description'
+                                    value={this.state.description}
                                     onChange={this.handleInputChange}/>
                             </div>
                             <div>

@@ -14,7 +14,7 @@ function checkStatus(response) {
         console.log(response);
         return response;
     }
-    const error = new Error('HTTP Error ${response.statusText}');
+    const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
     console.log(error);
@@ -37,11 +37,62 @@ function getLocations(callback) {
         .then(callback);
 }
 
+// GETs an array of integers representing the id numbers of the images for the given site.
+function getImageList(site, callback) {
+    return fetch(`/images/${site.id}`, {
+        accept: "application/json"
+    }).then(checkStatus)
+        .then(response => response.json())
+        .then(formatImageList)
+        .then(callback);
+}
+
+// POSTs a new site to the database
+function postSite(site, callback) {
+    const formData = new FormData();
+    formData.append("name", site.name);
+    formData.append("description", site.description);
+    formData.append("transcript", "");
+    formData.append("latitude", site.position[0]);
+    formData.append("longitude", site.position[1]);
+    formData.append("filters", null);
+    // formData.append("imageList", site.imageList);
+    // formData.append("newImgs", site.newImgs);
+
+    // for (var i = 0; i < site.imageList.length; i++) {
+    //     formData.append("imageList[]", site.imageList[i]);
+    // }
+    for (var i = 0; i < site.newImgs.length; i++) {
+        formData.append(`newImgs[]`, site.newImgs[i]);
+    }
+
+    return fetch('/locations', {
+        method: 'POST',
+        body: formData
+    }).then(checkStatus)
+        .then(response => response.json())
+        .then(callback);
+}
+
+// DELETEs a site from the database.
+function deleteSite(site, callback) {
+    return fetch(`/locations/${site.id}`, {
+        method: 'DELETE'
+    }).then(checkStatus)
+        .then(callback);
+}
+
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({name, description, transcript, filters, position: [latitude, longitude]}));
+        ({id, name, description, transcript, filters, position: [latitude, longitude]}));
     return map_response;
 }
-const APIHandler = { getUsers, getLocations };
+
+function formatImageList(response) {
+    let imageList_response = response.slice().sort((a, b) => a.index - b.index);
+    imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
+    return imageList_response;
+}
+const APIHandler = { getUsers, getLocations, postSite, deleteSite, getImageList};
 export default APIHandler;
