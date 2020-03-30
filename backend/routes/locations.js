@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 
 /* GET locations listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 
   const queryString = "SELECT * FROM locations"
   connection.query(queryString, (err, rows, fields) => {
@@ -82,12 +82,12 @@ router.post('/', (req, res) => {
 
   req.body should be json of format:
   {
-	    "name":"locname",
-	    "description":"locdesc",
-	    "transcript":"loctrans",
-	    "latitude":30.000,
-	    "longitude":-84.000,
-	    "filters":null
+	  "name":"locname",
+	  "description":"locdesc",
+	  "transcript":"loctrans",
+	  "latitude":30.000,
+	  "longitude":-84.000,
+	  "filters":null
   }
 
   Any unmodified fields should include their existing value
