@@ -17,11 +17,12 @@ export default class Homepage extends React.Component{
     componentDidMount(){
         fetch('/info', {
             accept: "application/json"
-        }).then(response => response.json())
-        .then(response => {
-            console.log('done');
-            this.setState({info:response.info})
         })
+            .then(response => response.json())
+            .then(response => {
+                console.log('sustainability info loaded')
+                this.setState({info:response.information})
+            })
     }
 
     redirect=()=>{ 
