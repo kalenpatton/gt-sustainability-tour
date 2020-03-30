@@ -4,6 +4,7 @@ var upload = multer();
 var router = express.Router();
 const path = require('path');
 const mysql = require('mysql')
+require('dotenv').config()
 
 const ImageHandler = require('./ImageHandler');
 
