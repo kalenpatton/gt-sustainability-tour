@@ -2,11 +2,10 @@ var express = require('express');
 var router = express.Router();
 const mysql = require('mysql')
 
-// THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',  //your password here
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: 'location_info',
 })
 

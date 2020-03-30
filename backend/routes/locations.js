@@ -1,12 +1,18 @@
 var express = require('express')
 var router = express.Router()
 const mysql = require('mysql')
+require('dotenv').config()
 
-// THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
+<<<<<<< Updated upstream
   host: 'localhost',
   user: 'root',
   password: '1 Love GT Sustainability.',
+=======
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+>>>>>>> Stashed changes
   database: 'location_info',
 })
 
