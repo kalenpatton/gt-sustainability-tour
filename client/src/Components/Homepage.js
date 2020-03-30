@@ -1,10 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/Homepage.css';
 import pic from '../images/gtlogo.png';
 import history from '../history';
 
-export default class Homepage extends Component{
+export default class Homepage extends React.Component{
 
+    constructor(props){
+        super(props);
+        this.state={
+            info:this.loadData,
+           
+        }
+        
+    }
+
+    componentDidMount(){
+        fetch('/info', {
+            accept: "application/json"
+        }).then(response => response.json())
+        .then(response => {
+            console.log('done');
+            this.setState({info:response.info})
+        })
+    }
 
     redirect=()=>{ 
         history.push('/tour');
@@ -12,20 +30,28 @@ export default class Homepage extends Component{
         
     }
 
-    
     render(){
-        return (
        
-            <div id="Homepage">
-                <p className='center'>Georgia Tech Campus Sustainability Tour</p>
-                <img src={pic} className='center'/>
-                <p>some info</p>
-                <button onClick={this.redirect}><i className="fas fa-walking"></i> Start Tour</button>
+            return (
+       
+                <div id="Homepage">
+                    <p className='center' id='title'>Georgia Tech Campus Sustainability Tour</p>
+                    <img src={pic} className='center' id='homepage-img'/>
+                    <div id="home-description">
+                        <p style={{marginBottom:30}}>{this.state.info}</p>
+                        <button  id='start' onClick={this.redirect}><i className="fas fa-walking fa-2x"></i> &nbsp;&nbsp;Start Tour</button>
+                    </div>
+                   
+                  
+    
+                </div>
+    
+            
+          );
 
-            </div>
-
+    
         
-      );
+        
 
 
 
