@@ -78,8 +78,12 @@ export default class Dashboard extends Component {
             APIHandler.postSite(site, (response) => {
                 APIHandler.getLocations(this.updateOnLocationLoad)
             });
-            this.closeModal();
+        } else {
+            APIHandler.putSite(site, (response) => {
+                APIHandler.getLocations(this.updateOnLocationLoad)
+            });
         }
+        this.closeModal();
     }
 
     render() {

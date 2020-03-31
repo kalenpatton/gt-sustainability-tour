@@ -91,6 +91,9 @@
     z-index: 9;
     background-size: contain;
 }
+.image-list-dragged {
+    z-index: 11 !important;
+}
 .close {
   cursor: pointer;
   position: absolute;

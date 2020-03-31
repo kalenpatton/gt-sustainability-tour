@@ -74,6 +74,31 @@ function postSite(site, callback) {
         .then(callback);
 }
 
+function putSite(site, callback) {
+    const formData = new FormData();
+    formData.append("name", site.name);
+    formData.append("description", site.description);
+    formData.append("transcript", "");
+    formData.append("latitude", site.position[0]);
+    formData.append("longitude", site.position[1]);
+    formData.append("filters", null);
+    // formData.append("imageList", site.imageList);
+    // formData.append("newImgs", site.newImgs);
+
+    for (var i = 0; i < site.imageList.length; i++) {
+        formData.append("imageList[]", site.imageList[i]);
+    }
+    for (var i = 0; i < site.newImgs.length; i++) {
+        formData.append(`newImgs[]`, site.newImgs[i]);
+    }
+
+    return fetch(`/locations/${site.id}`, {
+        method: 'PUT',
+        body: formData
+    }).then(checkStatus)
+        .then(callback);
+}
+
 // DELETEs a site from the database.
 function deleteSite(site, callback) {
     return fetch(`/locations/${site.id}`, {
@@ -94,5 +119,5 @@ function formatImageList(response) {
     imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
     return imageList_response;
 }
-const APIHandler = { getUsers, getLocations, postSite, deleteSite, getImageList};
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList};
 export default APIHandler;

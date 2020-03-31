@@ -26,10 +26,23 @@ class ImageHandler {
     // });
   }
 
+  static deleteAll(site_id) {
+    let folder = path.join(process.cwd(), '/public/images/' + site_id);
+    if( fs.existsSync(folder) ) {
+      fs.readdirSync(folder).forEach(function(file,index){
+        var curPath = folder + "/" + file;
+        if(!fs.lstatSync(curPath).isDirectory()) {
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(folder);
+    }
+  }
+
   async add(buffer, index, caption) {
     // Save info to images table
     let queryString = "INSERT INTO images (site_id, `index`, caption) VALUES (?, ?, ?); SELECT LAST_INSERT_ID() AS `newId`";
-    await this.connection.query(queryString,
+    let returnVal = await this.connection.query(queryString,
                     [this.site_id, index, caption],
                     async (err, result, fields) => {
       if (err) {
@@ -59,11 +72,29 @@ class ImageHandler {
           this.connection.query("DELETE FROM images WHERE id = ?", [id]);
           return -1;
         }
-
         return id;
       }
     });
+    return returnVal;
   }
+
+  // Update the index of an image.
+  async updateIndex(imgId, newIndex) {
+    const queryString = "UPDATE images SET `index` = ? WHERE id = ?"
+    let returnVal = await this.connection.query(queryString,
+                    [newIndex, imgId],
+                    (err, result) => {
+      if (err) {
+        console.log("Failed to update image\n\t" + err)
+        // Internal Server Error
+        return false;
+      } else {
+        return true;
+      }
+    });
+    return returnVal;
+  }
+
   makeFilePath(filename) {
     return path.resolve(`${this.folder}/${filename}`)
   }

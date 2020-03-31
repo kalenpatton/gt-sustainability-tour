@@ -42,6 +42,7 @@ class PopupWindow extends React.Component{
             }
         }
         let newSite = {
+            id: this.state.id,
             name: this.state.name,
             position: this.state.position,
             description: this.state.description,

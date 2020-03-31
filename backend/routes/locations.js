@@ -105,16 +105,21 @@ router.post('/', upload.any(), async (req, res) => {
 	    "transcript":"loctrans",
 	    "latitude":30.000,
 	    "longitude":-84.000,
-	    "filters":null
+	    "filters":null,
+
+      "imageList":[1,2,3,-1,-1],
+      "newImages":[img1, img2] //images must include a caption field.
   }
 
   Any unmodified fields should include their existing value
 */
-router.put('/:loc_id', (req, res) => {
-  const locationId = req.params.loc_id
-  const location = req.body
+router.put('/:loc_id', upload.any(), async (req, res) => {
+  const locationId = req.params.loc_id;
+  const location = req.body;
+  const newImgs = req.files;
+  var imageList = req.body.imageList.slice();
   console.log("Updating location with ID " + locationId)
-  console.log("Updated location info: " + location)
+  // console.log("Updated location info: " + location)
 
   const queryString = "UPDATE locations SET name = ?, description = ?, transcript = ?, latitude = ?, longitude = ?, filters = ? WHERE id = ?"
   connection.query(queryString,
@@ -124,9 +129,24 @@ router.put('/:loc_id', (req, res) => {
       console.log("Failed to update location\n\t" + err)
       res.sendStatus(500) // Internal Server Error
       return
+    } else {
+      // Update imageList
+      const imageHandler = new ImageHandler(locationId, connection);
+      let j = 0;
+      for (var i = 0; i < imageList.length; i++) {
+        if (imageList[i] == -1) {
+          // Add new image
+          imageList[i] = imageHandler.add(newImgs[j].buffer, i, newImgs[j].caption);
+          j++;
+        } else {
+          // Update image index for existing image
+          imageHandler.updateIndex(imageList[i],i);
+        }
+      }
+
+      console.log("Location updated")
+      res.end("send something useful here maybe?")
     }
-    console.log("Location updated")
-    res.end("send something useful here maybe?")
   })
 })
 
@@ -141,9 +161,13 @@ router.delete('/:loc_id', (req, res) => {
       console.log("Failed to delete location\n\t" + err)
       res.sendStatus(500) // Internal Server Error
       return
+    } else {
+      // delete images
+      ImageHandler.deleteAll(locationId);
+
+      console.log("Location " + locationId + " deleted")
+      res.end('Location has been deleted')
     }
-    console.log("Location " + locationId + " deleted")
-    res.end('Location has been deleted')
   })
 })
 

@@ -55,7 +55,7 @@ const connection = mysql.createConnection({
 
 // });
 
-/* GET specific location by id */
+/* GET imageList by location id */
 router.get('/:loc_id', (req, res) => {
   const locationId = req.params.loc_id
   console.log("Fetching image list for location id: " + locationId)
