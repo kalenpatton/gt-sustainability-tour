@@ -12,7 +12,6 @@ class PopupWindow extends React.Component{
 
     constructor(props) {
         super(props);
-        //console.log(this.props.autoplay);
         this.mapHandler = this.props.mapHandler;
         this.state = {
             openCC:false,
@@ -40,10 +39,7 @@ class PopupWindow extends React.Component{
 
 
     onMakeNextStop = () => {
-        //this.mapHandler.setNextStop(this.props.site);
-        //console.log(this.props.site);
         this.mapHandler.addToRoute(this.props.site);
-
     };
 
 
@@ -53,13 +49,11 @@ class PopupWindow extends React.Component{
                 <h2>{this.props.site.name}</h2>
                 <ImageGallery cover={pic} />
                 <div className="buttons">
-
-                    {/* <button onClick={this.onMakeNextStop}>Make Next Stop</button> */}
                     <button onClick={this.onMakeNextStop}>Add To My Route</button>
 
                 </div>
                 <div className="descriptions">
-                    {/* {this.state.site.description} */}
+                    <p>{this.props.site.description}</p>
                 </div>
                 <button onClick={this.onOpenModalGallery}>View Image Gallery</button>
                 <Modal open={this.state.openGallery} onClose={this.onCloseModalGallery} >
@@ -92,9 +86,9 @@ class PopupWindow extends React.Component{
                     />
                 </div>
 
-                <button onClick={this.onOpenModalCC}>CC</button>
+                <button onClick={this.onOpenModalCC}>View Transcript</button>
                 <Modal open={this.state.openCC} onClose={this.onCloseModalCC} >
-                    <CC/>
+                    <CC transcript={this.props.site.transcript}/>
                     <button onClick={this.onCloseModalCC}>Back</button>
                 </Modal>
             </div>

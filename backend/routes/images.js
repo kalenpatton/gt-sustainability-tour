@@ -5,13 +5,14 @@ var router = express.Router();
 const path = require('path');
 const mysql = require('mysql')
 
+require('dotenv').config()
+
 const ImageHandler = require('./ImageHandler');
 
-// THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'gttourapp',
-  password: 'gttourapp',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: 'location_info',
 })
 

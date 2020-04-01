@@ -1,11 +1,10 @@
-function getUsers(callback) {
+function getUsers() {
     return fetch('/users', {
         accept: "application/json"
     })
         .then(checkStatus)
         .then(response => response.json())
-        .then(convertUser)
-        .then(callback);
+        //.then(convertUser)
 }
 
 // Verifies successful response and throws error otherwise
@@ -21,7 +20,7 @@ function checkStatus(response) {
     throw error;
 }
 function convertUser(response) {
-    // let user_map = response.map(({username, password}) => name, password);
+     //let user_map = response.map(({login}) => ({username : value}));
     // return user_map;
     return response;
 }

@@ -10,6 +10,7 @@ var locationsRouter = require('./routes/locations');
 var filtersRouter = require('./routes/filters');
 var imagesRouter = require('./routes/images');
 var userRouter = require('./routes/users');
+var infoRouter = require('./routes/info');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/locations', locationsRouter);
 app.use('/filters', filtersRouter);
 app.use('/images', imagesRouter);
 app.use('/users', userRouter);
+app.use('/info', infoRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

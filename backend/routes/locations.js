@@ -1,23 +1,23 @@
 var express = require('express')
 var router = express.Router()
-const mysql = require('mysql')
+const mysql = require('mysql')\
 var multer = require('multer');
 var upload = multer();
 
-const ImageHandler = require('./ImageHandler');
+const ImageHandler = require('./ImageHandler');\
+require('dotenv').config()\
 
-// THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'gttourapp',
-  password: 'gttourapp',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: 'location_info',
   multipleStatements: true
 })
 
 
 /* GET locations listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 
   const queryString = "SELECT * FROM locations"
   connection.query(queryString, (err, rows, fields) => {
@@ -90,11 +90,12 @@ router.post('/', upload.any(), async (req, res) => {
       for (var i = 0; i < newImgs.length; i++) {
         imageHandler.add(newImgs[i].buffer, i, newImgs[i].caption);
       }
-      console.log("Location created");
-      res.json({site_id: site_id});
+      console.log("Location created")
+      console.log(result)
+      res.status(201).send('Location added with ID: ' + result.insertId)
     }
   });
-});
+})
 
 /* PUT specific location by id
 
@@ -145,7 +146,7 @@ router.put('/:loc_id', upload.any(), async (req, res) => {
       }
 
       console.log("Location updated")
-      res.end("send something useful here maybe?")
+      res.end("Location updated")
     }
   })
 })

@@ -35,8 +35,9 @@ button {
 #route-button{
     width: 2.5rem !important; 
     height: 2.5rem !important;
-    border-radius: 1rem !important;
-    background-color: #EAAA00; 
+    border-radius: 50%;
+    border: solid 2px #ddd6bb;
+    background-color: #B3A369; 
     z-index: 1000000;
     position: fixed;
     right: 10px;
