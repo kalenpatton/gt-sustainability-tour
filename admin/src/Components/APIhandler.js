@@ -69,7 +69,6 @@ function postSite(site, callback) {
         method: 'POST',
         body: formData
     }).then(checkStatus)
-        .then(response => response.json())
         .then(callback);
 }
 

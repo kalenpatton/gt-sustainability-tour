@@ -78,6 +78,28 @@ class ImageHandler {
     return returnVal;
   }
 
+  // delete the an image with a given id
+  async delete(imgId) {
+    const queryString = "DELETE FROM images WHERE id = ?"
+    let returnVal = await this.connection.query(queryString, [imgId], (err, result) => {
+      if (err) {
+        console.log("Failed to delete image\n\t" + err)
+        return false;
+      } else {
+        // delete images
+        let filename = `${imgId}.jpg`;
+        let thumbnailname = `thumb_${imgId}.jpg`
+        let filepath = this.makeFilePath(filename);
+        let thumbpath = this.makeFilePath(thumbnailname);
+
+        fs.unlinkSync(filepath);
+        fs.unlinkSync(thumbpath);
+        console.log("Image " + imgId + " deleted")
+        return true;
+      }
+    })
+  }
+
   // Update the index of an image.
   async updateIndex(imgId, newIndex) {
     const queryString = "UPDATE images SET `index` = ? WHERE id = ?"

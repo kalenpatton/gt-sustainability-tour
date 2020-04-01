@@ -3,6 +3,7 @@
 /* Table structure for table `locations` */
 CREATE DATABASE IF NOT EXISTS location_info;
 USE location_info;
+DROP TABLE IF EXISTS `images`;
 DROP TABLE IF EXISTS `locations`;
 CREATE TABLE `locations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -14,6 +15,16 @@ CREATE TABLE `locations` (
   `filters` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `images` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `site_id` int(10) unsigned DEFAULT NULL,
+  `index` int(10) unsigned DEFAULT NULL,
+  `caption` varchar(400) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `site_id_fk_idx` (`site_id`),
+  CONSTRAINT `site_id_fk` FOREIGN KEY (`site_id`) REFERENCES `locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /* Table structure for table `users` */
 DROP TABLE IF EXISTS `users`;

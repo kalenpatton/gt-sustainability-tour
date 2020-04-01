@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+import APIHandler from './APIHandler';
 
 const images = [
   '//placekitten.com/1500/500',
@@ -16,7 +17,32 @@ export default class ImageGallery extends Component {
     this.state = {
       photoIndex: 0,
       isOpen: false,
+      imageList: []
     };
+
+    APIHandler.getImageList(this.props.site, (response)=>{
+      this.setState({imageList: response})
+    });
+  }
+
+  updateImageList = () => {
+    APIHandler.getImageList(this.props.site, (response)=>{
+      this.setState({imageList: response})
+    });
+  };
+
+  getURL(photoIndex) {
+    return `/images/${this.props.site.id}/${this.state.imageList[photoIndex].id}.jpg`;
+  }
+
+  getCaption(photoIndex) {
+    return this.state.imageList[photoIndex].caption;
+  }
+
+  handleOpenRequest = () => {
+    if (this.state.imageList.length) {
+      this.setState({isOpen: true});
+    }
   }
 
   render() {
@@ -24,27 +50,27 @@ export default class ImageGallery extends Component {
 
     return (
       <div>
-        <img src={this.props.cover}
+        <img src={this.state.imageList.length ? this.getURL(0) : this.props.cover}
             id="pic"
             className="cover-image"
-            onClick={() => this.setState({isOpen: true})}/>
+            onClick={this.handleOpenRequest}/>
 
         {isOpen && (
           <Lightbox
             animationDuration={200}
-            mainSrc={images[photoIndex]}
-            nextSrc={images[(photoIndex + 1) % images.length]}
-            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
-            imageCaption={'This is an image of cat ' + photoIndex + '. This caption can be really long and can be used to offer more information about the image at hand.'}
+            mainSrc={this.getURL(photoIndex)}
+            nextSrc={this.getURL((photoIndex + 1) % this.state.imageList.length)}
+            prevSrc={this.getURL((photoIndex + this.state.imageList.length - 1) % this.state.imageList.length)}
+            imageCaption={this.getCaption(photoIndex)}
             onCloseRequest={() => this.setState({ isOpen: false })}
             onMovePrevRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + images.length - 1) % images.length,
+                photoIndex: (photoIndex + this.state.imageList.length - 1) % this.state.imageList.length,
               })
             }
             onMoveNextRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + 1) % images.length,
+                photoIndex: (photoIndex + 1) % this.state.imageList.length,
               })
             }
           />

@@ -1,11 +1,11 @@
 var express = require('express')
 var router = express.Router()
-const mysql = require('mysql')\
+const mysql = require('mysql')
 var multer = require('multer');
 var upload = multer();
 
-const ImageHandler = require('./ImageHandler');\
-require('dotenv').config()\
+const ImageHandler = require('./ImageHandler');
+require('dotenv').config()
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -118,7 +118,7 @@ router.put('/:loc_id', upload.any(), async (req, res) => {
   const locationId = req.params.loc_id;
   const location = req.body;
   const newImgs = req.files;
-  var imageList = req.body.imageList.slice();
+  var imageList = 'imageList' in req.body ? req.body.imageList.slice() : [];
   console.log("Updating location with ID " + locationId)
   // console.log("Updated location info: " + location)
 
@@ -131,22 +131,38 @@ router.put('/:loc_id', upload.any(), async (req, res) => {
       res.sendStatus(500) // Internal Server Error
       return
     } else {
-      // Update imageList
-      const imageHandler = new ImageHandler(locationId, connection);
-      let j = 0;
-      for (var i = 0; i < imageList.length; i++) {
-        if (imageList[i] == -1) {
-          // Add new image
-          imageList[i] = imageHandler.add(newImgs[j].buffer, i, newImgs[j].caption);
-          j++;
+      // Get previous image list
+      const queryString = "SELECT * FROM images WHERE site_id = ?"
+      connection.query(queryString, [locationId], (err, result, fields) => {
+        if (err) {
+          console.log("Failed to query for images\n\t" + err)
+          return
         } else {
-          // Update image index for existing image
-          imageHandler.updateIndex(imageList[i],i);
-        }
-      }
+          // Update imageList
+          let unusedImages = new Set(result.map(({id, site_id, index, caption}) => `${id}`));
 
-      console.log("Location updated")
-      res.end("Location updated")
+          const imageHandler = new ImageHandler(locationId, connection);
+          let j = 0;
+          for (var i = 0; i < imageList.length; i++) {
+            if (imageList[i] == -1) {
+              // Add new image
+              imageList[i] = imageHandler.add(newImgs[j].buffer, i, newImgs[j].caption);
+              j++;
+            } else {
+              // Update image index for existing image
+              imageHandler.updateIndex(imageList[i],i);
+            }
+            unusedImages.delete(imageList[i]);
+          }
+
+          unusedImages.forEach((imgId) => {
+            imageHandler.delete(imgId);
+          });
+
+          console.log("Location updated")
+          res.end("Location updated")
+        }
+      })
     }
   })
 })

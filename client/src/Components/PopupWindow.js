@@ -15,7 +15,8 @@ class PopupWindow extends React.Component{
         this.mapHandler = this.props.mapHandler;
         this.state = {
             openCC:false,
-            openGallery:false
+            openGallery:false,
+            imageList:[]
         };
     }
 
@@ -47,7 +48,10 @@ class PopupWindow extends React.Component{
         return(
             <div className="popupwindow">
                 <h2>{this.props.site.name}</h2>
-                <ImageGallery cover={pic} />
+                <ImageGallery
+                    cover={pic}
+                    site={this.props.site}
+                />
                 <div className="buttons">
                     <button onClick={this.onMakeNextStop}>Add To My Route</button>
 
