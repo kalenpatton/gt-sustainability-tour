@@ -33,12 +33,13 @@ USE `location_info` ;
 -- -----------------------------------------------------
 -- Table `location_info`.`filters`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `location_info`.`filters` (
+DROP TABLE IF EXISTS `filters`;
+CREATE TABLE `location_info`.`filters` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `filter` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 10
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 --
