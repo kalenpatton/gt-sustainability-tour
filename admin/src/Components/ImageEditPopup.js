@@ -5,17 +5,18 @@ export default class PopupWindow extends React.Component{
     constructor(props) {
         super(props);
         this.isNew = this.props.imageId < 0;
+        this.imageRef = React.createRef();
         this.state = {
-            id: -1,
-            image: null,
+            id: this.props.imageId,
+            imageUrl: null,
             caption: '',
             changed: false
         };
-        if (!this.isNew) {
-            this.state.id = this.props.imageId;
-            // call backend to get file
-            // call backend to get caption
-        }
+        // if (!this.isNew) {
+        //     this.state.id = this.props.imageId;
+        //     // call backend to get file
+        //     // call backend to get caption
+        // }
         this.save = this.props.onSave;
         console.log(this.isNew)
     }
@@ -24,15 +25,31 @@ export default class PopupWindow extends React.Component{
         event.preventDefault();
         event.stopPropagation();
         if (this.state.changed) {
-            // TODO: Add call to backend to post changes.
-            let image = {
-                id: this.state.id,
-                image: this.state.image,
-                caption: this.state.caption,
-            };
-            console.log(image);
-            // Send image to database here
-            this.save(event, this.state.id, this.isNew);
+            // // TODO: Add call to backend to post changes.
+
+            // // console.log(this.imageRef.current.files[0]);
+            // let data = new FormData();
+            // data.append('siteId', this.state.id);
+            // data.append('image', this.imageRef.current.files[0]);
+            // data.append('caption', this.state.caption);
+
+            // console.log(data);
+            // // Send image to database here
+            // fetch('/images/upload', {
+            //     method: 'POST',
+            //     body: data
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data)
+            // })
+            // .catch(error => {
+            //     console.error(error)
+            // });
+            let image = this.imageRef.current.files[0];
+            image.caption = this.state.caption;
+
+            this.save(event, image, this.state.imageUrl, this.isNew);
         }
     };
 
@@ -47,7 +64,7 @@ export default class PopupWindow extends React.Component{
     handleFileChange = (event) => {
         const image = event.target.files[0];
         this.setState({
-            image: URL.createObjectURL(image),
+            imageUrl: URL.createObjectURL(image),
             changed: true
         });
     }
@@ -64,6 +81,7 @@ export default class PopupWindow extends React.Component{
                                 <input
                                     className="form-file-upload"
                                     type="file"
+                                    ref={this.imageRef}
                                     name="image"
                                     accept="image/*"
                                     onChange={this.handleFileChange}
@@ -72,7 +90,7 @@ export default class PopupWindow extends React.Component{
                             </div>
                         </div>
                         <img
-                            src={this.state.image}
+                            src={this.state.imageUrl}
                             />
                         <div>
                             {'Caption: '}

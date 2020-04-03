@@ -4,6 +4,7 @@ var upload = multer();
 var router = express.Router();
 const path = require('path');
 const mysql = require('mysql')
+
 require('dotenv').config()
 
 const ImageHandler = require('./ImageHandler');
@@ -15,45 +16,63 @@ const connection = mysql.createConnection({
   database: 'location_info',
 })
 
-router.post('/upload', upload.single('image'), async function(req, res) {
-    try {
-        console.log(req.body);
-        const imagePath = path.join(process.cwd(), '/public/images');
-        const fileUpload = new ImageHandler(imagePath);
-        if (!req.file) {
-            return res.status(401).json({error: 'No image provided.'});
-        }
+// router.post('/upload', upload.single('image'), async function(req, res) {
+//   const imgInfo = req.body;
+//   console.log(imgInfo);
+//   const image = req.file;
+//   if (!image) {
+//     res.status(401).sent("Image is missing.");
+//     return;
+//   }
 
+//   // Add new images to image table/file system
+//   try {
+//     const imagePath = path.join(process.cwd(), '/public/images');
+//     const fileUpload = new ImageHandler(imagePath);
+//     // Insert newImages[j] into database, get id
+//     let queryString = "INSERT INTO images (site_id, `index`, caption) VALUES (?, ?, ?); SELECT LAST_INSERT_ID() as `newImgId`"
+//     let newImgId = -1;
+//     await connection.query(queryString,
+//                     [imgInfo.siteId, imgInfo.index, imgInfo.caption],
+//                     (err, result, fields) => {
+//       if (err) {
+//         console.log("Failed to add image \n\t" + err);
+//         res.sendStatus(500); // Internal Server Error
+//       } else {
+//         newImgId = result[1][0].newImgId;
+//       }
+//     });
+//     // Save image to file system
+//     fileUpload.save(image.buffer, newImgId);
 
-        // WIP
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send(err);
+//     return;
+//   }
+// });
 
-        // // CASE: New image
-        // if (req.body.id == -1) {
-        //   const queryString = "INSERT INTO images (site_id,index,caption) VALUES ()"
-        //   connection.query(queryString, req.query.filter, (err, result) => {
-        //     if (err) {
-        //       console.log("Failed to query for filters\n\t" + err)
-        //       res.sendStatus(500) // Internal Server Error
-        //       return
-        //     }
-        //     res.status(201).send('Filter added with ID: ' + result.insertId)
-        //     console.log("Added filter")
-        //   })
-        // // CASE: Edit image
-        // } else {
+// router.get('/reorder', function(req, res, next) {
 
-        // }
-        const id = await fileUpload.save(req.file.buffer);
+// });
 
+/* GET imageList by location id */
+router.get('/:loc_id', (req, res) => {
+  const locationId = req.params.loc_id
+  console.log("Fetching image list for location id: " + locationId)
 
-
-
-        res.status(200).json({id: id});
-    } catch (err) {
-        console.log(err);
-        res.status(500).send(err);
+  const queryString = "SELECT * FROM images WHERE site_id = ?"
+  connection.query(queryString, [locationId], (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for images\n\t" + err)
+      res.sendStatus(500) // Internal Server Error
+      return
+    } else {
+      console.log("Fetched image list");
+      res.json(rows)
     }
-});
+  })
+})
 
 router.get('/', function(req, res, next) {
   console.log("Responding to root route")
