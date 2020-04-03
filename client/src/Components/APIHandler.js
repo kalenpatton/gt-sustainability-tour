@@ -24,12 +24,29 @@ function checkStatus(response) {
     throw error;
 }
 
+// GETs an array of integers representing the id numbers of the images for the given site.
+function getImageList(site, callback) {
+    return fetch(`/images/${site.id}`, {
+        accept: "application/json"
+    }).then(checkStatus)
+        .then(response => response.json())
+        .then(formatImageList)
+        .then(callback);
+}
+
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
-    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) => 
-        ({name, description, transcript, filters, position: [latitude, longitude]}));
+    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
+        ({id, name, description, transcript, filters, position: [latitude, longitude]}));
     return map_response;
 }
 
-const APIHandler = { getLocations };
+
+function formatImageList(response) {
+    let imageList_response = response.slice().sort((a, b) => a.index - b.index);
+    imageList_response = imageList_response.map(({id, site_id, index, caption}) => ({id, caption}));
+    return imageList_response;
+}
+
+const APIHandler = { getLocations, getImageList };
 export default APIHandler;
