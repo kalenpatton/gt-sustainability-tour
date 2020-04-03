@@ -1,18 +1,18 @@
 var express = require('express')
 var router = express.Router()
 const mysql = require('mysql')
+require('dotenv').config()
 
-// THIS IS WILDLY UNSAFE CHANGE THIS ASAP
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '1 Love GT Sustainability.',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
   database: 'location_info',
 })
 
 
 /* GET locations listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
 
   const queryString = "SELECT * FROM locations"
   connection.query(queryString, (err, rows, fields) => {
@@ -74,7 +74,7 @@ router.post('/', (req, res) => {
     }
     console.log("Location created")
     console.log(result)
-    res.end("replace this with return of new location id")
+    res.status(201).send('Location added with ID: ' + result.insertId)
   })
 })
 
@@ -82,12 +82,12 @@ router.post('/', (req, res) => {
 
   req.body should be json of format:
   {
-	    "name":"locname",
-	    "description":"locdesc",
-	    "transcript":"loctrans",
-	    "latitude":30.000,
-	    "longitude":-84.000,
-	    "filters":null
+	  "name":"locname",
+	  "description":"locdesc",
+	  "transcript":"loctrans",
+	  "latitude":30.000,
+	  "longitude":-84.000,
+	  "filters":null
   }
 
   Any unmodified fields should include their existing value
@@ -108,7 +108,7 @@ router.put('/:loc_id', (req, res) => {
       return
     }
     console.log("Location updated")
-    res.end("send something useful here maybe?")
+    res.end("Location updated")
   })
 })
 

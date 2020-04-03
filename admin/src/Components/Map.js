@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { Map as LeafletMap, TileLayer, Marker ,Popup} from 'react-leaflet';
-
+import APIHandler from './APIHandler';
 class Map extends React.Component {
 
     constructor(props) {
@@ -10,7 +10,7 @@ class Map extends React.Component {
             isMapInit : false,
             showDirectionText: false,
             // Eventually, this hard code should be replaced with a call to backend
-
+            sites : APIHandler.getLocations(this.updateOnLocationLoad)
         };
 
     }

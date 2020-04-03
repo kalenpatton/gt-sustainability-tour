@@ -15,15 +15,6 @@ import RoutingList from './RoutingList';
 
 class Map extends React.Component {
 
-    // componentDidUpdate(prevState) {
-    //     //console.log(this.state.routeList);
-    //     if(this.state.routeList.length>0 && prevState.routingList[0].name!=this.state.routeList[0].name){
-    //         console.log(this.state.routeList[0].name);
-    //         this.props.settingHandler.showNextStop(this.state.routeList[0].name);
-    //     }
-        
-    // }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -82,7 +73,8 @@ class Map extends React.Component {
                 this.changeShowNextStop(this.state.routeList[0].name);
             }
             //this.changeShowNextStop(this.state.routeList[0].name);
-        }
+        },
+
     };
 
     updateOnLocationLoad = (location_arr) => {
@@ -112,7 +104,8 @@ class Map extends React.Component {
             focusedSite: site,
             open: true,
         });
-        //console.log(site);
+        console.log(this.state.focusedSite);
+
     };
 
     onCloseModal = () => {
@@ -228,10 +221,10 @@ class Map extends React.Component {
                     startDirectly
                     mapHandler={this.mapHandler}/>
 
-                {/* https://github.com/reactjs/react-modal */}
+               
+                {/* change order */}
+                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg" style={{color:'#404040'}}></i></button>
 
-                {/* <SuspendButton onClick={this.onOpenList}></SuspendButton> */}
-                <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg"></i></button>
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
                    
                     <RoutingList stops={this.state.routeList} mapHandler = {this.mapHandler}/>

@@ -1,14 +1,24 @@
 .settingWindow{
-    height: 90%;
+    height: 100%;
     width: 100%;
     max-height: fit-content;
     align-content: center;
-    
+}
+
+.styles_modal__gNwvD{
+    width: 100%;
+}
+
+.css-1r4vtzz{
+    margin-bottom: 10px;  
+}
+
+#restart{
+    margin-top: 30px;
 }
 
 ul {
     list-style: none;
-    
 }
 
 #admin-button{
