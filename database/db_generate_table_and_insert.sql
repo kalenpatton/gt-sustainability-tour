@@ -40,6 +40,24 @@ CREATE TABLE `users` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`idusers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='users for login\n';
+
+-- -----------------------------------------------------
+-- Schema location_info
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `location_info` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `location_info` ;
+
+-- -----------------------------------------------------
+-- Table `location_info`.`filters`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `location_info`.`filters` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `filter` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 10
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 --
 -- Data for table `locations`
 --
@@ -50,8 +68,17 @@ INSERT INTO `locations` VALUES (1,'Caddell Building','No description provided.',
 UNLOCK TABLES;
 
 LOCK TABLES `users` WRITE;
-/*!1 ALTER TABLE `users` DISABLE KEYS */;
+ALTER TABLE `users` DISABLE KEYS;
 INSERT INTO `users` VALUES (1,'gtsustain','12345');
+ALTER TABLE `users` ENABLE KEYS;
+UNLOCK TABLES;
+
+
+LOCK TABLES `filters` WRITE;
+ALTER TABLE `filters` DISABLE KEYS;
+INSERT INTO `filters` (filter) VALUES ('Energy and Emissions'),('Water'),('Materials Management'),('Built Environment'),('Community and Culture');
+ALTER TABLE `filters` ENABLE KEYS;
+UNLOCK TABLES;
 
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
