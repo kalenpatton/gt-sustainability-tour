@@ -58,4 +58,23 @@ router.get('/', function(req, res, next) {
     })
   });
 
+  /* DELETE a filter by id number. 
+      /filters/:filter_id
+  */
+  router.delete('/:filter_id', (req, res) => {
+    const filterId = req.params.filter_id
+    console.log("Deleting filter with ID " + filterId)
+  
+    const queryString = "DELETE FROM filters WHERE id = ?"
+    connection.query(queryString, filterId, (err, result) => {
+      if (err) {
+        console.log("Failed to delete filter\n\t" + err)
+        res.sendStatus(500) // Internal Server Error
+        return
+      }
+      console.log("Filter " + filterId + " deleted")
+      res.end('Filter ' + filterId + ' has been deleted')
+    })
+  })
+
 module.exports = router;
