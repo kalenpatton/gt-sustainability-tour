@@ -11,11 +11,13 @@ class PopupWindow extends React.Component{
     constructor(props) {
         super(props);
         this.isNewStop = this.props.site ? false : true;
+        this.audioRef = React.createRef();
         this.state = {
             id: -1,
             name: '',
             position: [33.775620, -84.396286],
-            description: ''
+            description: '',
+            transcript: ''
         };
         if (!this.isNewStop) this.state = {...this.props.site};
         // Remove later. Just for dev
@@ -49,6 +51,10 @@ class PopupWindow extends React.Component{
             imageList: imageList,
             newImgs: newImgs
         };
+
+        if (this.audioRef.current.value != '') {
+            newSite.audio = this.audioRef.current.files[0]
+        }
         console.log(newSite);
         this.saveSite(newSite, this.isNewStop);
     };
@@ -58,7 +64,7 @@ class PopupWindow extends React.Component{
         this.setState({
             imageList: imageList
         });
-    }
+    };
 
     handleInputChange = (event) => {
         const { value, name } = event.target;
@@ -110,6 +116,27 @@ class PopupWindow extends React.Component{
                                     imageList={this.state.imageList}
                                     onChange={(e, newList) => this.setState({imageList: newList})}
                                 />
+
+                                {'Audio: '}
+                                <div>
+                                    <input
+                                        className="form-file-upload"
+                                        type="file"
+                                        ref={this.audioRef}
+                                        name="audio"
+                                        accept="audio/mp3"
+                                        onChange={this.handleFileChange}
+                                        required={this.isNew}
+                                    />
+                                </div>
+                                <div>
+                                    {'Audio Transcript: '}
+                                    <textarea
+                                        className='form-desc-in'
+                                        name='transcript'
+                                        value={this.state.transcript}
+                                        onChange={this.handleInputChange}/>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ var multer = require('multer');
 var upload = multer();
 
 const ImageHandler = require('./ImageHandler');
+const AudioHandler = require('./AudioHandler');
 require('dotenv').config()
 
 const connection = mysql.createConnection({
@@ -92,7 +93,7 @@ router.post('/', upload.any(), async (req, res) => {
       }
       console.log("Location created")
       console.log(result)
-      res.status(201).send('Location added with ID: ' + result.insertId)
+      res.status(201).json(site_id)
     }
   });
 })
@@ -181,6 +182,7 @@ router.delete('/:loc_id', (req, res) => {
     } else {
       // delete images
       ImageHandler.deleteAll(locationId);
+      AudioHandler.delete(locationId);
 
       console.log("Location " + locationId + " deleted")
       res.end('Location has been deleted')
