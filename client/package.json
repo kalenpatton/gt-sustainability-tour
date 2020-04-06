@@ -16,11 +16,13 @@
     "react-image-lightbox": "^5.1.1",
     "react-leaflet": "^2.6.0",
     "react-multiselect-checkboxes": "^0.1.1",
+    "react-redux": "^7.2.0",
     "react-responsive-modal": "^4.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
     "react-toggle-button": "^2.2.0",
     "reactjs-popup": "^1.5.0",
+    "redux": "^4.0.5",
     "styled-components": "^5.0.1"
   },
   "scripts": {

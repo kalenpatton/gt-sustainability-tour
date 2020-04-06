@@ -19,6 +19,10 @@ export default class Header extends Component {
 
     onCloseModal = () => {
       this.setState({ open: false });
+      //update map ref 
+      if(this.props.map){
+        this.props.map.updatefiltedSites();
+      }
     };
 
     render() {

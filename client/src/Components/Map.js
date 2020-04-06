@@ -8,6 +8,7 @@ import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
 import APIHandler from './APIHandler';
 
+import {connect} from "react-redux";
 
 import RoutingList from './RoutingList';
 
@@ -23,7 +24,11 @@ class Map extends React.Component {
             showDirectionText: true,
             open : false,
 
+            allSites:null,
             sites : APIHandler.getLocations(this.updateOnLocationLoad),
+            //sites:this.props.sites,
+
+            selectedFilters:this.filterOut(),
 
             // the site currently in focus in the popup window
             focusedSite : null,
@@ -34,8 +39,20 @@ class Map extends React.Component {
 
             routeList:[],
         };
-
+       
+        console.log(this.state.selectedFilters);
         this.addRouting = this.addRouting.bind(this);
+        props.setRef(this);
+    }
+
+    filterOut=()=>{
+        var selectedFilters = new Set(); 
+        
+        this.props.filters.forEach((e)=>{
+            selectedFilters.add(e.label);
+        })
+        this.setState({selectedFilters:selectedFilters});
+        return selectedFilters;
     }
 
     // Object that contains methods to edit the map. Can be passed to children
@@ -78,9 +95,24 @@ class Map extends React.Component {
     };
 
     updateOnLocationLoad = (location_arr) => {
+       //randomly add some filters for testing 
+        for(let i=0;i<location_arr.length;i+=2){
+            location_arr[i].filters="Energy and Emissions";
+        }
+        for(let i=1;i<location_arr.length;i+=2){
+            location_arr[i].filters="Water";
+        }
+        for(let i=0;i<location_arr.length;i+=3){
+            location_arr[i].filters="Materials Management,Built Environment";
+        }
+
         console.log(location_arr);
         this.setState(
             { sites: location_arr },
+            console.log("Sites updated")
+        );
+        this.setState(
+            { allSites: location_arr },
             console.log("Sites updated")
         );
         this.setState(
@@ -95,6 +127,33 @@ class Map extends React.Component {
         return location_arr;
     };
 
+    //filtering 
+    updatefiltedSites = () => {
+        var selected=this.filterOut();
+
+        var newSites=[];
+        for(let i=0;i<this.state.allSites.length;i++){
+            
+            var filterList = this.state.allSites[i].filters.split(",");
+            for(let j=0;j<filterList.length;j++){
+                if(selected.has(filterList[j])){
+                    newSites.push(this.state.allSites[i]);
+                    break;
+                }
+            }
+        }
+       
+        console.log("all sites:");
+        console.log(this.state.allSites);
+        console.log("new sites:");
+        console.log(newSites);
+        this.setState(
+            { sites: newSites },
+            console.log("filtered sites updated")
+        );
+
+    }
+
     changeShowNextStop=(name)=>{ 
         this.props.settingHandler.showNextStop(name);
     }
@@ -105,6 +164,9 @@ class Map extends React.Component {
             open: true,
         });
         console.log(this.state.focusedSite);
+
+        //test
+        this.updatefiltedSites();
 
     };
 
@@ -185,6 +247,7 @@ class Map extends React.Component {
         this.setState({
             isMapInit: true
         });
+        this.props.saveMap(map);
     }
 
     render() {
@@ -247,4 +310,18 @@ class Map extends React.Component {
         );
     }
 }
-export default Map;
+
+
+const mapStateToProps = (state) =>{
+    return{
+        filters: state.filters,
+    };
+
+}
+
+const mapDispaychToProps = dispatch =>{
+    return{
+        setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
+    };
+}
+export default connect(mapStateToProps,mapDispaychToProps)(Map);
