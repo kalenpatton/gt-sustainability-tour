@@ -4,7 +4,12 @@ import Map from './Components/Map';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import reducer from './Reducer';
 
+
+const store = createStore(reducer);
 
 class App extends React.Component {
 
@@ -13,9 +18,16 @@ class App extends React.Component {
     this.state={
       autoplay:true,
       textDirection:true,
-      nextStop:"N/A"
+      nextStop:"N/A",
+      map:null,
+    
     }
+
+    this.map = null;
+   
   }
+
+ 
 
   settingHandler={
     changeAutoplay:(value)=>{
@@ -30,13 +42,19 @@ class App extends React.Component {
       this.setState({nextStop:value});
     },
 
-    // filterStops:(choosedFilter)=>{        
-    //   var newList=this.state.routeList.filter(e => e[filter]==choosedFilter );  
-    // }
+    filterStops:(choosedFilter)=>{        
+      //var newList=this.state.routeList.filter(e => e[filter]==choosedFilter );  
+      console.log(choosedFilter);
+    }
     
   }
+  saveMap=(currmap)=>{
+    this.setState({map:currmap});
+  }
+
   render(){
     return (
+      <Provider store={store}>
       <div className="App">
         
         <Header 
@@ -44,11 +62,13 @@ class App extends React.Component {
           autoplay={this.state.autoplay} 
           textDirection={this.state.textDirection}
           nextStop={this.state.nextStop}
+          map={this.map}
         />
-        <Map autoplay={this.state.autoplay} textDirection={this.state.textDirection} settingHandler={this.settingHandler}/>
+        <Map  autoplay={this.state.autoplay} textDirection={this.state.textDirection} settingHandler={this.settingHandler} saveMap={this.saveMap} setRef={ref => this.map = ref} />
         <Footer/>
         
       </div>
+      </Provider>
     );
 
     }
