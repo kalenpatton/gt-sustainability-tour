@@ -84,7 +84,7 @@ class PopupWindow extends React.Component{
                     showLoopControl
                     showSkipControls={false}
                     showVolumeControl
-                    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+                    src={`/audio/${this.props.site.id}.mp3`}
                     volume={1}
                     volumeJumpStep={0.1}
                     />

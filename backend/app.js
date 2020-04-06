@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var locationsRouter = require('./routes/locations');
 var filtersRouter = require('./routes/filters');
 var imagesRouter = require('./routes/images');
+var audioRouter = require('./routes/audio');
 var userRouter = require('./routes/users');
 var infoRouter = require('./routes/info');
 
@@ -28,6 +29,7 @@ app.use('/', indexRouter);
 app.use('/locations', locationsRouter);
 app.use('/filters', filtersRouter);
 app.use('/images', imagesRouter);
+app.use('/audio', audioRouter);
 app.use('/users', userRouter);
 app.use('/info', infoRouter);
 

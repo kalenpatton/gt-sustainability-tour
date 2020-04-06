@@ -69,8 +69,14 @@ function postSite(site, callback) {
         method: 'POST',
         body: formData
     }).then(checkStatus)
-        .then(callback);
+        .then(response => response.json())
+        .then((response) => {
+            console.log(response)
+            if ('audio' in site) postAudio(response, site.audio, callback);
+            else callback(response);
+        })
 }
+
 
 function putSite(site, callback) {
     const formData = new FormData();
@@ -94,7 +100,23 @@ function putSite(site, callback) {
         method: 'PUT',
         body: formData
     }).then(checkStatus)
-        .then(callback);
+        .then((response) => {
+            if ('audio' in site) postAudio(site.id, site.audio, callback);
+            else callback(response);
+        })
+}
+
+
+// POST audio file
+function postAudio(site_id, audio, callback) {
+    const formData = new FormData();
+    formData.append("site_id", site_id);
+    formData.append("audio", audio);
+    return fetch('/audio', {
+        method: 'POST',
+        body: formData
+    }).then(checkStatus)
+        .then(callback)
 }
 
 // DELETEs a site from the database.
@@ -117,5 +139,5 @@ function formatImageList(response) {
     imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
     return imageList_response;
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList};
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio};
 export default APIHandler;
