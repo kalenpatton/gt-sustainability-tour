@@ -1,0 +1,69 @@
+#Homepage{
+    height: 100vh;
+    overflow: hidden;
+    background-image: url(../images/tech.png);
+    background-position: left;
+    background-size: cover;
+}
+
+#homepage-img{
+    /* border: solid 8px #ddd6bb; */
+    border-radius: 25px;
+    /* border: solid 3px #003057; */
+    width: 400px;
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+
+}
+
+@media (max-width: 800px) {
+    #homepage-img{
+        width: 50%;
+        border-radius: 25px;
+    }
+  
+}
+
+#title{
+    /* background-color: #B3A369; */
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    color: #003057;
+    /* border-radius: 25px;
+    border: solid 3px #003057; */
+    width: 800px;
+    height: 55px;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+#home-description{
+    width: fit-content;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#start{
+    background-color: #E5E5E5;
+    border-radius: 25px;
+    border: solid 3px #003057;
+    width: 180px;
+    height: 55px;
+    font-weight: bold;
+    font-size: large;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

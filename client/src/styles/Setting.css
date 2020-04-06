@@ -1,0 +1,40 @@
+.settingWindow{
+    height: 100%;
+    width: 50%;
+    max-height: fit-content;
+    font-size: large;
+    
+}
+
+.styles_modal__gNwvD{
+    width: 50%;
+    justify-content: center;
+}
+
+.css-1r4vtzz{
+    margin-bottom: 10px;  
+}
+
+#restart{
+    margin-top: 30px;
+}
+
+ul {
+    list-style: none;
+}
+
+#admin-button{
+    background-color:red;
+}
+
+/* admin button only visible for laptop users */
+@media (max-width: 800px) {
+    #admin-button{
+        display: none;
+    }
+  }
+
+
+
+
+

@@ -1,0 +1,12 @@
+.gallery{
+    height: 90%;
+    width: 300px;
+    max-height: fit-content;
+    align-content: center;
+    overflow: scroll;
+}
+
+img.bordered{
+    width: 100%;
+    border: solid 1px #cccccc;
+}

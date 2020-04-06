@@ -1,0 +1,46 @@
+{
+  "name": "gt-sustainability-tour",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001/",
+  "dependencies": {
+    "express": "^4.17.1",
+    "leaflet": "^1.6.0",
+    "leaflet-routing-machine": "^3.2.12",
+    "leaflet.locatecontrol": "^0.70.0",
+    "node-sass": "^4.13.1",
+    "react": "^16.11.0",
+    "react-beautiful-dnd": "^12.2.0",
+    "react-dom": "^16.11.0",
+    "react-h5-audio-player": "^2.0.1",
+    "react-leaflet": "^2.6.0",
+    "react-multiselect-checkboxes": "^0.1.1",
+    "react-responsive-modal": "^4.0.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
+    "react-toggle-button": "^2.2.0",
+    "reactjs-popup": "^1.5.0",
+    "styled-components": "^5.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

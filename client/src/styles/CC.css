@@ -1,0 +1,7 @@
+.CC{
+    height: 90%;
+    width: 300px;
+    max-height: fit-content;
+    align-content: center;
+    overflow: scroll;
+}

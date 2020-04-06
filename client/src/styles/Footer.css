@@ -1,0 +1,20 @@
+.App-footer{
+    position: fixed;
+    width: 100%;
+    background-color:#B3A369;
+    height:35px;
+    bottom: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(3px + 2vmin);
+    font-weight:bold;
+    color: white;
+
+    /*Shadow*/
+    z-index: 10;
+    box-shadow: 0px 0px 10px rgba(30, 45, 70, .5);
+
+}
+
