@@ -29,11 +29,12 @@ CREATE TABLE `images` (
 /* Table structure for table `users` */
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `idusers` int NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`idusers`)
+  `email` varchar(45) NOT NULL,
+  `password` char(60) NOT NULL,
+  `usertype` enum('admin','superadmin') NOT NULL DEFAULT 'admin',
+  PRIMARY KEY (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='users for login\n';
+
 
 -- -----------------------------------------------------
 -- Schema location_info
@@ -71,7 +72,7 @@ UNLOCK TABLES;
 /* Data for table `users` */
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'gtsustain','12345');
+INSERT INTO `users` VALUES ('kpatton33@gatech.edu','$2b$10$EpNeZG2VTX.NzeP2xBSBo.7EM5lbLI9dS6OvRCWSFcPvWdHXQMzXO', 'superadmin');
 ALTER TABLE `users` ENABLE KEYS;
 UNLOCK TABLES;
 

@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 const mysql = require('mysql')
+const withAuth = require('./withAuth');
 var multer = require('multer');
 var upload = multer();
 
@@ -60,17 +61,19 @@ router.get('/:loc_id', (req, res) => {
 	    "longitude":-84.000,
       "filters":null,
 
-      "newImgs":[img1, img2] //images must include a caption field.
+      "newImgs":[img1, img2],
+      "newCaptions":["caption1", "caption2"]
   }
 
   Returns the auto-generated id of the new location
 */
-router.post('/', upload.any(), async (req, res) => {
+router.post('/', withAuth, upload.any(), async (req, res) => {
   // Set up variables
   console.log("Creating new location");
   console.log(req.body);
   console.log(req.files);
   const location = req.body;
+  const newCaptions = req.body.newCaptions;
   const newImgs = req.files;
   var site_id = -1;
 
@@ -89,7 +92,7 @@ router.post('/', upload.any(), async (req, res) => {
       // Add images
       const imageHandler = new ImageHandler(site_id, connection);
       for (var i = 0; i < newImgs.length; i++) {
-        imageHandler.add(newImgs[i].buffer, i, newImgs[i].caption);
+        imageHandler.add(newImgs[i].buffer, i, newCaptions[i]);
       }
       console.log("Location created")
       console.log(result)
@@ -110,15 +113,17 @@ router.post('/', upload.any(), async (req, res) => {
 	    "filters":null,
 
       "imageList":[1,2,3,-1,-1],
-      "newImages":[img1, img2] //images must include a caption field.
+      "newImages":[img1, img2],
+      "newCaptions":["caption1", "caption2"]
   }
 
   Any unmodified fields should include their existing value
 */
-router.put('/:loc_id', upload.any(), async (req, res) => {
+router.put('/:loc_id', withAuth, upload.any(), async (req, res) => {
   const locationId = req.params.loc_id;
   const location = req.body;
   const newImgs = req.files;
+  const newCaptions = req.body.newCaptions;
   var imageList = 'imageList' in req.body ? req.body.imageList.slice() : [];
   console.log("Updating location with ID " + locationId)
   // console.log("Updated location info: " + location)
@@ -147,7 +152,7 @@ router.put('/:loc_id', upload.any(), async (req, res) => {
           for (var i = 0; i < imageList.length; i++) {
             if (imageList[i] == -1) {
               // Add new image
-              imageList[i] = imageHandler.add(newImgs[j].buffer, i, newImgs[j].caption);
+              imageList[i] = imageHandler.add(newImgs[j].buffer, i, newCaptions[j]);
               j++;
             } else {
               // Update image index for existing image
@@ -169,7 +174,7 @@ router.put('/:loc_id', upload.any(), async (req, res) => {
 })
 
 /* DELETE specific location by id */
-router.delete('/:loc_id', (req, res) => {
+router.delete('/:loc_id', withAuth, (req, res) => {
   const locationId = req.params.loc_id
   console.log("Deleting location with ID " + locationId)
 

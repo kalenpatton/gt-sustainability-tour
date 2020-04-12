@@ -51,7 +51,7 @@ function postSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
     formData.append("description", site.description);
-    formData.append("transcript", "");
+    formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
@@ -63,6 +63,7 @@ function postSite(site, callback) {
     // }
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
+        formData.append(`newCaptions[]`, site.newImgs[i].caption);
     }
 
     return fetch('/locations', {
@@ -82,7 +83,7 @@ function putSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
     formData.append("description", site.description);
-    formData.append("transcript", "");
+    formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
@@ -94,6 +95,7 @@ function putSite(site, callback) {
     }
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
+        formData.append(`newCaptions[]`, site.newImgs[i].caption);
     }
 
     return fetch(`/locations/${site.id}`, {
@@ -127,6 +129,26 @@ function deleteSite(site, callback) {
         .then(callback);
 }
 
+// POST a login request
+function postLogin(email, password, callback) {
+    return fetch('/users/authenticate', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// check if the user currently has a valid tocken
+function checkToken(callback) {
+    return fetch('users/checktoken', {
+        method: 'GET'
+    }).then(response => response.ok)
+        .then(callback)
+}
+
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
@@ -139,5 +161,13 @@ function formatImageList(response) {
     imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
     return imageList_response;
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio};
+async function formatLoginResponse(response) {
+    if (response.ok) {
+        return ({ok: true})
+    }
+    response = await response.json()
+    response.ok = false
+    return response
+}
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
 export default APIHandler;

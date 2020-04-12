@@ -22,33 +22,15 @@ export default class Login extends React.Component {
     }
     onSubmit = (event) => {
         event.preventDefault();
-            const{email, password} = this.state;
-            var users = this.APIHandler.getUsers(this.state);
-
-                    
-
-            };
-        // TODO: Use fetch to authenticate. For now, just log in
-
-        // fetch(AUTH_URL, {
-        //     method: 'POST',
-        //     body: JSON.stringify(this.state),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        // .then(res => {
-        //     if (res.status === 200) {
-        //         this.props.history.push('/');
-        //     } else {
-        //         const error = new Error(res.error);
-        //         throw error;
-        //     }
-        // })
-        // .catch(err => {
-        //     console.error(err);
-        //     alert('Error logging in please try again');
-        // });
+        const{ email, password } = this.state;
+        APIHandler.postLogin(email, password, (res) => {
+            if (res.ok) {
+                this.props.history.push('/dashboard');
+            } else {
+                alert(res.error)
+            }
+        });
+    }
 
     render() {
         return (
