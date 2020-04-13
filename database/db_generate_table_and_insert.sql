@@ -79,7 +79,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `filters` WRITE;
 ALTER TABLE `filters` DISABLE KEYS;
-INSERT INTO `filters` (filter) VALUES ('Energy and Emissions'),('Water'),('Materials Management'),('Built Environment'),('Community and Culture');
+INSERT INTO `filters` (filter) VALUES ('Buildings and Infrastructure'),('Transportation'),('Grounds'),('Energy and Emissions'),('Equity'),('Water');
 ALTER TABLE `filters` ENABLE KEYS;
 UNLOCK TABLES;
 
