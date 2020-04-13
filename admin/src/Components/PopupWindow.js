@@ -48,6 +48,7 @@ class PopupWindow extends React.Component{
             name: this.state.name,
             position: this.state.position,
             description: this.state.description,
+            transcript: this.state.transcript,
             imageList: imageList,
             newImgs: newImgs
         };

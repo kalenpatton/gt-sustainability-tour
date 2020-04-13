@@ -7,6 +7,7 @@ const mysql = require('mysql')
 const fs = require('fs');
 
 const AudioHandler = require('./AudioHandler');
+const withAuth = require('./withAuth');
 require('dotenv').config()
 
 const connection = mysql.createConnection({
@@ -21,7 +22,7 @@ const connection = mysql.createConnection({
   //     "site_id":5,
   //     "audio": {<my_site_audio.mp3>}
   // }
-router.post('/', upload.single('audio'), async function (req, res) {
+router.post('/', withAuth, upload.single('audio'), function (req, res) {
   const audio = req.file;
   const site_id = req.body.site_id;
   if (!audio) {
