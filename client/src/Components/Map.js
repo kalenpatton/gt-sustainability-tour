@@ -46,9 +46,13 @@ class Map extends React.Component {
         props.setRef(this);
     }
 
+    componentWillMount(){
+
+    }
+
     filterOut=()=>{
         var selectedFilters = new Set(); 
-        
+        //redux 
         this.props.filters.forEach((e)=>{
             selectedFilters.add(e.label);
         })
