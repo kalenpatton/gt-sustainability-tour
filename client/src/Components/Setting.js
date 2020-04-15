@@ -3,11 +3,23 @@ import '../styles/Setting.css';
 import ToggleButton from 'react-toggle-button';
 
 import history from '../history';
-import Filter from '../Components/Filter';
 
 
+import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 
-export default class Header extends Component {
+import {connect} from "react-redux";
+
+//change to backend calls to get all filters
+const filters=[
+    { label: 'Energy and Emissions', value: 1},
+    { label: 'Water', value: 2},
+    { label: 'Materials Management', value: 3},
+    { label: 'Built Environment', value: 4},
+    { label: 'Community and Culture', value: 5},
+];
+
+
+class Setting extends Component {
     constructor(props){
         super(props);
        
@@ -15,10 +27,23 @@ export default class Header extends Component {
             autoplay:this.props.autoplay,
             textDirection:this.props.textDirection,
 
+            //filters
+            selectedOption: this.props.filters,
+            options:filters,
            
         }
     }
 
+    handleChange = selectedOption => {
+        this.props.settingHandler.filterStops(selectedOption);
+        this.setState(
+          { selectedOption },
+          // () => console.log(`Option selected:`, this.state.selectedOption)
+       
+        );
+        //console.log(selectedOption);
+        this.props.setFilters(selectedOption);
+      };
     
      
     changeAutoPlay=(value)=>{
@@ -44,7 +69,11 @@ export default class Header extends Component {
 
                 <h5>Filter Sustainability Types</h5>
 
-                <Filter filterHander={this.props.settingHandler}/>
+                <ReactMultiSelectCheckboxes 
+                options={this.state.options} 
+                value={this.state.selectedOption}
+                onChange={this.handleChange}
+                />
 
 
                 <hr/>
@@ -78,3 +107,16 @@ export default class Header extends Component {
     }
 
 }
+const mapStateToProps = (state) =>{
+    return{
+        filters: state.filters,
+    };
+
+}
+
+const mapDispaychToProps = dispatch =>{
+    return{
+        setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
+    };
+}
+export default connect(mapStateToProps,mapDispaychToProps)(Setting);

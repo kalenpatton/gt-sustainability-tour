@@ -2,37 +2,68 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import LocationSelect from './LocationSelect';
 import ImageEdit from './ImageEdit';
+import APIHandler from './APIHandler';
 
 class PopupWindow extends React.Component{
-
+    // Required props:
+    // onSaveSite
+    // site
     constructor(props) {
         super(props);
         this.isNewStop = this.props.site ? false : true;
+        this.audioRef = React.createRef();
         this.state = {
+            id: -1,
             name: '',
             position: [33.775620, -84.396286],
-            desc: ''
+            description: '',
+            transcript: ''
         };
-        if (!this.isNewStop) this.state={...this.props.site};
+        if (!this.isNewStop) this.state = {...this.props.site};
         // Remove later. Just for dev
-        this.state.imageList=[];
-        for (let i=1; i<=5; i++) this.state.imageList.push(i);
-        //
+        this.state.imageList = [];
+        APIHandler.getImageList(this.props.site, this.updateOnImageListLoad);
+        // for (let i=1; i<=5; i++) this.state.imageList.push(i);
+        // //
         this.saveSite = this.props.onSaveSite;
 
     }
 
+    // Run on submission of popup
     onSubmit = (event) => {
         event.preventDefault();
         // TODO: Add call to backend to post changes.
+
+        // Format imageList
+        let imageList = this.state.imageList.slice();
+        let newImgs = [];
+        for (var i = 0; i < imageList.length; i++) {
+            if (!Number.isInteger(imageList[i])) {
+                newImgs.push(imageList[i]);
+                imageList[i] = -1;
+            }
+        }
         let newSite = {
+            id: this.state.id,
             name: this.state.name,
             position: this.state.position,
-            desc: this.state.desc,
-            imageList: this.state.imageList
+            description: this.state.description,
+            imageList: imageList,
+            newImgs: newImgs
         };
+
+        if (this.audioRef.current.value != '') {
+            newSite.audio = this.audioRef.current.files[0]
+        }
         console.log(newSite);
         this.saveSite(newSite, this.isNewStop);
+    };
+
+    // update the list of images after fetching the from backend
+    updateOnImageListLoad = (imageList) => {
+        this.setState({
+            imageList: imageList
+        });
     };
 
     handleInputChange = (event) => {
@@ -66,8 +97,8 @@ class PopupWindow extends React.Component{
                                 {'Description: '}
                                 <textarea
                                     className='form-desc-in'
-                                    name='desc'
-                                    value={this.state.desc}
+                                    name='description'
+                                    value={this.state.description}
                                     onChange={this.handleInputChange}/>
                             </div>
                             <div>
@@ -81,9 +112,31 @@ class PopupWindow extends React.Component{
                             <div>
                                 <div>{'Images: '}</div>
                                 <ImageEdit
+                                    siteId={this.state.id}
                                     imageList={this.state.imageList}
                                     onChange={(e, newList) => this.setState({imageList: newList})}
                                 />
+
+                                {'Audio: '}
+                                <div>
+                                    <input
+                                        className="form-file-upload"
+                                        type="file"
+                                        ref={this.audioRef}
+                                        name="audio"
+                                        accept="audio/mp3"
+                                        onChange={this.handleFileChange}
+                                        required={this.isNew}
+                                    />
+                                </div>
+                                <div>
+                                    {'Audio Transcript: '}
+                                    <textarea
+                                        className='form-desc-in'
+                                        name='transcript'
+                                        value={this.state.transcript}
+                                        onChange={this.handleInputChange}/>
+                                </div>
                             </div>
                         </div>
                     </div>
