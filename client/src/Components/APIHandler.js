@@ -41,6 +41,12 @@ function convertToMapObject(response) {
     return map_response;
 }
 
+function parseDescription(description) {
+    // perhaps some way to insert newlines to the description?
+    let bullet_dash_regex = /- /g
+    description = description.replace(bullet_dash_regex, "\u2022 ")
+    return description
+}
 
 function formatImageList(response) {
     let imageList_response = response.slice().sort((a, b) => a.index - b.index);

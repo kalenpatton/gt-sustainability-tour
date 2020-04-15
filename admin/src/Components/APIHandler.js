@@ -51,7 +51,11 @@ function postSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
     formData.append("description", site.description);
+<<<<<<< HEAD
     formData.append("transcript", "");
+=======
+    formData.append("transcript", site.transcript);
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
@@ -63,6 +67,10 @@ function postSite(site, callback) {
     // }
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
+<<<<<<< HEAD
+=======
+        formData.append(`newCaptions[]`, site.newImgs[i].caption);
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
     }
 
     return fetch('/locations', {
@@ -82,7 +90,11 @@ function putSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
     formData.append("description", site.description);
+<<<<<<< HEAD
     formData.append("transcript", "");
+=======
+    formData.append("transcript", site.transcript);
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
@@ -94,6 +106,10 @@ function putSite(site, callback) {
     }
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
+<<<<<<< HEAD
+=======
+        formData.append(`newCaptions[]`, site.newImgs[i].caption);
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
     }
 
     return fetch(`/locations/${site.id}`, {
@@ -127,6 +143,7 @@ function deleteSite(site, callback) {
         .then(callback);
 }
 
+<<<<<<< HEAD
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
@@ -134,10 +151,58 @@ function convertToMapObject(response) {
     return map_response;
 }
 
+=======
+// POST a login request
+function postLogin(email, password, callback) {
+    return fetch('/users/authenticate', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// check if the user currently has a valid tocken
+function checkToken(callback) {
+    return fetch('users/checktoken', {
+        method: 'GET'
+    }).then(response => response.ok)
+        .then(callback)
+}
+
+// Convert json object to a format that matches what Map expects
+function convertToMapObject(response) {
+    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
+        ({id, name, description: parseDescription(description), transcript, filters, position: [latitude, longitude]}));
+    return map_response;
+}
+
+function parseDescription(description) {
+    // perhaps some way to insert newlines to the description?
+    let bullet_dash_regex = /- /g
+    description = description.replace(bullet_dash_regex, "\u2022 ")
+    return description
+}
+
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
 function formatImageList(response) {
     let imageList_response = response.slice().sort((a, b) => a.index - b.index);
     imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
     return imageList_response;
 }
+<<<<<<< HEAD
 const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio};
+=======
+async function formatLoginResponse(response) {
+    if (response.ok) {
+        return ({ok: true})
+    }
+    response = await response.json()
+    response.ok = false
+    return response
+}
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+>>>>>>> c7ac4bc92055c076d28c64bf7ba59cf06b1b0b5c
 export default APIHandler;
