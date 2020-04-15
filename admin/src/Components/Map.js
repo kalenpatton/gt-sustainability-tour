@@ -80,6 +80,8 @@ class Map extends React.Component {
                 easeLinearity={0.35}
                 onClick={this.handleClick}
                 ref={this.saveMap}
+                maxBounds={ [[33.75,-84.41],[33.8, -84.38]]} //southWest,northEast
+                maxBoundsViscosity={1.0}
             >
                 <TileLayer
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'

@@ -16,14 +16,24 @@ export default class Dashboard extends Component {
             sites : APIHandler.getLocations(this.updateOnLocationLoad),
             isModalOpen: false,
             isIntroModalOpen:false,
+            isFilterModalOpen:false,
+            filters:APIHandler.getFilters(this.updateFilters),
 
             //the site currently in focus in the popup window
             focusedSite : null,
-            info:"",
+            intro:APIHandler.getIntro(this.updateIntro),
         };
 
         this.state.focusedSite = this.state.sites[0];
     };
+
+    updateFilters =(filter)=>{
+        this.setState({filters:filter});
+    }
+
+    updateIntro=(intro)=>{
+        this.setState({intro:intro.information});
+    }
 
     updateOnLocationLoad = (location_arr) => {
         console.log(location_arr);
@@ -41,24 +51,6 @@ export default class Dashboard extends Component {
         // );
 
         return location_arr;
-    };
-
-    //called before render, fetch data from backend
-    componentDidMount(){
-        //fetch information about the intro
-        // NOTE: this should be moved to APIHandler
-        fetch('/info',{
-            headers : {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-             }}).then(response => response.json())
-        .then(response => {
-            //console.log(response);
-            this.setState({info:response.info})
-        })
-
-        //fetch other data...
-        //...
     };
 
     openModal = (site) => {
@@ -90,15 +82,29 @@ export default class Dashboard extends Component {
     };
 
     introChange=(event)=>{
-        this.setState({info: event.target.value});
+        this.setState({intro: event.target.value});
     };
 
     saveIntro=()=>{
         //need to replace this with database opertion
-        console.log(`save ${this.state.info} to database`);
+        console.log(`save ${this.state.intro} to database`);
 
     };
 
+    //the filter handlers
+    handleEditFilters=()=>{
+        this.setState({isFilterModalOpen:true});
+    }
+    closeFilterModal=()=>{
+        this.setState({isFilterModalOpen:false});
+    }
+    filterChange=()=>{
+        console.log(this.state.filters);
+
+    }
+    saveFilter=()=>{
+
+    }
 
     //the site handlers
     handleEditSite = (site) => {
@@ -111,9 +117,6 @@ export default class Dashboard extends Component {
         });
     };
 
-    handleEditFilters = () =>{
-        console.log('call to backend to get filters');
-    };
 
     onSaveSite = (site, isNew) => {
         if (isNew) {
@@ -132,6 +135,18 @@ export default class Dashboard extends Component {
     };
 
     render() {
+        let filterList=<p>No filters listed</p>;
+        if(this.state.filters){
+           
+        filterList = <div style={{height:500,width:300,display:'block',margin:10,overflow:"scroll"}}>
+        {this.state.filters.map((e)=>{
+            return <p style={{backgroundColor:"yellow"}}>
+                <p key={e.id}>{e.filter}</p>
+                <button>remove</button>
+                </p>
+        })}</div>
+        }
+
         return (
             <div className="dash">
                 <header>
@@ -145,11 +160,27 @@ export default class Dashboard extends Component {
                             open={this.state.isIntroModalOpen}
                             onClose={this.closeIntroModal}
                             className="centered editSiteModal">
-                            <input value={this.state.info} onChange={this.introChange} style={{height:300,width:300,display:'block',margin:10}}></input>
-                            <button className="optionBtn centered" onClick={this.saveIntro}>save</button>
+                            <div style={{height:300,width:300,display:'block',margin:10}}>
+                                <textarea value={this.state.intro} onChange={this.introChange} style={{height:280,width:290,resize:"none",rows:100,cols:100,wrap:"hard"}}></textarea>
+    
+                                <button className="optionBtn centered" onClick={this.saveIntro}>save</button>
+                            </div>
                         </Modal>
 
                         <button onClick={this.handleEditFilters} className="optionBtn">Edit Filters</button>
+                        <Modal
+                            open={this.state.isFilterModalOpen}
+                            onClose={this.closeFilterModal}
+                            className="centered editSiteModal">
+                            {filterList}
+                            <hr/>
+                            <p>Add more filters!</p>
+                            <input/>
+                            <button>add</button>
+                            <hr/>
+                            <button className="optionBtn centered" onClick={this.saveFilter}>save</button>
+                        </Modal>
+                       
                     </div>
                 </header>
                 <div className="map-container">

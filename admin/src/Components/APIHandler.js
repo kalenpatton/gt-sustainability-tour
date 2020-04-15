@@ -176,5 +176,30 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+
+function getFilters(callback){
+    fetch('/filters',{
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }}).then(response => response.json())
+    .then(response => {
+        //console.log(response);
+        callback(response);
+        //this.setState({info:response.info})
+    });
+
+} 
+function getIntro(callback){
+    fetch('/info',{
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }}).then(response => response.json())
+    .then(response => {
+        callback(response);
+    });
+
+}
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken,getFilters,getIntro};
 export default APIHandler;
