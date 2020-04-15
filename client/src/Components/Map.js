@@ -38,6 +38,7 @@ class Map extends React.Component {
             routeState: null,
 
             routeList:[],
+            routeSet:new Set(),
         };
        
         console.log(this.state.selectedFilters);
@@ -70,24 +71,29 @@ class Map extends React.Component {
         },
 
         addToRoute:(pos) => {
-            this.setState((prevState) => {  
-                return {
-                    routeList: [...prevState.routeList, pos]
-                };  
-            });
-            console.log(this.state.routeList.length);
-            if(this.state.routeList.length === 0){
-                this.changeShowNextStop(pos.name);
+            
+            if(!this.state.routeSet.has(pos)){
+                this.state.routeSet.add(pos);
+                this.setState((prevState) => {  
+                    return {
+                        routeList: [...prevState.routeList, pos]
+                    };  
+                });
+                if(this.state.routeList.length === 0){
+                    this.changeShowNextStop(pos.name);
+                }
             }
         },
 
-        changeOrder:(newRoute)=>{
+        changeOrder:(newRoute,stop)=>{
             this.setState({routeList:newRoute}); 
-            if(this.state.routeList.length==0){
+            this.state.routeSet.delete(stop);
+            //console.log(this.state.routeList);
+            if(this.state.routeList.length-1==0){
                 this.changeShowNextStop("N/A");
             }
             else{
-                this.changeShowNextStop(this.state.routeList[0].name);
+                this.changeShowNextStop(newRoute[0].name);
             }
             //this.changeShowNextStop(this.state.routeList[0].name);
         },
@@ -155,7 +161,7 @@ class Map extends React.Component {
     }
 
     changeShowNextStop=(name)=>{ 
-        this.props.settingHandler.showNextStop(name);
+        this.props.settingHandler.showNextStop(name);  
     }
 
     onOpenModal = (site) => {
