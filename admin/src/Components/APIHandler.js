@@ -152,8 +152,15 @@ function checkToken(callback) {
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({id, name, description, transcript, filters, position: [latitude, longitude]}));
+        ({id, name, description: parseDescription(description), transcript, filters, position: [latitude, longitude]}));
     return map_response;
+}
+
+function parseDescription(description) {
+    // perhaps some way to insert newlines to the description?
+    let bullet_dash_regex = /- /g
+    description = description.replace(bullet_dash_regex, "\u2022 ")
+    return description
 }
 
 function formatImageList(response) {
