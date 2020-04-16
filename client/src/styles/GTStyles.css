@@ -1,0 +1,44 @@
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+ font-family: “Roboto Condensed”, “Helvetica Neue”,
+ “Helvetica”, “Arial”, sans-serif;
+ font-weight: 600;
+ letter-spacing: .035rem;
+ line-height: 1;
+ margin-bottom: .25rem;
+ color: var(--gt-md-gold);
+}
+h2, h2 a, .h2, .h2 a {
+ font-size: 2.12rem;
+}
+h3, h3 a, .h3, .h3 a {
+ font-size: 1.75rem;
+}
+h4, h4 a, .h4, .h4 a {
+ font-size: 1.5rem;
+}
+h5, h5 a, .h5, .h5 a {
+ font-size: 1.25rem;
+}
+h6, h6 a, .h6, .h6 a {
+ font-size: 1rem;
+}
+h1.abel, h2.abel, h3.abel, h4.abel, h5.abel, h6.abel,
+.h1.abel, .h2.abel, .h3.abel, .h4.abel, .h5.abel,
+.h6.abel {
+ font-family: ‘Abel’, sans-serif;
+}
+:root {
+ --gt-gold: #B3A369;
+ --gt-lt-gold: #BFB37C;
+ --gt-md-gold: #A4925A;/*Accessible large headines*/
+ --gt-drk-gold: #857437;/*Accessible normal text*/
+ --gt-blktxt: #333;
+ --gt-mdgray: #545454;
+ --gt-drkgray: #3b3b3b;
+ --gt-pimile-light: #F2F3F1;
+ --gt-linkblue: #004F9F;
+ --gt-linkhov: #1879DB;
+ --gt-linkvisited: #730053;/*Whistle purple*/
+ --gt-buzzgold: #EEB211;
+}

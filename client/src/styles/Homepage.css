@@ -3,8 +3,8 @@
     height: 100vh;
     overflow: hidden;
     text-align: center;
-    
-   
+
+
 }
 
 #homepage-img{
@@ -17,7 +17,7 @@
         width: 90%;
         border-radius: 25px;
     }
-  
+
   }
 
 #title{
@@ -34,13 +34,13 @@
     padding-bottom: 15px;
     margin: 0 auto;
     margin-top: 20px;
-    
+
     margin-bottom: 20px;
     border: solid 4px #ddd6bb;
     border-radius: 25px;
 }
 
-#start{
+/*#start{
     background-color: #B3A369;
     border-radius: 20px;
     border: solid 3px #ddd6bb;
@@ -49,4 +49,4 @@
 
 
 
-}
+}*/

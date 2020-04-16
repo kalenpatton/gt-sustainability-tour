@@ -17,27 +17,27 @@ class RoutingList extends React.Component{
 
     onReorder = (event, previousIndex, nextIndex, fromId, toId) => {
         let newList = reorder(this.state.stops, previousIndex, nextIndex);
-        this.props.mapHandler.changeOrder(newList); 
+        this.props.mapHandler.changeOrder(newList);
         this.setState({
             stops: newList,
         });
-        
+
     };
 
     removeStop = (event, i,stop) => {
         //console.log(stop)
         let newList = this.state.stops.slice();
-        
+
         newList.splice(i,1);
-        
+
         this.setState({
             stops: newList,
         });
-        this.props.mapHandler.changeOrder(newList,stop); 
+        this.props.mapHandler.changeOrder(newList,stop);
     }
 
 
-    
+
 
     render(){
         return(
@@ -47,15 +47,21 @@ class RoutingList extends React.Component{
                     reorderId='routes'
                     onReorder={this.onReorder.bind(this)}
                     autoScroll={true}
-                
+                    draggedClassName="onDrag"
+
                 >{
                     this.state.stops.map((stop,i) => (
-                        
+
                       <li key={stop.name} className="stop">
-                          
+
                         {stop.name}
-                        <button onClick={(e)=>this.removeStop(e, i,stop)}>remove</button>
-                        
+                        <a
+                            className='close'
+                            onClick={(e)=>this.removeStop(e, i, stop)}>
+                            &times;
+                        </a>
+                        {/*<a className="lightBtn" onClick={(e)=>this.removeStop(e, i,stop)}>remove</a>*/}
+
                       </li>
                     ))}
                 </Reorder>

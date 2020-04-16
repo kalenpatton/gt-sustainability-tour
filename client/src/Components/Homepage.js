@@ -9,9 +9,9 @@ export default class Homepage extends React.Component{
         super(props);
         this.state={
             info:this.loadData,
-           
+
         }
-        
+
     }
 
     componentDidMount(){
@@ -25,37 +25,41 @@ export default class Homepage extends React.Component{
             })
     }
 
-    redirect=()=>{ 
+    redirect=()=>{
         history.push('/tour');
         window.location.reload();
-        
+
     }
 
     render(){
-       
+
             return (
-       
+
                 <div id="Homepage">
                     <p className='center' id='title'>Georgia Tech Campus Sustainability Tour</p>
                     <img src={pic} className='center' id='homepage-img'/>
                     <div id="home-description">
                         <p style={{marginBottom:30}}>{this.state.info}</p>
-                        <button  id='start' onClick={this.redirect}><i className="fas fa-walking fa-2x"></i> &nbsp;&nbsp;Start Tour</button>
+                        <a  id='start'
+                            className='bigButton'
+                            onClick={this.redirect}>
+                            <i className="fas fa-walking fa"></i> &nbsp;&nbsp;Start Tour
+                        </a>
                     </div>
-                   
-                  
-    
+
+
+
                 </div>
-    
-            
+
+
           );
 
-    
-        
-        
+
+
+
 
 
 
     }
-    
+
 }
