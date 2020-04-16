@@ -25,7 +25,8 @@ class Routing extends MapLayer {
             // ],
 
             //all routes
-             waypoints:[L.latLng(from[0], from[1]),...route],
+            // waypoints:[L.latLng(from[0], from[1]),...route],
+            
              //only route to the next stop
             waypoints:[L.latLng(from[0], from[1]),route[0]],
 

@@ -230,7 +230,6 @@ class Map extends React.Component {
         if (this.state.isMapInit && this.state.routeStart) {
             console.log("Routing updated");
             return ( <RoutingMachine
-                //Hard code for proof of concept. Change once we have user location data.
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
 
@@ -295,7 +294,7 @@ class Map extends React.Component {
                     mapHandler={this.mapHandler}/>
 
                
-                {/* change order */}
+                {/* change order */}88
                 <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg" style={{color:'#404040'}}></i></button>
 
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">

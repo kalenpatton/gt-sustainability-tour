@@ -246,7 +246,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `filters` WRITE;
 ALTER TABLE `filters` DISABLE KEYS;
-INSERT INTO `filters` (filter) VALUES ('Buildings and Infrastructure'),('Transportation'),('Grounds'),('Energy and Emissions'),('Equity'),('Water');
+INSERT INTO `filters` (filter) VALUES ('Buildings and Infrastructure'),('Transportation'),('Grounds'),('Energy and Emissions'),('Materials Management'),('Equity'),('Water');
 ALTER TABLE `filters` ENABLE KEYS;
 UNLOCK TABLES;
 
