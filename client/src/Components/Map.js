@@ -172,11 +172,10 @@ class Map extends React.Component {
         for(let i=1; i <= this.state.allSites.length; i++){
             for (let j=0; j < this.state.allSites.length; j++) {
                 var num_str = this.state.allSites[j].stop_num;
-                console.log(num_str)
                 if (num_str != 'null') {
                     var num = parseInt(num_str)
                     if (num == i) {
-                        route.push(this.state.allSites[i]);
+                        route.push(this.state.allSites[j]);
                         break;
                     }
                 }
