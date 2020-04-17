@@ -53,6 +53,7 @@ class Map extends React.Component {
     filterOut=()=>{
         var selectedFilters = new Set();
         //redux
+        console.log(this.props.filters)
         this.props.filters.forEach((e)=>{
             selectedFilters.add(e.label);
         })
@@ -105,17 +106,6 @@ class Map extends React.Component {
     };
 
     updateOnLocationLoad = (location_arr) => {
-       //randomly add some filters for testing
-        for(let i=0;i<location_arr.length;i+=2){
-            location_arr[i].filters="Energy and Emissions";
-        }
-        for(let i=1;i<location_arr.length;i+=2){
-            location_arr[i].filters="Water";
-        }
-        for(let i=0;i<location_arr.length;i+=3){
-            location_arr[i].filters="Materials Management,Built Environment";
-        }
-
         console.log(location_arr);
         this.setState(
             { sites: location_arr },
@@ -138,13 +128,13 @@ class Map extends React.Component {
     };
 
     //filtering
-    updatefiltedSites = () => {
+    updateFilteredSites = () => {
         var selected=this.filterOut();
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
 
-            var filterList = this.state.allSites[i].filters.split(",");
+            var filterList = this.state.allSites[i].filters
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
@@ -176,7 +166,7 @@ class Map extends React.Component {
         console.log(this.state.focusedSite);
 
         //test
-        this.updatefiltedSites();
+        this.updateFilteredSites();
 
     };
 

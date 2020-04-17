@@ -66,5 +66,25 @@ function formatImageList(response) {
     return imageList_response;
 }
 
-const APIHandler = { getLocations, getImageList };
+function getFilters(callback){
+    var filterList=[];
+    var promise = fetch('/filters', {
+        accept: "application/json"
+    })
+        .then(response => response.json())
+        .then(response => {
+            response.forEach((element) => {
+                let curr = {
+                    label:element.filter,
+                    value:element.id,
+                }
+            
+                filterList.push(curr);
+            });
+            return filterList
+        })
+        .then(callback)
+}
+
+const APIHandler = { getLocations, getImageList, getFilters };
 export default APIHandler;
