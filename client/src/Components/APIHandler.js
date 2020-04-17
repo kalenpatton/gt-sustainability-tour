@@ -17,7 +17,7 @@ function checkStatus(response) {
     if (response.ok) {
         return response;
     }
-    const error = new Error('HTTP Error ${response.statusText}');
+    const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
     console.log(error);
@@ -68,7 +68,7 @@ function formatImageList(response) {
 
 function getFilters(callback){
     var filterList=[];
-    var promise = fetch('/filters', {
+    fetch('/filters', {
         accept: "application/json"
     })
         .then(response => response.json())

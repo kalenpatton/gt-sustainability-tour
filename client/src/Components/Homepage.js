@@ -37,7 +37,7 @@ export default class Homepage extends React.Component{
 
                 <div id="Homepage">
                     <p className='center' id='title'>Georgia Tech Campus Sustainability Tour</p>
-                    <img src={pic} className='center' id='homepage-img'/>
+                    <img src={pic} className='center' id='homepage-img' alt="gt tour logo"/>
                     <div id="home-description">
                         <p style={{marginBottom:30}}>{this.state.info}</p>
                         <a  id='start'

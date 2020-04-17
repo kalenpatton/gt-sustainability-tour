@@ -3,8 +3,6 @@ import '../styles/RoutingList.css';
 
 import Reorder, {
     reorder,
-    reorderFromTo,
-    reorderFromToImmutable
   } from 'react-reorder';
 
 
