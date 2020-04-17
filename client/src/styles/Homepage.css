@@ -33,7 +33,7 @@
     color: #003057;
     font-family: sans-serif;
     overflow-wrap: break-word; 
-
+    word-wrap: break-word;
 
     padding-left: 5px;
     padding-right: 5px;
