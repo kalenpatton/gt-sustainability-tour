@@ -143,7 +143,7 @@ The Kendeda Building has a unique sustainable water management system. The Kende
 - Greywater is used water that doesn\'t have organic matter in it. Once greywater is used in sinks, showers, and water fountains, it is collected and pumped to the south side of the site near Ferst Drive. It then flows through constructed wetlands where plants and organisms treat the water through natural processes on site. Water then slowly infiltrates back into the soil.\n
 - Toilet water/waste is the only source of blackwater on site. The solution for treating blackwater is to use composting toilets. Composting toilets use very little water to capture waste and compost organic matter on site. The use of composting toilets significantly reduced the total water needs for the building and prevented the need to build a wastewater treatment plant on site. The waste from these toilets collects in composters in the basement where it can turn into useful and nutrient-rich fertilizers. The fertilizer will then be hauled off site and reused in a beneficial way.\n',
 33.7785,-84.3996,
-'Buildings and Infrastructure,Energy,Water,Materials Management'),
+'Buildings and Infrastructure,Energy and Emissions,Water,Materials Management'),
 
 (5,'West Village Dining Commons',
 '- The West Village Dining Commons is a highly flexible, 50,000 SF dining, lounge and educational facility that seats over 600 students and includes over 10,000 SF of multi-use academic space.\n
