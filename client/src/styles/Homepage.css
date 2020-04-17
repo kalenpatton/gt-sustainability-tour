@@ -31,12 +31,9 @@
     text-align: center;
     font-weight: bold;
     color: #003057;
-    /* border-radius: 25px;
-    border: solid 3px #003057; */
-    width: 800px;
-    height: 55px;
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: sans-serif;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;
 
     padding-left: 5px;
     padding-right: 5px;
@@ -65,5 +62,5 @@
     font-weight: bold;
     font-size: large;
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: sans-serif;
 }
