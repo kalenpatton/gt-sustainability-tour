@@ -200,8 +200,8 @@ class Map extends React.Component {
                         <div className="center-text">
                             <p>{site.name}</p>
                             <div className="buttons">
-                                <a className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</a>
-                                <a className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</a>
+                                <button className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</button>
+                                <button className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</button>
                             </div>
                         </div>
                     </Popup>

@@ -40,11 +40,11 @@ export default class Homepage extends React.Component{
                     <img src={pic} className='center' id='homepage-img' alt="gt tour logo"/>
                     <div id="home-description">
                         <p style={{marginBottom:30}}>{this.state.info}</p>
-                        <a  id='start'
+                        <button  id='start'
                             className='bigButton'
                             onClick={this.redirect}>
                             <i className="fas fa-walking fa"></i> &nbsp;&nbsp;Start Tour
-                        </a>
+                        </button>
                     </div>
 
 
