@@ -19,11 +19,6 @@ function checkStatus(response) {
     console.log(error);
     throw error;
 }
-function convertUser(response) {
-     //let user_map = response.map(({login}) => ({username : value}));
-    // return user_map;
-    return response;
-}
 
 // GETs an array of locations with latitude and longitude arranged as a
 // position array like this.state.sites expects// Fetches locations as list of objects with only name and location
@@ -90,10 +85,10 @@ function putSite(site, callback) {
     // formData.append("imageList", site.imageList);
     // formData.append("newImgs", site.newImgs);
 
-    for (var i = 0; i < site.imageList.length; i++) {
+    for (let i = 0; i < site.imageList.length; i++) {
         formData.append("imageList[]", site.imageList[i]);
     }
-    for (var i = 0; i < site.newImgs.length; i++) {
+    for (let i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
         formData.append(`newCaptions[]`, site.newImgs[i].caption);
     }

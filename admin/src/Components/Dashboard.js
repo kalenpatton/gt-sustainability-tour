@@ -7,8 +7,6 @@ import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import APIHandler from './APIHandler';
 
-const AUTH_URL = '/api/authenticate';
-
 export default class Dashboard extends Component {
     constructor(props) {
         super(props)
