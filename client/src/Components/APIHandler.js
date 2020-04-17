@@ -37,10 +37,11 @@ function getImageList(site, callback) {
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({id, name, description: parseDescription(description), transcript, filters, position: [latitude, longitude]}));
+        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude]}));
     return map_response;
 }
 
+// replaces temp characters with utf ones
 function parseDescription(description) {
     // perhaps some way to insert newlines to the description?
     let bullet_dash_regex = /- /g
@@ -48,6 +49,16 @@ function parseDescription(description) {
     return description
 }
 
+// converts filters field into a list of filters
+function parseFilters(filters) {
+    let filters_list = []
+
+    if (filters != null) {
+        filters_list = filters.split(',')
+    }
+
+    return filters_list
+}
 
 function formatImageList(response) {
     let imageList_response = response.slice().sort((a, b) => a.index - b.index);
