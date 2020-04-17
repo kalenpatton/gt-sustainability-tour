@@ -130,13 +130,11 @@ class Map extends React.Component {
     //filtering
     updateFilteredSites = () => {
         var selected=this.filterOut();
-        console.log(selected)
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
-            console.log(filterList)
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
