@@ -16,7 +16,6 @@ export default class ImageGallery extends Component {
 
     this.state = {
       photoIndex: 0,
-      isOpen: false,
       imageList: []
     };
 
@@ -41,12 +40,13 @@ export default class ImageGallery extends Component {
 
   handleOpenRequest = () => {
     if (this.state.imageList.length) {
-      this.setState({isOpen: true});
+      this.props.handleOpenRequest();
     }
   }
 
   render() {
-    const { photoIndex, isOpen } = this.state;
+    const { photoIndex } = this.state;
+    const open = this.props.open && this.state.imageList.length > 0;
 
     return (
       <div>
@@ -55,14 +55,14 @@ export default class ImageGallery extends Component {
             className="cover-image"
             onClick={this.handleOpenRequest}/>
 
-        {isOpen && (
+        {open && (
           <Lightbox
             animationDuration={200}
             mainSrc={this.getURL(photoIndex)}
             nextSrc={this.getURL((photoIndex + 1) % this.state.imageList.length)}
             prevSrc={this.getURL((photoIndex + this.state.imageList.length - 1) % this.state.imageList.length)}
             imageCaption={this.getCaption(photoIndex)}
-            onCloseRequest={() => this.setState({ isOpen: false })}
+            onCloseRequest={() => this.props.handleCloseRequest()}
             onMovePrevRequest={() =>
               this.setState({
                 photoIndex: (photoIndex + this.state.imageList.length - 1) % this.state.imageList.length,
