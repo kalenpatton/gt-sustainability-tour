@@ -156,6 +156,7 @@ function convertToMapObject(response) {
     return map_response;
 }
 
+// replaces temp characters with utf ones
 function parseDescription(description) {
     // perhaps some way to insert newlines to the description?
     let bullet_dash_regex = /- /g
