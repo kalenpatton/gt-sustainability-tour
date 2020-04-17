@@ -10,7 +10,6 @@ import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 
 import {connect} from "react-redux";
 
-//change to backend calls to get all filters
 let filters = []
 APIHandler.getFilters(function(filterList) {
     filters = filterList
@@ -112,9 +111,9 @@ const mapStateToProps = (state) =>{
 
 }
 
-const mapDispaychToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
     return{
         setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
     };
 }
-export default connect(mapStateToProps,mapDispaychToProps)(Setting);
+export default connect(mapStateToProps,mapDispatchToProps)(Setting);

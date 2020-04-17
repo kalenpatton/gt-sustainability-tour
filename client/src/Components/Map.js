@@ -130,16 +130,21 @@ class Map extends React.Component {
     //filtering
     updateFilteredSites = () => {
         var selected=this.filterOut();
+        console.log(selected)
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
+            console.log(filterList)
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
                     break;
                 }
+            }
+            if (filterList.length == 0) {
+                newSites.push(this.state.allSites[i]);
             }
         }
 
@@ -321,9 +326,9 @@ const mapStateToProps = (state) =>{
 
 }
 
-const mapDispaychToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
     return{
         setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
     };
 }
-export default connect(mapStateToProps,mapDispaychToProps)(Map);
+export default connect(mapStateToProps,mapDispatchToProps)(Map);
