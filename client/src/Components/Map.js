@@ -94,7 +94,7 @@ class Map extends React.Component {
             this.setState({routeList:newRoute});
             this.state.routeSet.delete(stop);
             //console.log(this.state.routeList);
-            if(this.state.routeList.length-1==0){
+            if(this.state.routeList.length-1 === 0){
                 this.changeShowNextStop("N/A");
             }
             else{
@@ -130,20 +130,18 @@ class Map extends React.Component {
     //filtering
     updateFilteredSites = () => {
         var selected=this.filterOut();
-        console.log(selected)
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
-            console.log(filterList)
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
                     break;
                 }
             }
-            if (filterList.length == 0) {
+            if (filterList.length === 0) {
                 newSites.push(this.state.allSites[i]);
             }
         }
@@ -190,6 +188,7 @@ class Map extends React.Component {
     // Returns UI elements for all site markers
     addMarkers = () => {
         var markers = [];
+        // eslint-disable-next-line
         if (this.state.sites.length == undefined) {
             return markers;
         }
@@ -216,9 +215,8 @@ class Map extends React.Component {
     // Returns the UI element for the direction routing
     addRouting = () => {
         console.log("Adding routing...");
-        if (this.state.sites.length == undefined
-            || this.state.focusedSite == undefined
-            || this.state.nextStop == undefined) {
+        // eslint-disable-next-line
+        if (this.state.sites.length == undefined || this.state.focusedSite == undefined || this.state.nextStop == undefined) {
             return;
         }
 

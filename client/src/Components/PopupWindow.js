@@ -5,7 +5,6 @@ import '../styles/Audio.scss';
 import H5AudioPlayer from 'react-h5-audio-player';
 import Modal from 'react-responsive-modal';
 import CC from './CC';
-import Gallery from './Gallery';
 import ImageGallery from './ImageGallery';
 
 class PopupWindow extends React.Component{
