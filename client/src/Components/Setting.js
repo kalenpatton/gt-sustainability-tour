@@ -29,9 +29,28 @@ class Setting extends Component {
 
             //filters
             selectedOption: this.props.filters,
-            options:filters,
+            options:[],
            
         }
+    }
+
+    componentWillMount() {
+        var options = [];
+        fetch('/filters', {
+            accept: "application/json"
+        }).then(response => response.json()).then(response => {
+            response.forEach((element) => {
+                let curr = {
+                    label: element.filter,
+                    value: element.id,
+                }
+
+                options.push(curr);
+            });
+
+            this.setState({ options: options });
+            
+        });
     }
 
     handleChange = selectedOption => {

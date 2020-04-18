@@ -1,13 +1,15 @@
 
 
-const initialState={
+const initialState = {
+    allFilters:[],
     filters:
-    [
-        { label: 'Energy and Emissions', value: 1},
-        { label: 'Water', value: 2},
-        { label: 'Material Management', value: 3},
-        { label: 'Built Environment', value: 4},
-        { label: 'Community and Culture', value: 5}],
+        // [
+        //     { label: 'Energy and Emissions', value: 1},
+        //     { label: 'Water', value: 2},
+        //     { label: 'Material Management', value: 3},
+        //     { label: 'Built Environment', value: 4},
+        //     { label: 'Community and Culture', value: 5}],
+        [],
     mediaAutoplay:true,
     textDirection:true,
 }
@@ -26,21 +28,13 @@ function getFilters(){
             filterList.push(curr);
         });
 
-        initialState.filters=filterList;
+        initialState.filters = filterList;
+        initialState.allFilters = filterList;
         console.log(initialState.filters)
     });
 }
 
 getFilters();
-
-// console.log(getFilters());
-// var f=[
-//         { label: 'Energy and Emissions', value: 1},
-//         { label: 'Water', value: 2},
-//         { label: 'Materials Management', value: 3},
-//         { label: 'Built Environment', value: 4},
-//         { label: 'Community and Culture', value: 5}];
-// console.log(f);
 
 const reducer =(state=initialState,action)=>{
     switch(action.type){
