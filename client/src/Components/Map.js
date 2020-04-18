@@ -104,17 +104,17 @@ class Map extends React.Component {
 
     updateOnLocationLoad = (location_arr) => {
         //randomly add some filters for testing
-        // for(let i=0;i<location_arr.length;i+=2){
-        //     location_arr[i].filters="Energy and Emissions";
-        // }
-        // for(let i=1;i<location_arr.length;i+=2){
-        //     location_arr[i].filters="Water";
-        // }
-        // for(let i=0;i<location_arr.length;i+=3){
-        //     location_arr[i].filters="Materials Management,Built Environment";
-        // }
+        for(let i=0;i<location_arr.length;i+=2){
+            location_arr[i].filters="Energy and Emissions";
+        }
+        for(let i=1;i<location_arr.length;i+=2){
+            location_arr[i].filters="Water";
+        }
+        for(let i=0;i<location_arr.length;i+=3){
+            location_arr[i].filters="Materials Management,Built Environment";
+        }
 
-        // console.log(location_arr);
+        console.log(location_arr);
         this.setState(
             {
                 allSites: location_arr,
@@ -147,7 +147,6 @@ class Map extends React.Component {
     updatefiltedSites = () => {
 
         var selected = this.filterOut();
-        console.log(this.site.allSites);
         var newSites = [];
         for(let i=0;i<this.state.allSites.length;i++){
 
