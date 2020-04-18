@@ -16,10 +16,10 @@ const connection = mysql.createConnection({
 const secret = process.env.SECRET;
 
 /* GET all users */
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
   console.log("Fetching users")
 
-  const queryString = "SELECT * FROM users"
+  const queryString = "SELECT email, usertype FROM users"
   connection.query(queryString, (err, rows, fields) => {
     if (err) {
       console.log("Failed to query for users\n\t" + err)
@@ -32,7 +32,12 @@ router.get('/', (req, res) => {
   })
 })
 
-router.post('/register', (req, res) => {
+router.post('/register', withAuth, (req, res) => {
+  if (req.usertype != 'superadmin') {
+    res.status(401).json({
+      error: `User not authorized to edit accounts.`
+    })
+  }
   console.log("Adding new user.")
   const { email, password } = req.body;
 
@@ -48,10 +53,43 @@ router.post('/register', (req, res) => {
   });
 })
 
+router.delete('/', withAuth, (req, res) => {
+  if (req.usertype != 'superadmin') {
+    res.status(401).json({
+      error: `User not authorized to edit accounts.`
+    });
+    return;
+  }
+  const { email } = req.body;
+  if (!email) {
+    res.status(400).json({
+      error: `No user provided.`
+    });
+    return;
+  }
+  if (req.email == email) {
+    res.status(400).json({
+      error: `You cannot delete your own account.`
+    })
+    return;
+  }
+  console.log("Deleting user " + email)
+
+  const userHandler = new UserHandler(connection);
+  userHandler.delete(email, (err) => {
+    if (err) {
+      res.status(500).json({
+        error: `Error deleting user: ${err}`
+      }) // Internal Server Error
+      return;
+    }
+    res.sendStatus(200)
+  });
+})
+
 router.post('/authenticate', (req, res) => {
   console.log("Verifying user login.")
   const { email, password } = req.body;
-  console.log(req.body)
 
   const userHandler = new UserHandler(connection);
   userHandler.test(email, password, (err, same, usertype) => {
@@ -61,7 +99,7 @@ router.post('/authenticate', (req, res) => {
       }) // Internal Server Error
     } else if (!same) {
       res.status(401).json({
-        error: 'Incorrect email or password.'
+        error: 'Invalid email or password.'
       }); // Invalid credentials
     } else {
       const payload = { email, usertype };
@@ -74,8 +112,40 @@ router.post('/authenticate', (req, res) => {
   });
 })
 
+router.post('/changepass', withAuth, (req, res) => {
+  console.log("Changing password")
+  const { password, newPassword } = req.body;
+  const email = req.email;
+
+  const userHandler = new UserHandler(connection);
+  userHandler.test(email, password, (err, same, usertype) => {
+    if (err) {
+      res.status(500).json({
+        error: err
+      }) // Internal Server Error
+    } else if (!same) {
+      res.status(401).json({
+        error: 'Invalid current password.'
+      }); // Invalid credentials
+    } else {
+      userHandler.setPassword(email, newPassword, (err) => {
+        if (err) {
+          res.status(500).json({
+            error: err
+          }) // Internal Server Error
+        } else {
+          res.sendStatus(200);
+        }
+      });
+    }
+  });
+})
+
 router.get('/checktoken', withAuth, (req, res) => {
-  res.sendStatus(200);
+  res.status(200).json({
+    email : req.email,
+    usertype : req.usertype
+  });
 })
 
 module.exports = router

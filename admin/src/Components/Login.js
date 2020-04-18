@@ -10,7 +10,8 @@ export default class Login extends React.Component {
         super(props)
         this.state = {
             email : '',
-            password: ''
+            password: '',
+            errorText:''
         };
     }
     //controls login and fixes input change
@@ -27,7 +28,7 @@ export default class Login extends React.Component {
             if (res.ok) {
                 this.props.history.push('/dashboard');
             } else {
-                alert(res.error)
+                this.setState({errorText:res.error});
             }
         });
     }
@@ -55,6 +56,9 @@ export default class Login extends React.Component {
                         onChange={this.handleInputChange}
                         required
                     />
+                </div>
+                <div className = "error-text">
+                    {this.state.errorText}
                 </div>
                 <input type="submit" value="Submit"/>
             </form>
