@@ -6,6 +6,8 @@ import Map from "./Map";
 import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
 import APIHandler from './APIHandler';
+import PasswordEditPopup from './PasswordEditPopup';
+import ManageAdminsPopup from './ManageAdminsPopup';
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -14,6 +16,8 @@ export default class Dashboard extends Component {
             sites : APIHandler.getLocations(this.updateOnLocationLoad),
             isModalOpen: false,
             isIntroModalOpen:false,
+            isPassEditOpen:false,
+            isManageAdminsOpen:false,
 
             //the site currently in focus in the popup window
             focusedSite : null,
@@ -21,6 +25,7 @@ export default class Dashboard extends Component {
         };
 
         this.state.focusedSite = this.state.sites[0];
+        console.log(this.props.email)
     };
 
     updateOnLocationLoad = (location_arr) => {
@@ -80,6 +85,21 @@ export default class Dashboard extends Component {
         this.openIntroModel();
 
     };
+
+    openPassEdit=()=>{
+        this.setState({isPassEditOpen:true});
+    };
+    closePassEdit=()=>{
+        this.setState({isPassEditOpen:false});
+    };
+
+    openManageAdmins=()=>{
+        this.setState({isManageAdminsOpen:true});
+    };
+    closeManageAdmins=()=>{
+        this.setState({isManageAdminsOpen:false});
+    };
+
     openIntroModel=()=>{
         this.setState({isIntroModalOpen:true});
     };
@@ -133,6 +153,13 @@ export default class Dashboard extends Component {
         return (
             <div className="dash">
                 <header>
+                    <div className="profile-info">
+                        <div>Logged in as: {this.props.email}</div>
+                        <div>
+                            <button onClick={this.openPassEdit}>Change Password</button>
+                            {this.props.usertype == "superadmin" ? <button onClick={this.openManageAdmins}>Manage Admin Accounts</button> : null}
+                        </div>
+                    </div>
                     <h1>Dashboard</h1>
                     <div className="toolbar">
                         <button onClick={this.handleAddStop} className="optionBtn">Add Site</button>
@@ -145,6 +172,20 @@ export default class Dashboard extends Component {
                             className="centered editSiteModal">
                             <input value={this.state.info} onChange={this.introChange} style={{height:300,width:300,display:'block',margin:10}}></input>
                             <button className="optionBtn centered" onClick={this.saveIntro}>save</button>
+                        </Modal>
+                        <Modal
+                            open={this.state.isPassEditOpen}
+                            onClose={this.closePassEdit}>
+                            <PasswordEditPopup
+                                email = {this.props.email}
+                                onClose = {this.closePassEdit}/>
+                        </Modal>
+                        <Modal
+                            open={this.state.isManageAdminsOpen}
+                            onClose={this.closeManageAdmins}>
+                            <ManageAdminsPopup
+                                email = {this.props.email}
+                                onClose = {this.closeManageAdmins}/>
                         </Modal>
 
                         <button onClick={this.handleEditFilters} className="optionBtn">Edit Filters</button>

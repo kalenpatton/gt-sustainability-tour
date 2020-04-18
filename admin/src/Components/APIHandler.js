@@ -1,9 +1,10 @@
-function getUsers() {
+function getUsers(callback) {
     return fetch('/users', {
         accept: "application/json"
     })
         .then(checkStatus)
         .then(response => response.json())
+        .then(callback)
         //.then(convertUser)
 }
 
@@ -136,12 +137,52 @@ function postLogin(email, password, callback) {
     .then(callback)
 }
 
+// POST a login request
+function postPassChange(password, newPassword, callback) {
+    return fetch('/users/changepass', {
+        method: 'POST',
+        body: JSON.stringify({ password, newPassword }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// POST an add admin request
+function postAddUser(email, password, callback) {
+    return fetch('/users/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// DELETE an admin
+function deleteUser(email, callback) {
+    return fetch('/users/', {
+        method: 'DELETE',
+        body: JSON.stringify({ email: email }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
 // check if the user currently has a valid tocken
 function checkToken(callback) {
     return fetch('users/checktoken', {
         method: 'GET'
-    }).then(response => response.ok)
-        .then(callback)
+    }).then(response => {
+            if (response.ok){
+                return response.json();
+            }
+            return false;
+        }).then(callback)
 }
 
 // Convert json object to a format that matches what Map expects
@@ -183,5 +224,5 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
 export default APIHandler;

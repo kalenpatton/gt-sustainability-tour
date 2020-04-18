@@ -30,6 +30,24 @@ class UserHandler {
     });
   }
 
+  // change the password for a user
+  setPassword(email, password, callback) {
+    bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
+      if (err) {
+        return callback(err);
+      }
+      const queryString = "UPDATE users SET password = ? WHERE email = ?";
+      this.connection.query(queryString,
+                      [hashedPassword, email],
+                      (err, rows, fields) => {
+        if (err) {
+          return callback(err);
+        }
+        return callback();
+      })
+    });
+  }
+
   // test and email/password pair
   test(email, password, callback) {
     const queryString = "SELECT password, usertype FROM users WHERE email = ?";
@@ -56,8 +74,16 @@ class UserHandler {
 
 
   // delete user
-  delete(email) {
-
+  delete(email, callback) {
+    const queryString = "DELETE FROM users WHERE email = ?";
+    this.connection.query(queryString,
+                    [email],
+                    (err, rows, fields) => {
+      if (err) {
+        return callback(err);
+      }
+      return callback();
+    })
   }
 }
 module.exports = UserHandler;
