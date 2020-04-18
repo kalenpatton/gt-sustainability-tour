@@ -9,8 +9,6 @@ import APIHandler from './APIHandler';
 import PasswordEditPopup from './PasswordEditPopup';
 import ManageAdminsPopup from './ManageAdminsPopup';
 
-const AUTH_URL = '/api/authenticate';
-
 export default class Dashboard extends Component {
     constructor(props) {
         super(props)

@@ -3,13 +3,6 @@ import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
 import APIHandler from './APIHandler';
 
-const images = [
-  '//placekitten.com/1500/500',
-  '//placekitten.com/4000/3000',
-  '//placekitten.com/800/1200',
-  '//placekitten.com/1500/1500',
-];
-
 export default class ImageGallery extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +46,7 @@ export default class ImageGallery extends Component {
         <img src={this.state.imageList.length ? this.getURL(0) : this.props.cover}
             id="pic"
             className="cover-image"
+            alt="featured site"
             onClick={this.handleOpenRequest}/>
 
         {open && (
