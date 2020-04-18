@@ -1,9 +1,8 @@
 // Login.js
 // Adapted from https://medium.com/@faizanv/authentication-for-your-react-and-express-application-w-json-web-tokens-923515826e0
 // import APIHandler from './APIHandler';
-import React, { Component } from 'react';
+import React from 'react';
 import APIHandler from './APIHandler';
-const AUTH_URL = '/api/authenticate';
 
 export default class Login extends React.Component {
     constructor(props) {

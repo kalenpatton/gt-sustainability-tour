@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/Setting.css';
 import ToggleButton from 'react-toggle-button';
+import APIHandler from './APIHandler'
 
 import history from '../history';
 
@@ -9,14 +10,10 @@ import ReactMultiSelectCheckboxes from 'react-multiselect-checkboxes';
 
 import {connect} from "react-redux";
 
-//change to backend calls to get all filters
-const filters=[
-    { label: 'Energy and Emissions', value: 1},
-    { label: 'Water', value: 2},
-    { label: 'Materials Management', value: 3},
-    { label: 'Built Environment', value: 4},
-    { label: 'Community and Culture', value: 5},
-];
+let filters = []
+APIHandler.getFilters(function(filterList) {
+    filters = filterList
+})
 
 
 class Setting extends Component {
@@ -114,9 +111,9 @@ const mapStateToProps = (state) =>{
 
 }
 
-const mapDispaychToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
     return{
         setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
     };
 }
-export default connect(mapStateToProps,mapDispaychToProps)(Setting);
+export default connect(mapStateToProps,mapDispatchToProps)(Setting);

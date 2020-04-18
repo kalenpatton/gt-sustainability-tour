@@ -21,7 +21,7 @@ export default class Header extends Component {
       this.setState({ open: false });
       //update map ref 
       if(this.props.map){
-        this.props.map.updatefiltedSites();
+        this.props.map.updateFilteredSites();
       }
     };
 
