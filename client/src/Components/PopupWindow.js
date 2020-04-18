@@ -5,7 +5,6 @@ import '../styles/Audio.scss';
 import H5AudioPlayer from 'react-h5-audio-player';
 import Modal from 'react-responsive-modal';
 import CC from './CC';
-import Gallery from './Gallery';
 import ImageGallery from './ImageGallery';
 
 class PopupWindow extends React.Component{
@@ -54,13 +53,13 @@ class PopupWindow extends React.Component{
                     handleCloseRequest={this.onCloseModalGallery}
                 />
                 <div className="buttons">
-                    <a className="smallBtn" onClick={this.onMakeNextStop}>Add To My Route</a>
+                    <button className="smallBtn" onClick={this.onMakeNextStop}>Add To My Route</button>
 
                 </div>
                 <div className="descriptions">
                     <p>{this.props.site.description}</p>
                 </div>
-                <a className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</a>
+                <button className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</button>
 
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
 
@@ -87,10 +86,10 @@ class PopupWindow extends React.Component{
                     />
                 </div>
 
-                <a className="smallBtn" onClick={this.onOpenModalCC}>View Transcript</a>
+                <button className="smallBtn" onClick={this.onOpenModalCC}>View Transcript</button>
                 <Modal open={this.state.openCC} onClose={this.onCloseModalCC} >
                     <CC transcript={this.props.site.transcript}/>
-                    <a className="lightBtn" onClick={this.onCloseModalCC}>Back</a>
+                    <button className="lightBtn" onClick={this.onCloseModalCC}>Back</button>
                 </Modal>
             </div>
         );

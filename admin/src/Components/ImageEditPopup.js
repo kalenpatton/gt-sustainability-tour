@@ -91,6 +91,7 @@ export default class PopupWindow extends React.Component{
                         </div>
                         <img
                             src={this.state.imageUrl}
+                            alt="featured site"
                             />
                         <div>
                             {'Caption: '}

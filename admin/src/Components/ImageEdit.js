@@ -1,10 +1,5 @@
 import React from 'react';
-import Reorder, {
-  reorder,
-  reorderImmutable,
-  reorderFromTo,
-  reorderFromToImmutable
-} from 'react-reorder';
+import Reorder, { reorder } from 'react-reorder';
 import ImageEditPopup from './ImageEditPopup';
 import Modal from 'react-responsive-modal';
 

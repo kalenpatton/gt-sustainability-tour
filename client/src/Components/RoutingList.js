@@ -3,8 +3,6 @@ import '../styles/RoutingList.css';
 
 import Reorder, {
     reorder,
-    reorderFromTo,
-    reorderFromToImmutable
   } from 'react-reorder';
 
 
@@ -55,11 +53,11 @@ class RoutingList extends React.Component{
                       <li key={stop.name} className="stop">
 
                         {stop.name}
-                        <a
+                        <button
                             className='close'
                             onClick={(e)=>this.removeStop(e, i, stop)}>
                             &times;
-                        </a>
+                        </button>
                         {/*<a className="lightBtn" onClick={(e)=>this.removeStop(e, i,stop)}>remove</a>*/}
 
                       </li>

@@ -53,6 +53,7 @@ class Map extends React.Component {
     filterOut=()=>{
         var selectedFilters = new Set();
         //redux
+        console.log(this.props.filters)
         this.props.filters.forEach((e)=>{
             selectedFilters.add(e.label);
         })
@@ -93,7 +94,7 @@ class Map extends React.Component {
             this.setState({routeList:newRoute});
             this.state.routeSet.delete(stop);
             //console.log(this.state.routeList);
-            if(this.state.routeList.length-1==0){
+            if(this.state.routeList.length-1 === 0){
                 this.changeShowNextStop("N/A");
             }
             else{
@@ -105,17 +106,6 @@ class Map extends React.Component {
     };
 
     updateOnLocationLoad = (location_arr) => {
-       //randomly add some filters for testing
-        for(let i=0;i<location_arr.length;i+=2){
-            location_arr[i].filters="Energy and Emissions";
-        }
-        for(let i=1;i<location_arr.length;i+=2){
-            location_arr[i].filters="Water";
-        }
-        for(let i=0;i<location_arr.length;i+=3){
-            location_arr[i].filters="Materials Management,Built Environment";
-        }
-
         console.log(location_arr);
         this.setState(
             { sites: location_arr },
@@ -138,18 +128,21 @@ class Map extends React.Component {
     };
 
     //filtering
-    updatefiltedSites = () => {
+    updateFilteredSites = () => {
         var selected=this.filterOut();
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
 
-            var filterList = this.state.allSites[i].filters.split(",");
+            var filterList = this.state.allSites[i].filters
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
                     break;
                 }
+            }
+            if (filterList.length === 0) {
+                newSites.push(this.state.allSites[i]);
             }
         }
 
@@ -176,7 +169,7 @@ class Map extends React.Component {
         console.log(this.state.focusedSite);
 
         //test
-        this.updatefiltedSites();
+        this.updateFilteredSites();
 
     };
 
@@ -195,6 +188,7 @@ class Map extends React.Component {
     // Returns UI elements for all site markers
     addMarkers = () => {
         var markers = [];
+        // eslint-disable-next-line
         if (this.state.sites.length == undefined) {
             return markers;
         }
@@ -206,8 +200,8 @@ class Map extends React.Component {
                         <div className="center-text">
                             <p>{site.name}</p>
                             <div className="buttons">
-                                <a className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</a>
-                                <a className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</a>
+                                <button className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</button>
+                                <button className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</button>
                             </div>
                         </div>
                     </Popup>
@@ -221,9 +215,8 @@ class Map extends React.Component {
     // Returns the UI element for the direction routing
     addRouting = () => {
         console.log("Adding routing...");
-        if (this.state.sites.length == undefined
-            || this.state.focusedSite == undefined
-            || this.state.nextStop == undefined) {
+        // eslint-disable-next-line
+        if (this.state.sites.length == undefined || this.state.focusedSite == undefined || this.state.nextStop == undefined) {
             return;
         }
 
@@ -331,9 +324,9 @@ const mapStateToProps = (state) =>{
 
 }
 
-const mapDispaychToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
     return{
         setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
     };
 }
-export default connect(mapStateToProps,mapDispaychToProps)(Map);
+export default connect(mapStateToProps,mapDispatchToProps)(Map);

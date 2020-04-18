@@ -1,9 +1,10 @@
-function getUsers() {
+function getUsers(callback) {
     return fetch('/users', {
         accept: "application/json"
     })
         .then(checkStatus)
         .then(response => response.json())
+        .then(callback)
         //.then(convertUser)
 }
 
@@ -18,11 +19,6 @@ function checkStatus(response) {
     error.response = response;
     console.log(error);
     throw error;
-}
-function convertUser(response) {
-     //let user_map = response.map(({login}) => ({username : value}));
-    // return user_map;
-    return response;
 }
 
 // GETs an array of locations with latitude and longitude arranged as a
@@ -90,10 +86,10 @@ function putSite(site, callback) {
     // formData.append("imageList", site.imageList);
     // formData.append("newImgs", site.newImgs);
 
-    for (var i = 0; i < site.imageList.length; i++) {
+    for (let i = 0; i < site.imageList.length; i++) {
         formData.append("imageList[]", site.imageList[i]);
     }
-    for (var i = 0; i < site.newImgs.length; i++) {
+    for (let i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
         formData.append(`newCaptions[]`, site.newImgs[i].caption);
     }
@@ -141,18 +137,58 @@ function postLogin(email, password, callback) {
     .then(callback)
 }
 
+// POST a login request
+function postPassChange(password, newPassword, callback) {
+    return fetch('/users/changepass', {
+        method: 'POST',
+        body: JSON.stringify({ password, newPassword }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// POST an add admin request
+function postAddUser(email, password, callback) {
+    return fetch('/users/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
+// DELETE an admin
+function deleteUser(email, callback) {
+    return fetch('/users/', {
+        method: 'DELETE',
+        body: JSON.stringify({ email: email }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatLoginResponse)
+    .then(callback)
+}
+
 // check if the user currently has a valid tocken
 function checkToken(callback) {
     return fetch('users/checktoken', {
         method: 'GET'
-    }).then(response => response.ok)
-        .then(callback)
+    }).then(response => {
+            if (response.ok){
+                return response.json();
+            }
+            return false;
+        }).then(callback)
 }
 
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({id, name, description: parseDescription(description), transcript, filters, position: [latitude, longitude]}));
+        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude]}));
     return map_response;
 }
 
@@ -162,6 +198,17 @@ function parseDescription(description) {
     let bullet_dash_regex = /- /g
     description = description.replace(bullet_dash_regex, "\u2022 ")
     return description
+}
+
+// converts filters field into a list of filters
+function parseFilters(filters) {
+    let filters_list = []
+
+    if (filters != null) {
+        filters_list = filters.split(',')
+    }
+
+    return filters_list
 }
 
 function formatImageList(response) {
@@ -177,5 +224,5 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
 export default APIHandler;

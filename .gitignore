@@ -29,5 +29,5 @@ yarn-error.log*
 .idea/
 *.iml
 
-/backend/public/audio/
 /backend/public/images
+/backend/public/audio

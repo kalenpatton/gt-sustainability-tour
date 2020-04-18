@@ -1,16 +1,16 @@
 // Login.js
 // Adapted from https://medium.com/@faizanv/authentication-for-your-react-and-express-application-w-json-web-tokens-923515826e0
 // import APIHandler from './APIHandler';
-import React, { Component } from 'react';
+import React from 'react';
 import APIHandler from './APIHandler';
-const AUTH_URL = '/api/authenticate';
 
 export default class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             email : '',
-            password: ''
+            password: '',
+            errorText:''
         };
     }
     //controls login and fixes input change
@@ -27,7 +27,7 @@ export default class Login extends React.Component {
             if (res.ok) {
                 this.props.history.push('/dashboard');
             } else {
-                alert(res.error)
+                this.setState({errorText:res.error});
             }
         });
     }
@@ -55,6 +55,9 @@ export default class Login extends React.Component {
                         onChange={this.handleInputChange}
                         required
                     />
+                </div>
+                <div className = "error-text">
+                    {this.state.errorText}
                 </div>
                 <input type="submit" value="Submit"/>
             </form>
