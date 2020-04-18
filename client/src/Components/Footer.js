@@ -1,10 +1,10 @@
 import React from 'react';
 import '../styles/Footer.css';
 
-export default function Footer(props){
+export default function Footer(){
       return (
         <footer className="App-footer">
-          <p>Copyright © 2020 Georgia Tech TreeSearchers. All rights reserved.</p>
+          <p>Copyright © 2020 Georgia Tech TreeSearchers</p>
         </footer>
       );
     

@@ -16,7 +16,7 @@ class Routing extends MapLayer {
             addWaypoints: false,
             createMarker: (() => null),
 
-            
+          
             
             position: 'bottomleft',
             // waypoints: [
@@ -46,6 +46,7 @@ class Routing extends MapLayer {
         this.control.route();
         this.control.addTo(map.leafletElement);
         this.plan = this.control.getPlan();
+       
 
         return this.plan;
     }
