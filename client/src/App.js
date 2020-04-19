@@ -10,7 +10,7 @@ import {createStore} from 'redux';
 import reducer from './Reducer';
 
 
-const store = createStore(reducer);
+export const store = createStore(reducer);
 
 class App extends React.Component {
 

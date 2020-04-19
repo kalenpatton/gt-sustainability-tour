@@ -1,4 +1,5 @@
 import APIHandler from './Components/APIHandler'
+import { store } from './App'
 
 const initialState={
     filters: [],
@@ -8,6 +9,10 @@ const initialState={
 
 function updateOnFilterLoad(filters) {
     initialState.filters=filters;
+    store.dispatch({
+        type: 'SET_FILTERS',
+        payload: initialState.filters
+    })
     console.log(initialState.filters)
 }
 

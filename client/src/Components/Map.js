@@ -53,7 +53,6 @@ class Map extends React.Component {
     filterOut=()=>{
         var selectedFilters = new Set();
         //redux
-        console.log(this.props.filters)
         this.props.filters.forEach((e)=>{
             selectedFilters.add(e.label);
         })
