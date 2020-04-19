@@ -136,14 +136,15 @@ class Map extends React.Component {
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
-            for(let j=0;j<filterList.length;j++){
-                if(selected.has(filterList[j])){
-                    newSites.push(this.state.allSites[i]);
-                    break;
-                }
-            }
-            if (filterList.length === 0) {
+            if (filterList == null) {
                 newSites.push(this.state.allSites[i]);
+            } else {
+                for(let j=0;j<filterList.length;j++){
+                    if(selected.has(filterList[j])){
+                        newSites.push(this.state.allSites[i]);
+                        break;
+                    }
+                }
             }
         }
 
