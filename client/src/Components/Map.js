@@ -161,7 +161,8 @@ class Map extends React.Component {
         console.log("default route:");
         console.log(route);
         this.setState(
-            { routeList: route },
+            { routeList: route,
+              routeSet: new Set(route)},
             console.log("default route updated")
         );
         this.changeShowNextStop();
