@@ -35,7 +35,9 @@ export default class Login extends React.Component {
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Login</h1>
+                <h1>Campus Sustainability Tour</h1>
+                <h1>Administrator Panel</h1>
+                <p>Please log in to continue</p>
                 <div>
                     <input
                         type="email"
@@ -59,7 +61,7 @@ export default class Login extends React.Component {
                 <div className = "error-text">
                     {this.state.errorText}
                 </div>
-                <input type="submit" value="Submit"/>
+                <input type="submit" value="Log in"/>
             </form>
         );
     }
