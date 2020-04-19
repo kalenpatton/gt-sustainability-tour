@@ -79,15 +79,19 @@ class Map extends React.Component {
                     return {
                         routeList: [...prevState.routeList, site]
                     };
-                });
-                this.changeShowNextStop();
+                }, this.changeShowNextStop);
             }
         },
 
+        popNextSite:() => {
+
+        },
+
         changeOrder:(newRoute,stop)=>{
-            this.setState({routeList:newRoute});
-            this.state.routeSet.delete(stop);
-            this.changeShowNextStop();
+            this.setState({
+                routeList:newRoute,
+                routeSet: new Set(newRoute)
+            }, this.changeShowNextStop);
         },
 
     };
@@ -167,12 +171,10 @@ class Map extends React.Component {
         this.setState(
             { routeList: route,
               routeSet: new Set(route)},
-            console.log("default route updated")
-        );
-        this.changeShowNextStop();
+            this.changeShowNextStop);
     }
 
-    changeShowNextStop=()=>{
+    changeShowNextStop=(site)=>{
         let name = this.state.routeList.length > 0 ? this.state.routeList[0].name : "N/A"
         this.props.settingHandler.showNextStop(name);
     }
@@ -195,6 +197,7 @@ class Map extends React.Component {
 
     onCloseList=() => {
         this.setState({openList:false});
+        this.changeShowNextStop();
     }
 
     onOpenList=()=>{

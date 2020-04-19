@@ -7,9 +7,9 @@
     flex-direction: column;
     /* align-items: center; */
     /* justify-content: center; */
-    font-size: calc(5px + 2vmin);
+    font-size: 14px;
     font-weight:bold;
-    color: white;
+    color: var(--blktxt);
 
     text-align:left !important;
 
@@ -31,7 +31,11 @@
 
   }
 
+.gt-logo {
+    position: absolute;
+    left: 12px;
+    height: 100%;
+}
 
 
 
-  
