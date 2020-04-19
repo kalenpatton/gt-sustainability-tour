@@ -32,8 +32,6 @@ class Map extends React.Component {
 
             // the site currently in focus in the popup window
             focusedSite : null,
-            // the next site the user is being routed to
-            nextStop: null,
             // the starting point of the route
             routeState: null,
 
@@ -63,43 +61,29 @@ class Map extends React.Component {
     // Object that contains methods to edit the map. Can be passed to children
     // components, like the popup window.
     mapHandler = {
-        // logic for setting the next stop on the tour
-        setNextStop : (site) => {
-            this.setState({ nextStop: site});
-        },
-
         //route start: current pos
         setRouteStart : (location) =>  {
             this.setState({ routeStart: location })
 
         },
 
-        addToRoute:(pos) => {
+        addToRoute:(site) => {
 
-            if(!this.state.routeSet.has(pos)){
-                this.state.routeSet.add(pos);
+            if(!this.state.routeSet.has(site)){
+                this.state.routeSet.add(site);
                 this.setState((prevState) => {
                     return {
-                        routeList: [...prevState.routeList, pos]
+                        routeList: [...prevState.routeList, site]
                     };
                 });
-                if(this.state.routeList.length === 0){
-                    this.changeShowNextStop(pos.name);
-                }
+                this.changeShowNextStop();
             }
         },
 
         changeOrder:(newRoute,stop)=>{
             this.setState({routeList:newRoute});
             this.state.routeSet.delete(stop);
-            //console.log(this.state.routeList);
-            if(this.state.routeList.length-1 === 0){
-                this.changeShowNextStop("N/A");
-            }
-            else{
-                this.changeShowNextStop(newRoute[0].name);
-            }
-            //this.changeShowNextStop(this.state.routeList[0].name);
+            this.changeShowNextStop();
         },
 
     };
@@ -118,10 +102,8 @@ class Map extends React.Component {
             { focusedSite: this.state.sites[0] },
             console.log("focusedSite updated")
         );
-        this.setState(
-            { nextStop: this.state.focusedSite },
-            console.log("nextStop updated")
-        );
+
+        this.updateDefaultRoute();
 
         return location_arr;
     };
@@ -134,14 +116,15 @@ class Map extends React.Component {
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
-            for(let j=0;j<filterList.length;j++){
-                if(selected.has(filterList[j])){
-                    newSites.push(this.state.allSites[i]);
-                    break;
-                }
-            }
-            if (filterList.length === 0) {
+            if (filterList == null) {
                 newSites.push(this.state.allSites[i]);
+            } else {
+                for(let j=0;j<filterList.length;j++){
+                    if(selected.has(filterList[j])){
+                        newSites.push(this.state.allSites[i]);
+                        break;
+                    }
+                }
             }
         }
 
@@ -156,7 +139,37 @@ class Map extends React.Component {
 
     }
 
-    changeShowNextStop=(name)=>{
+    //default route
+    updateDefaultRoute = () => {
+        var route = [];
+        for(let i=1; i <= this.state.allSites.length; i++){
+            for (let j=0; j < this.state.allSites.length; j++) {
+                var num_str = this.state.allSites[j].stop_num;
+                if (num_str != 'null') {
+                    var num = parseInt(num_str)
+                    if (num == i) {
+                        route.push(this.state.allSites[j]);
+                        break;
+                    }
+                }
+            }
+
+        }
+
+        console.log("all sites:");
+        console.log(this.state.allSites);
+        console.log("default route:");
+        console.log(route);
+        this.setState(
+            { routeList: route,
+              routeSet: new Set(route)},
+            console.log("default route updated")
+        );
+        this.changeShowNextStop();
+    }
+
+    changeShowNextStop=()=>{
+        let name = this.state.routeList.length > 0 ? this.state.routeList[0].name : "N/A"
         this.props.settingHandler.showNextStop(name);
     }
 
@@ -215,7 +228,7 @@ class Map extends React.Component {
     addRouting = () => {
         console.log("Adding routing...");
         // eslint-disable-next-line
-        if (this.state.sites.length == undefined || this.state.focusedSite == undefined || this.state.nextStop == undefined) {
+        if (this.state.sites.length == undefined || this.state.focusedSite == undefined) {
             return;
         }
 
@@ -226,7 +239,7 @@ class Map extends React.Component {
             console.log("Routing updated");
             return ( <RoutingMachine
                 from={this.state.routeStart}
-                to={this.state.nextStop.position}
+                to={this.state.routeList.length > 0 ? this.state.routeList[0].position : null}
 
                 route={list}
 
