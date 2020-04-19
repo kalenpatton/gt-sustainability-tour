@@ -159,7 +159,7 @@ export default class Dashboard extends Component {
                         <div>Logged in as: {this.props.email}</div>
                         <div>
                             <button onClick={this.openPassEdit}>Change Password</button>
-                            {this.props.usertype == "superadmin" ? <button onClick={this.openManageAdmins}>Manage Admin Accounts</button> : null}
+                            {this.props.usertype === "superadmin" ? <button onClick={this.openManageAdmins}>Manage Admin Accounts</button> : null}
                         </div>
                     </div>
                     <h1>Dashboard</h1>
