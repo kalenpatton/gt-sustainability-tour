@@ -75,6 +75,10 @@ class Map extends React.Component {
 
         },
 
+        handleLocationFound : (lat, lng) => {
+            this.setState({ routeStart: [lat, lng] })
+        },
+
         addToRoute:(pos) => {
 
             if(!this.state.routeSet.has(pos)){

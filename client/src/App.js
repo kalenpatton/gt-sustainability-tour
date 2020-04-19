@@ -65,7 +65,12 @@ class App extends React.Component {
           nextStop={this.state.nextStop}
           map={this.map}
         />
-        <Map  autoplay={this.state.autoplay} textDirection={this.state.textDirection} settingHandler={this.settingHandler} saveMap={this.saveMap} setRef={ref => this.map = ref} />
+        <Map
+          autoplay={this.state.autoplay}
+          textDirection={this.state.textDirection}
+          settingHandler={this.settingHandler}
+          saveMap={this.saveMap}
+          setRef={ref => this.map = ref} />
         <Footer/>
 
       </div>

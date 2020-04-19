@@ -40,6 +40,19 @@ class PopupWindow extends React.Component{
         this.mapHandler.addToRoute(this.props.site);
     };
 
+    formatDesc = (desc) => {
+        let bullets = desc.split("\n")
+        let output = []
+        bullets.forEach((bullet, i) => {
+            bullet = bullet.trim()
+            if (bullet.length > 0) {
+                output.push(<li key={i} className='desc'>{bullet}</li>)
+            }
+        });
+
+        return (<ul className='desc'>{output}</ul>)
+    };
+
 
     render(){
         return(
@@ -57,7 +70,7 @@ class PopupWindow extends React.Component{
 
                 </div>
                 <div className="descriptions">
-                    <p>{this.props.site.description}</p>
+                    {this.formatDesc(this.props.site.description)}
                 </div>
                 <button className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</button>
 

@@ -19,7 +19,7 @@ export default class Header extends Component {
 
     onCloseModal = () => {
       this.setState({ open: false });
-      //update map ref 
+      //update map ref
       if(this.props.map){
         this.props.map.updateFilteredSites();
       }
@@ -33,8 +33,6 @@ export default class Header extends Component {
             <Modal open={this.state.open} onClose={this.onCloseModal} >
                <Setting settingHandler={this.props.settingHandler} autoplay={this.props.autoplay} textDirection={this.props.textDirection}/>
             </Modal>
-
-
          </header>
       );
     }

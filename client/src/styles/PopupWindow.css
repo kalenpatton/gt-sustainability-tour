@@ -2,7 +2,6 @@
     height: 100%;
     width: 100%;
     max-height: fit-content;
-    max-width: 400px;
     text-align: center;
 
     /* background: chocolate;
@@ -13,7 +12,7 @@ img.cover-image{
     height: 200px;
     width: 100%;
     object-fit: cover;
-    border: solid 1px #cccccc;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
 
 }
 
@@ -36,11 +35,19 @@ img.cover-image{
 
 .descriptions{
     width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    font-size: 14px;
+    margin: 1px;
     text-align: left;
-    border: solid 1px #cccccc;
     box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
     height:150px;
     overflow-y:scroll;
+}
+
+li.desc {
+    list-style: disc !important;
+}
+
+ul.desc {
+    padding-left: 30px;
+    padding-right: 10px;
 }
