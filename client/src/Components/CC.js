@@ -15,7 +15,7 @@ export default class CC extends React.Component {
         bullets.forEach((bullet, i) => {
             bullet = bullet.trim();
             if (bullet.length > 0) {
-                output.push(<p>{bullet}</p>);
+                output.push(<p key={i}>{bullet}</p>);
             }
         });
 
