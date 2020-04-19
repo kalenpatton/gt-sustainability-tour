@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './GTStyles.css';
 import './App.css';
 import Login from './Components/Login';

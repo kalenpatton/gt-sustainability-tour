@@ -16,10 +16,10 @@ export default class PasswordEditPopup extends React.Component{
     }
 
     onSubmit = (event) => {
-        const { currentPass, newPass, verifyNewPass } = this.state
+        const { newPass, verifyNewPass } = this.state
         event.preventDefault();
         event.stopPropagation();
-        if (newPass != verifyNewPass) {
+        if (newPass !== verifyNewPass) {
             this.setError("Passwords must match.");
             return;
         }
