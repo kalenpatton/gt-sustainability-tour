@@ -102,7 +102,6 @@ class Setting extends Component {
                 <button onClick={this.restart}
                         id="restart"
                         className="smallBtn">Restart Tour</button>
-                <button id="admin-button">Admin Login</button>
             </div>
         );
     }

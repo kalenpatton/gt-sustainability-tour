@@ -40,6 +40,11 @@ class PopupWindow extends React.Component{
         this.mapHandler.addToRoute(this.props.site);
     };
 
+    onContinueTour = () => {
+        this.mapHandler.popNextSite()
+        this.props.onClose()
+    }
+
     formatDesc = (desc) => {
         let bullets = desc.split("\n")
         let output = []
@@ -72,7 +77,8 @@ class PopupWindow extends React.Component{
                 <div className="descriptions">
                     {this.formatDesc(this.props.site.description)}
                 </div>
-                <button className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</button>
+                <button className="smallBtn" onClick={this.onOpenModalGallery}>Image Gallery</button>
+                <button className="smallBtn" onClick={this.onOpenModalCC}>Audio Transcript</button>
 
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
 
@@ -99,11 +105,13 @@ class PopupWindow extends React.Component{
                     />
                 </div>
 
-                <button className="smallBtn" onClick={this.onOpenModalCC}>View Transcript</button>
                 <Modal open={this.state.openCC} onClose={this.onCloseModalCC} >
                     <CC transcript={this.props.site.transcript}/>
                     <button className="lightBtn" onClick={this.onCloseModalCC}>Back</button>
                 </Modal>
+                {this.mapHandler.isNextStop(this.props.site) &&
+                    <button className="brightBtn" onClick={this.onContinueTour}>Continue with the Tour</button>
+                }
             </div>
         );
     }
