@@ -25,10 +25,14 @@ class App extends React.Component {
     }
 
     this.map = null;
-
+    this.setNextStop = this.setNextStop.bind(this)
   }
 
-
+  setNextStop(stop) {
+    this.setState({
+      nextStop: stop
+    })
+  }
 
   settingHandler={
     changeAutoplay:(value)=>{
@@ -65,12 +69,12 @@ class App extends React.Component {
           nextStop={this.state.nextStop}
           map={this.map}
         />
-        <Map
-          autoplay={this.state.autoplay}
-          textDirection={this.state.textDirection}
-          settingHandler={this.settingHandler}
-          saveMap={this.saveMap}
-          setRef={ref => this.map = ref} />
+        <Map  autoplay={this.state.autoplay}
+              textDirection={this.state.textDirection}
+              settingHandler={this.settingHandler}
+              saveMap={this.saveMap}
+              setRef={ref => this.map = ref}
+              nextStopHandler={this.setNextStop}/>
         <Footer/>
 
       </div>
