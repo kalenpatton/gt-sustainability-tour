@@ -41,12 +41,6 @@ class PopupWindow extends React.Component{
     };
 
 
-    listItems = this.props.site.description.split("•");
-    bulletPoints=this.listItems.splice(1, this.listItems.length).map((number, i) =>
-        <p key={i}>{"•"+number}</p>
-    );
-
-
     render(){
         return(
             <div className="popupwindow">
@@ -63,7 +57,7 @@ class PopupWindow extends React.Component{
 
                 </div>
                 <div className="descriptions">
-                    {this.bulletPoints}
+                    <p>{this.props.site.description}</p>
                 </div>
                 <button className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</button>
 

@@ -165,7 +165,7 @@ class Map extends React.Component {
             focusedSite: site,
             open: true,
         });
-        //console.log(this.state.focusedSite);
+        console.log(this.state.focusedSite);
 
         //test
         this.updateFilteredSites();
