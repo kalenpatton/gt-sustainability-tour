@@ -223,8 +223,10 @@ function parseDescription(description) {
 function parseFilters(filters) {
     let filters_list = []
 
-    if (filters != null) {
+    if (filters != null || filters === "" || filters === "null") {
         filters_list = filters.split(',')
+    } else {
+        filters_list = null
     }
 
     return filters_list
