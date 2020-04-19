@@ -240,7 +240,7 @@ UNLOCK TABLES;
 /* Data for table `users` */
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('kpatton33@gatech.edu','$2b$10$EpNeZG2VTX.NzeP2xBSBo.7EM5lbLI9dS6OvRCWSFcPvWdHXQMzXO', 'superadmin');
+INSERT INTO `users` VALUES ('admin@gatech.edu','$2b$10$EpNeZG2VTX.NzeP2xBSBo.7EM5lbLI9dS6OvRCWSFcPvWdHXQMzXO', 'superadmin');
 ALTER TABLE `users` ENABLE KEYS;
 UNLOCK TABLES;
 

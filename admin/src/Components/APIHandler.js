@@ -1,3 +1,11 @@
+function getUsers(callback) {
+    return fetch('/users', {
+        accept: "application/json"
+    })
+        .then(checkStatus)
+        .then(response => response.json())
+        .then(callback)
+}
 
 // Verifies successful response and throws error otherwise
 function checkStatus(response) {
@@ -235,6 +243,6 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
 
 export default APIHandler;
