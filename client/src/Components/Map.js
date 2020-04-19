@@ -164,12 +164,7 @@ class Map extends React.Component {
             { routeList: route },
             console.log("default route updated")
         );
-<<<<<<< HEAD
         this.changeShowNextStop();
-
-=======
-        this.props.nextStopHandler(this.state.routeList[0].name)
->>>>>>> f510a640a0110ac3f2fa563711dfe4affdb16083
     }
 
     changeShowNextStop=()=>{
