@@ -1,9 +1,26 @@
 .stop{
-    background-color:#EAAA00;
+    position: relative;
+    background-color: var(--gt-gold);
     border: 1px solid black;
     padding: 7px;
+    z-index: 9
 }
 
+.stop.onDrag {
+    z-index: 11
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0%;
+  height: 30px;
+  width: 30px;
+  font-size: 16px;
+  text-align: center;
+  z-index: 10;
+}
 /* .close{
     position: relative;
     right:2%;

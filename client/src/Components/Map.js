@@ -19,7 +19,7 @@ class Map extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+
             isMapInit : false,
             showDirectionText: true,
             open : false,
@@ -40,7 +40,7 @@ class Map extends React.Component {
             routeList:[],
             routeSet:new Set(),
         };
-       
+
         console.log(this.state.selectedFilters);
         this.addRouting = this.addRouting.bind(this);
         props.setRef(this);
@@ -51,8 +51,8 @@ class Map extends React.Component {
     }
 
     filterOut=()=>{
-        var selectedFilters = new Set(); 
-        //redux 
+        var selectedFilters = new Set();
+        //redux
         this.props.filters.forEach((e)=>{
             selectedFilters.add(e.label);
         })
@@ -75,13 +75,13 @@ class Map extends React.Component {
         },
 
         addToRoute:(pos) => {
-            
+
             if(!this.state.routeSet.has(pos)){
                 this.state.routeSet.add(pos);
-                this.setState((prevState) => {  
+                this.setState((prevState) => {
                     return {
                         routeList: [...prevState.routeList, pos]
-                    };  
+                    };
                 });
                 if(this.state.routeList.length === 0){
                     this.changeShowNextStop(pos.name);
@@ -90,10 +90,10 @@ class Map extends React.Component {
         },
 
         changeOrder:(newRoute,stop)=>{
-            this.setState({routeList:newRoute}); 
+            this.setState({routeList:newRoute});
             this.state.routeSet.delete(stop);
             //console.log(this.state.routeList);
-            if(this.state.routeList.length-1==0){
+            if(this.state.routeList.length-1 === 0){
                 this.changeShowNextStop("N/A");
             }
             else{
@@ -105,17 +105,6 @@ class Map extends React.Component {
     };
 
     updateOnLocationLoad = (location_arr) => {
-       //randomly add some filters for testing 
-        for(let i=0;i<location_arr.length;i+=2){
-            location_arr[i].filters="Energy and Emissions";
-        }
-        for(let i=1;i<location_arr.length;i+=2){
-            location_arr[i].filters="Water";
-        }
-        for(let i=0;i<location_arr.length;i+=3){
-            location_arr[i].filters="Materials Management,Built Environment";
-        }
-
         console.log(location_arr);
         this.setState(
             { sites: location_arr },
@@ -131,7 +120,7 @@ class Map extends React.Component {
         );
         this.setState(
             { nextStop: this.state.focusedSite },
-            console.log("nextStop updated")    
+            console.log("nextStop updated")
         );
 
         this.updateDefaultRoute();
@@ -139,22 +128,25 @@ class Map extends React.Component {
         return location_arr;
     };
 
-    //filtering 
-    updatefiltedSites = () => {
+    //filtering
+    updateFilteredSites = () => {
         var selected=this.filterOut();
 
         var newSites=[];
         for(let i=0;i<this.state.allSites.length;i++){
-            
-            var filterList = this.state.allSites[i].filters.split(",");
+
+            var filterList = this.state.allSites[i].filters
             for(let j=0;j<filterList.length;j++){
                 if(selected.has(filterList[j])){
                     newSites.push(this.state.allSites[i]);
                     break;
                 }
             }
+            if (filterList.length === 0) {
+                newSites.push(this.state.allSites[i]);
+            }
         }
-       
+
         console.log("all sites:");
         console.log(this.state.allSites);
         console.log("new sites:");
@@ -203,10 +195,10 @@ class Map extends React.Component {
             focusedSite: site,
             open: true,
         });
-        console.log(this.state.focusedSite);
+        //console.log(this.state.focusedSite);
 
         //test
-        this.updatefiltedSites();
+        this.updateFilteredSites();
 
     };
 
@@ -225,6 +217,7 @@ class Map extends React.Component {
     // Returns UI elements for all site markers
     addMarkers = () => {
         var markers = [];
+        // eslint-disable-next-line
         if (this.state.sites.length == undefined) {
             return markers;
         }
@@ -235,7 +228,10 @@ class Map extends React.Component {
                     <Popup>   {/* Popup for any custom information. */}
                         <div className="center-text">
                             <p>{site.name}</p>
-                            <button onClick={() => this.onOpenModal(site)}>See details</button>
+                            <div className="buttons">
+                                <button className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</button>
+                                <button className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</button>
+                            </div>
                         </div>
                     </Popup>
                 </Marker>
@@ -248,24 +244,22 @@ class Map extends React.Component {
     // Returns the UI element for the direction routing
     addRouting = () => {
         console.log("Adding routing...");
-        if (this.state.sites.length == undefined
-            || this.state.focusedSite == undefined
-            || this.state.nextStop == undefined) {
+        // eslint-disable-next-line
+        if (this.state.sites.length == undefined || this.state.focusedSite == undefined || this.state.nextStop == undefined) {
             return;
         }
-      
+
         var list=[];
         this.state.routeList.forEach((e)=>{list.push(e.position);});
-      
+
         if (this.state.isMapInit && this.state.routeStart) {
             console.log("Routing updated");
             return ( <RoutingMachine
-                //Hard code for proof of concept. Change once we have user location data.
                 from={this.state.routeStart}
                 to={this.state.nextStop.position}
 
                 route={list}
-                
+
                 map={this.map}
                 show={this.props.textDirection}
 
@@ -273,9 +267,9 @@ class Map extends React.Component {
         }
     };
 
-   
 
-  
+
+
     // What to do when the map is clicked
     handleClick = (e) => {
         console.log(e.latlng);
@@ -292,7 +286,7 @@ class Map extends React.Component {
 
     render() {
         return (
-           
+
             <LeafletMap
             // This is the default lon and lat of GT
                         center={[33.775620, -84.396286]}
@@ -311,7 +305,7 @@ class Map extends React.Component {
                         maxBoundsViscosity={1.0}
                         ref={this.saveMap}
             >
-                
+
                 <TileLayer
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
@@ -324,17 +318,17 @@ class Map extends React.Component {
                     startDirectly
                     mapHandler={this.mapHandler}/>
 
-               
-                {/* change order */}
+
+                {/* change order */}88
                 <button onClick={this.onOpenList} id="route-button"><i className="fas fa-route fa-lg" style={{color:'#404040'}}></i></button>
 
                 <Modal open={this.state.openList} onClose={this.onCloseList} className="centered">
-                   
+
                     <RoutingList stops={this.state.routeList} mapHandler = {this.mapHandler}/>
-                   
+
                 </Modal>
-      
-                
+
+
                 <Modal
                     open={this.state.open}
                     onClose={this.onCloseModal}
@@ -344,9 +338,9 @@ class Map extends React.Component {
                         mapHandler = {this.mapHandler}
                         autoplay={this.props.autoplay}/>
                 </Modal>
-                
+
             </LeafletMap>
-            
+
         );
     }
 }
@@ -359,9 +353,9 @@ const mapStateToProps = (state) =>{
 
 }
 
-const mapDispaychToProps = dispatch =>{
+const mapDispatchToProps = dispatch =>{
     return{
         setFilters: filters => dispatch({type:"SET_FILTERS",payload:filters})
     };
 }
-export default connect(mapStateToProps,mapDispaychToProps)(Map);
+export default connect(mapStateToProps,mapDispatchToProps)(Map);

@@ -17,7 +17,7 @@ function checkStatus(response) {
     if (response.ok) {
         return response;
     }
-    const error = new Error('HTTP Error ${response.statusText}');
+    const error = new Error(`HTTP Error ${response.statusText}`);
     error.status = response.statusText;
     error.response = response;
     console.log(error);
@@ -41,11 +41,23 @@ function convertToMapObject(response) {
     return map_response;
 }
 
+// replaces temp characters with utf ones
 function parseDescription(description) {
     // perhaps some way to insert newlines to the description?
     let bullet_dash_regex = /- /g
     description = description.replace(bullet_dash_regex, "\u2022 ")
     return description
+}
+
+// converts filters field into a list of filters
+function parseFilters(filters) {
+    let filters_list = []
+
+    if (filters != null) {
+        filters_list = filters.split(',')
+    }
+
+    return filters_list
 }
 
 function formatImageList(response) {
@@ -54,5 +66,25 @@ function formatImageList(response) {
     return imageList_response;
 }
 
-const APIHandler = { getLocations, getImageList };
+function getFilters(callback){
+    var filterList=[];
+    fetch('/filters', {
+        accept: "application/json"
+    })
+        .then(response => response.json())
+        .then(response => {
+            response.forEach((element) => {
+                let curr = {
+                    label:element.filter,
+                    value:element.id,
+                }
+            
+                filterList.push(curr);
+            });
+            return filterList
+        })
+        .then(callback)
+}
+
+const APIHandler = { getLocations, getImageList, getFilters };
 export default APIHandler;

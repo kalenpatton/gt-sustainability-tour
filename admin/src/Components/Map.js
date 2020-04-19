@@ -9,7 +9,6 @@ class Map extends React.Component {
         this.state = {
             isMapInit : false,
             showDirectionText: false,
-            // Eventually, this hard code should be replaced with a call to backend
             sites : APIHandler.getLocations(this.updateOnLocationLoad)
         };
 
