@@ -53,11 +53,11 @@ class RoutingList extends React.Component{
                       <li key={stop.name} className="stop">
 
                         {stop.name}
-                        <button
+                        <div
                             className='close'
                             onClick={(e)=>this.removeStop(e, i, stop)}>
                             &times;
-                        </button>
+                        </div>
                         {/*<a className="lightBtn" onClick={(e)=>this.removeStop(e, i,stop)}>remove</a>*/}
 
                       </li>

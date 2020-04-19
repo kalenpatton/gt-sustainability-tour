@@ -19,7 +19,7 @@ APIHandler.getFilters(function(filterList) {
 class Setting extends Component {
     constructor(props){
         super(props);
-       
+
         this.state={
             autoplay:this.props.autoplay,
             textDirection:this.props.textDirection,
@@ -27,7 +27,7 @@ class Setting extends Component {
             //filters
             selectedOption: this.props.filters,
             options:filters,
-           
+
         }
     }
 
@@ -36,13 +36,13 @@ class Setting extends Component {
         this.setState(
           { selectedOption },
           // () => console.log(`Option selected:`, this.state.selectedOption)
-       
+
         );
         //console.log(selectedOption);
         this.props.setFilters(selectedOption);
       };
-    
-     
+
+
     changeAutoPlay=(value)=>{
         this.props.settingHandler.changeAutoplay(value);
     }
@@ -52,30 +52,32 @@ class Setting extends Component {
     }
 
     restart=()=>{
-        history.push('/');
-        window.location.reload();
+        if (window.confirm("Restart the tour? This will reset your tour route.")) {
+            history.push('/tour');
+            window.location.reload();
+        }
     }
 
 
     render(){
-       
+
         return(
             <div className='settingWindow'>
-                
+
                 <h3>Settings</h3>
 
                 <h5>Filter Sustainability Types</h5>
 
-                <ReactMultiSelectCheckboxes 
-                options={this.state.options} 
+                <ReactMultiSelectCheckboxes
+                options={this.state.options}
                 value={this.state.selectedOption}
                 onChange={this.handleChange}
                 />
 
 
                 <hr/>
-               
-                <h5>Enable Media Autoplay</h5><ToggleButton 
+
+                <h5>Enable Media Autoplay</h5><ToggleButton
                 value={ this.state.autoplay}
                 onToggle={(value) => {
                     this.setState({
@@ -84,7 +86,7 @@ class Setting extends Component {
                     this.changeAutoPlay(value);
                 }} />
 
-                <h5>Enable Text Directions</h5><ToggleButton 
+                <h5>Enable Text Directions</h5><ToggleButton
                 value={ this.state.textDirection}
                 onToggle={(value) => {
                     this.setState({
@@ -92,12 +94,14 @@ class Setting extends Component {
                     });
                     this.changeTextDirection(value);
                 }} />
-                
-                <hr/>
-                
 
-                
-                <button onClick={this.restart} id="restart">Restart Tour</button>
+                <hr/>
+
+
+
+                <button onClick={this.restart}
+                        id="restart"
+                        className="smallBtn">Restart Tour</button>
                 <button id="admin-button">Admin Login</button>
             </div>
         );

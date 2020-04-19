@@ -124,9 +124,11 @@ export default class Dashboard extends Component {
     };
 
     handleDeleteSite = (site) => {
-        APIHandler.deleteSite(site, (response) => {
-            APIHandler.getLocations(this.updateOnLocationLoad)
-        });
+        if (window.confirm(`Are you sure you want to delete '${site.name}'?`)) {
+            APIHandler.deleteSite(site, (response) => {
+                APIHandler.getLocations(this.updateOnLocationLoad)
+            });
+        }
     };
 
     handleEditFilters = () =>{

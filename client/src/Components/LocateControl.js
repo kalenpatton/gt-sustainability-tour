@@ -23,6 +23,7 @@ class LocateControl extends Component {
     lc.addTo(map);
 
     map.on('locationfound', (e) => {
+      // mapHandler.handleLocationFound(e.latlng.lat, e.latlng.lng)
       mapHandler.setRouteStart([e.latlng.lat, e.latlng.lng]);
     });
 

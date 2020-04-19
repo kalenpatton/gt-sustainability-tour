@@ -95,6 +95,9 @@
     margin: 2px;
     z-index: 9;
     background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: lightgray;
 }
 .image-list-dragged {
     z-index: 11 !important;
