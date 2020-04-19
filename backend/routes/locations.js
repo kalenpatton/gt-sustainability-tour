@@ -50,6 +50,20 @@ router.get('/:loc_id', (req, res) => {
   })
 })
 
+/*gets the filters available for locations*/
+router.get('/:filters',(req, res) => {
+  const queryString = "SELECT * FROM filters"
+  console.log("Fetching filters")
+  connection.query(queryString, (err, rows, fields) => {
+    if (err) {
+      console.log("Failed to query for filters\n\t" + err)
+      res.sendStatus(500) // Internal Server Error
+      return
+    }
+    console.log("Fetched filters")
+    res.json(rows)
+  })
+});
 /* POST specific location by id
 
   req.body should be json of format:
