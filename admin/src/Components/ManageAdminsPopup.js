@@ -53,7 +53,7 @@ export default class ManageAdminsPopup extends React.Component{
                 <tr key={admin.email}>
                     <td>{admin.email}</td>
                     <td>{admin.usertype}</td>
-                    {admin.email != this.props.email ? <td>
+                    {admin.email !== this.props.email ? <td>
                         <button onClick={() => this.deleteUser(admin)}>Delete</button>
                     </td> : null}
                 </tr>

@@ -16,10 +16,10 @@ export default class AddAdminPopup extends React.Component{
     }
 
     onSubmit = (event) => {
-        const { email, password, verifypassword } = this.state
+        const { password, verifypassword } = this.state
         event.preventDefault();
         event.stopPropagation();
-        if (password != verifypassword) {
+        if (password !== verifypassword) {
             this.setError("Passwords must match.");
             return;
         }
