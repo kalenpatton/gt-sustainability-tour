@@ -116,14 +116,15 @@ class Map extends React.Component {
         for(let i=0;i<this.state.allSites.length;i++){
 
             var filterList = this.state.allSites[i].filters
-            for(let j=0;j<filterList.length;j++){
-                if(selected.has(filterList[j])){
-                    newSites.push(this.state.allSites[i]);
-                    break;
-                }
-            }
-            if (filterList.length === 0) {
+            if (filterList == null) {
                 newSites.push(this.state.allSites[i]);
+            } else {
+                for(let j=0;j<filterList.length;j++){
+                    if(selected.has(filterList[j])){
+                        newSites.push(this.state.allSites[i]);
+                        break;
+                    }
+                }
             }
         }
 
@@ -163,8 +164,12 @@ class Map extends React.Component {
             { routeList: route },
             console.log("default route updated")
         );
+<<<<<<< HEAD
         this.changeShowNextStop();
 
+=======
+        this.props.nextStopHandler(this.state.routeList[0].name)
+>>>>>>> f510a640a0110ac3f2fa563711dfe4affdb16083
     }
 
     changeShowNextStop=()=>{
