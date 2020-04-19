@@ -54,12 +54,6 @@ class PopupWindow extends React.Component{
     };
 
 
-    listItems = this.props.site.description.split("•");
-    bulletPoints=this.listItems.splice(1, this.listItems.length).map((number, i) =>
-        <p key={i}>{"•"+number}</p>
-    );
-
-
     render(){
         return(
             <div className="popupwindow">

@@ -81,6 +81,7 @@ class Map extends React.Component {
                 ref={this.saveMap}
             >
                 <TileLayer
+                //s z,x,y are all used for leaflet and aren't defined by us.
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
                 />
 

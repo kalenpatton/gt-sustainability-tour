@@ -95,7 +95,7 @@ router.post('/authenticate', (req, res) => {
   userHandler.test(email, password, (err, same, usertype) => {
     if (err) {
       res.status(500).json({
-        error: err
+        error: err.toString()
       }) // Internal Server Error
     } else if (!same) {
       res.status(401).json({

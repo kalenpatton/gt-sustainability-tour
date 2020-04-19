@@ -1,12 +1,3 @@
-function getUsers(callback) {
-    return fetch('/users', {
-        accept: "application/json"
-    })
-        .then(checkStatus)
-        .then(response => response.json())
-        .then(callback)
-        //.then(convertUser)
-}
 
 // Verifies successful response and throws error otherwise
 function checkStatus(response) {
@@ -32,6 +23,14 @@ function getLocations(callback) {
         .then(callback);
 }
 
+//gets an array of filters that are necesssary for categorizing the filters
+function getfilters(callback) {
+    return fetch('/filters', {
+        accept: "application/json"
+    }).then(checkStatus)
+        .then(response => response.json())
+        .then(callback);
+}
 // GETs an array of integers representing the id numbers of the images for the given site.
 function getImageList(site, callback) {
     return fetch(`/images/${site.id}`, {
@@ -51,12 +50,7 @@ function postSite(site, callback) {
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
-    // formData.append("imageList", site.imageList);
-    // formData.append("newImgs", site.newImgs);
 
-    // for (var i = 0; i < site.imageList.length; i++) {
-    //     formData.append("imageList[]", site.imageList[i]);
-    // }
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
         formData.append(`newCaptions[]`, site.newImgs[i].caption);
@@ -83,13 +77,15 @@ function putSite(site, callback) {
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
     formData.append("filters", null);
-    // formData.append("imageList", site.imageList);
-    // formData.append("newImgs", site.newImgs);
 
-    for (let i = 0; i < site.imageList.length; i++) {
+
+    //adds the image list
+    for (var i = 0; i < site.imageList.length; i++) {
         formData.append("imageList[]", site.imageList[i]);
     }
-    for (let i = 0; i < site.newImgs.length; i++) {
+    //adds the images and captions to specific image list. 
+    for (var i = 0; i < site.newImgs.length; i++) {
+
         formData.append(`newImgs[]`, site.newImgs[i]);
         formData.append(`newCaptions[]`, site.newImgs[i].caption);
     }
@@ -224,5 +220,6 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
+const APIHandler = { getfilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+
 export default APIHandler;
