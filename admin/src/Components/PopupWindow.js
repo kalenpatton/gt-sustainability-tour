@@ -16,14 +16,19 @@ class PopupWindow extends React.Component{
             name: '',
             position: [33.775620, -84.396286],
             description: '',
-            transcript: ''
+            transcript: '',
+
         };
         if (!this.isNewStop) this.state = {...this.props.site};
         // Remove later. Just for dev
         this.state.imageList = [];
         APIHandler.getImageList(this.props.site, this.updateOnImageListLoad);
-        // for (let i=1; i<=5; i++) this.state.imageList.push(i);
+        // for (let i=1; i<=5; i++) this.sta e.imageList.push(i);
         // //
+         this.state.filters = '';
+        APIHandler.getfilters(this.props.site, this.updateOnfilterListLoad);
+        console.log('hello!');
+        console.log(this.state.filters.toString());
         this.saveSite = this.props.onSaveSite;
 
     }
@@ -65,7 +70,13 @@ class PopupWindow extends React.Component{
             imageList: imageList
         });
     };
+    //udate the list of filters after fetching 
+    updateOnfilterListLoad = (filters) => {
+        this.setState({
+            filters: filters
+        });
 
+    };
     handleInputChange = (event) => {
         const { value, name } = event.target;
         this.setState({
@@ -100,6 +111,12 @@ class PopupWindow extends React.Component{
                                     name='description'
                                     value={this.state.description}
                                     onChange={this.handleInputChange}/>
+                            </div>
+                            <div> 
+                                {'Filters : '} 
+                                <select id='filterz'>
+
+                                </select>
                             </div>
                             <div>
                                 <LocationSelect

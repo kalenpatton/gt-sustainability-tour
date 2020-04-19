@@ -36,8 +36,8 @@ function getImageList(site, callback) {
 
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
-    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude]}));
+    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters, stop_num}) =>
+        ({id, name, description, transcript, filters, position: [latitude, longitude], stop_num}));
     return map_response;
 }
 
