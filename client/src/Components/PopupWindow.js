@@ -5,7 +5,6 @@ import '../styles/Audio.scss';
 import H5AudioPlayer from 'react-h5-audio-player';
 import Modal from 'react-responsive-modal';
 import CC from './CC';
-import Gallery from './Gallery';
 import ImageGallery from './ImageGallery';
 
 class PopupWindow extends React.Component{
@@ -19,8 +18,6 @@ class PopupWindow extends React.Component{
             imageList:[]
         };
     }
-
-
 
     onOpenModalCC = () => {
         this.setState({ openCC: true });
@@ -47,23 +44,22 @@ class PopupWindow extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h2>{this.props.site.name}</h2>
+                <h4>{this.props.site.name}</h4>
                 <ImageGallery
                     cover={pic}
                     site={this.props.site}
+                    open={this.state.openGallery}
+                    handleOpenRequest={this.onOpenModalGallery}
+                    handleCloseRequest={this.onCloseModalGallery}
                 />
                 <div className="buttons">
-                    <button onClick={this.onMakeNextStop}>Add To My Route</button>
+                    <button className="smallBtn" onClick={this.onMakeNextStop}>Add To My Route</button>
 
                 </div>
                 <div className="descriptions">
                     <p>{this.props.site.description}</p>
                 </div>
-                <button onClick={this.onOpenModalGallery}>View Image Gallery</button>
-                <Modal open={this.state.openGallery} onClose={this.onCloseModalGallery} >
-                    <Gallery/>
-                    <button onClick={this.onCloseModalGallery}>Back</button>
-                </Modal>
+                <button className="smallBtn" onClick={this.onOpenModalGallery}>View Image Gallery</button>
 
                 {/* https://www.npmjs.com/package/react-h5-audio-player */}
 
@@ -90,10 +86,10 @@ class PopupWindow extends React.Component{
                     />
                 </div>
 
-                <button onClick={this.onOpenModalCC}>View Transcript</button>
+                <button className="smallBtn" onClick={this.onOpenModalCC}>View Transcript</button>
                 <Modal open={this.state.openCC} onClose={this.onCloseModalCC} >
                     <CC transcript={this.props.site.transcript}/>
-                    <button onClick={this.onCloseModalCC}>Back</button>
+                    <button className="lightBtn" onClick={this.onCloseModalCC}>Back</button>
                 </Modal>
             </div>
         );

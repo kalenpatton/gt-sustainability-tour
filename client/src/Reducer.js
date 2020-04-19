@@ -1,20 +1,26 @@
+import APIHandler from './Components/APIHandler'
+import { store } from './App'
 
 const initialState={
-    //change to backend calls to get all filters later
-    filters:[
-        { label: 'Energy and Emissions', value: 1},
-        { label: 'Water', value: 2},
-        { label: 'Materials Management', value: 3},
-        { label: 'Built Environment', value: 4},
-        { label: 'Community and Culture', value: 5}],
+    filters: [],
     mediaAutoplay:true,
     textDirection:true,
-
 }
+
+function updateOnFilterLoad(filters) {
+    initialState.filters=filters;
+    store.dispatch({
+        type: 'SET_FILTERS',
+        payload: initialState.filters
+    })
+    console.log(initialState.filters)
+}
+
+APIHandler.getFilters(updateOnFilterLoad)
+
 const reducer =(state=initialState,action)=>{
     switch(action.type){
         case "SET_FILTERS":
-            //console.log(action.payload);
             return{
                 ...state,
                 filters:action.payload

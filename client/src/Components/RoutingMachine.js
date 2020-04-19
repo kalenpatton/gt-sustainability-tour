@@ -4,6 +4,7 @@ import 'leaflet-routing-machine';
 
 class Routing extends MapLayer {
     createLeafletElement() {
+        // eslint-disable-next-line
         const { map, from, to, show,route} = this.props;
         
 
@@ -25,7 +26,8 @@ class Routing extends MapLayer {
             // ],
 
             //all routes
-             waypoints:[L.latLng(from[0], from[1]),...route],
+            // waypoints:[L.latLng(from[0], from[1]),...route],
+            
              //only route to the next stop
             waypoints:[L.latLng(from[0], from[1]),route[0]],
 

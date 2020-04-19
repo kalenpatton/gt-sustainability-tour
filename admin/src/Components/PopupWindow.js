@@ -1,5 +1,4 @@
 import React from 'react';
-import Modal from 'react-responsive-modal';
 import LocationSelect from './LocationSelect';
 import ImageEdit from './ImageEdit';
 import APIHandler from './APIHandler';
@@ -58,7 +57,7 @@ class PopupWindow extends React.Component{
             newImgs: newImgs
         };
 
-        if (this.audioRef.current.value != '') {
+        if (this.audioRef.current.value !== '') {
             newSite.audio = this.audioRef.current.files[0]
         }
         console.log(newSite);

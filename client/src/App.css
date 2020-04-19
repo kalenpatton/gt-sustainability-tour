@@ -21,3 +21,73 @@
   font-size: calc(10px + 2vmin);
   color: white;
 } */
+
+button {
+    background-color: #B3A369;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.bigButton {
+    box-shadow: 0px 4px 3px -3px #424242;
+    background-color:var(--gt-gold);
+    border-radius:28px;
+    border: 1px solid var(--gt-drk-gold);
+    display:inline-block;
+    cursor:pointer;
+    color:#333333;
+    font-size:20px;
+    font-weight:bold;
+    padding:10px 31px;
+    text-decoration:none;
+}
+.bigButton:hover {
+    background-color:#bfb37c;
+}
+.bigButton:active {
+    position:relative;
+    top:1px;
+}
+
+.smallBtn {
+    box-shadow: 0px 2px 3px -1px #424242;
+    background-color:var(--gt-gold);
+    border-radius:28px;
+    display:inline-block;
+    cursor:pointer;
+    color:#333333 !important;
+    font-size:12px;
+    font-weight:bold;
+    padding:3px 10px;
+    text-decoration:none;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.smallBtn:hover {
+    background-color:#bfb37c;
+}
+.smallBtn:active {
+    position:relative;
+    top:1px;
+}
+
+.lightBtn {
+    box-shadow: 0px 2px 3px -1px #383838;
+    background-color:#f2f3f1;
+    border-radius:28px;
+    display:inline-block;
+    cursor:pointer;
+    color:#333333 !important;
+    font-size:12px;
+    padding:3px 10px;
+    text-decoration:none;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.lightBtn:hover {
+    background-color:#ffffff;
+}
+.lightBtn:active {
+    position:relative;
+    top:1px;
+}

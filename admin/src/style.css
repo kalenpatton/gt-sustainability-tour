@@ -20,12 +20,17 @@
     text-align: left;
 }
 
+.right-text {
+    width: 100%;
+    text-align: left;
+}
+
 .main-map {
     position: fixed;
     left: 0px;
     right: 0px;
-    top: 150px;
-    bottom: 100px;
+    top: 100px;
+    bottom: 0px;
     align-content: center;
 
     z-index: 1;
@@ -106,3 +111,20 @@
   z-index: 10;
 }
 .close:hover {background: #bbb;}
+
+.profile-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding: 5px;
+}
+
+.error-text {
+    color : red;
+}
+
+th, td {
+    text-align: left;
+    padding-right: 10px;
+}
