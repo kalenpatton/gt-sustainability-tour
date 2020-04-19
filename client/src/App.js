@@ -75,7 +75,9 @@ class App extends React.Component {
               saveMap={this.saveMap}
               setRef={ref => this.map = ref}
               nextStopHandler={this.setNextStop}/>
-        <Footer/>
+        <Footer
+          nextStop={this.state.nextStop}
+          />
 
       </div>
       </Provider>

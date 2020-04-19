@@ -40,7 +40,8 @@ class RoutingList extends React.Component{
     render(){
         return(
             <div className="popupwindow">
-                <h4><i className="far fa-hand-point-up fa-lg"></i> drag to reorder </h4>
+                <h4>Current Tour Stops</h4>
+                <h6><i className="far fa-hand-point-up fa-lg"></i> drag to reorder </h6>
                 <Reorder
                     reorderId='routes'
                     onReorder={this.onReorder.bind(this)}

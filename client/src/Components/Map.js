@@ -79,15 +79,31 @@ class Map extends React.Component {
                     return {
                         routeList: [...prevState.routeList, site]
                     };
-                });
-                this.changeShowNextStop();
+                }, this.changeShowNextStop);
+            }
+        },
+
+        isNextStop:(site) => {
+            return (this.state.routeList.length > 0
+                    && this.state.routeList[0].id == site.id)
+        },
+
+        popNextSite:() => {
+            let newRoute = this.state.routeList.slice()
+            if (newRoute.length > 0) {
+                newRoute.shift();
+                this.setState({
+                    routeList:newRoute,
+                    routeSet: new Set(newRoute)
+                }, this.changeShowNextStop);
             }
         },
 
         changeOrder:(newRoute,stop)=>{
-            this.setState({routeList:newRoute});
-            this.state.routeSet.delete(stop);
-            this.changeShowNextStop();
+            this.setState({
+                routeList:newRoute,
+                routeSet: new Set(newRoute)
+            }, this.changeShowNextStop);
         },
 
     };
@@ -167,12 +183,10 @@ class Map extends React.Component {
         this.setState(
             { routeList: route,
               routeSet: new Set(route)},
-            console.log("default route updated")
-        );
-        this.changeShowNextStop();
+            this.changeShowNextStop);
     }
 
-    changeShowNextStop=()=>{
+    changeShowNextStop=(site)=>{
         let name = this.state.routeList.length > 0 ? this.state.routeList[0].name : "N/A"
         this.props.settingHandler.showNextStop(name);
     }
@@ -195,6 +209,7 @@ class Map extends React.Component {
 
     onCloseList=() => {
         this.setState({openList:false});
+        this.changeShowNextStop();
     }
 
     onOpenList=()=>{
@@ -210,13 +225,14 @@ class Map extends React.Component {
         }
         for (var i=0; i<this.state.sites.length; i++) {
             let site = this.state.sites[i];
+            let isNextStop = this.mapHandler.isNextStop(site)
             markers.push(
                 <Marker position={site.position} key={i}>
                     <Popup>   {/* Popup for any custom information. */}
                         <div className="center-text">
                             <p>{site.name}</p>
                             <div className="buttons">
-                                <button className="smallBtn" onClick={() => this.onOpenModal(site)}>See Details</button>
+                                <button className={isNextStop?"brightBtn":"smallBtn"} onClick={() => this.onOpenModal(site)}>See Details</button>
                                 <button className="smallBtn" onClick={() => this.mapHandler.addToRoute(site)}>Add to My Route</button>
                             </div>
                         </div>
@@ -322,6 +338,7 @@ class Map extends React.Component {
                     onClose={this.onCloseModal}
                     className="centered">
                     <PopupWindow
+                        onClose={this.onCloseModal}
                         site = {this.state.focusedSite}
                         mapHandler = {this.mapHandler}
                         autoplay={this.props.autoplay}/>

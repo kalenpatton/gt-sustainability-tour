@@ -28,7 +28,7 @@ export default class Header extends Component {
     render() {
       return (
          <header className="App-header">
-            <span id="nextStop">Next Stop: {this.props.nextStop}</span>
+            <span> <img src="gt-logo.svg" alt="Georgia Institute of Technology" className="gt-logo"/></span>
             <span onClick={this.onOpenModal} id="setting"><i className="fas fa-cog"></i></span>
             <Modal open={this.state.open} onClose={this.onCloseModal} >
                <Setting settingHandler={this.props.settingHandler} autoplay={this.props.autoplay} textDirection={this.props.textDirection}/>
