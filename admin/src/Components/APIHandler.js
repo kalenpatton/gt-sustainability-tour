@@ -24,13 +24,28 @@ function getLocations(callback) {
 }
 
 //gets an array of filters that are necesssary for categorizing the filters
-function getfilters(callback) {
-    return fetch('/filters', {
+function getFilters(callback) {
+    var filterList=[];
+    fetch('/filters', {
         accept: "application/json"
-    }).then(checkStatus)
+    })
         .then(response => response.json())
-        .then(callback);
+        .then(response => {
+            response.forEach((element) => {
+                let curr = {
+                    label:element.filter,
+                    value:element.id,
+                }
+            
+                filterList.push(curr);
+            });
+            console.log(filterList);
+            return filterList
+        })
+        .then(callback)
 }
+
+
 // GETs an array of integers representing the id numbers of the images for the given site.
 function getImageList(site, callback) {
     return fetch(`/images/${site.id}`, {
@@ -220,6 +235,6 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getfilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
+const APIHandler = { getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken};
 
 export default APIHandler;

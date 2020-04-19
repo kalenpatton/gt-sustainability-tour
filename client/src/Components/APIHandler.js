@@ -81,6 +81,7 @@ function getFilters(callback){
             
                 filterList.push(curr);
             });
+            console.log(filterList);
             return filterList
         })
         .then(callback)
