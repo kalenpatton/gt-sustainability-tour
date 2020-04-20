@@ -32,7 +32,7 @@
 ### DEPENDENCIES:
 - See package.json in client/, admin/, and backend/ directories for a full listing
 ### DOWNLOAD:
-- https://github.com/kalenpatton/gt-sustainability-tour
+- https://github.com/kalenpatton/gt-sustainability-tour/archive/master.zip
 ### INSTALLATION: 
 - Run “npm install” in the admin, backend, and client directories.
 - Execute the “database/db_generate_table_and_insert.sql” script to setup the MySQL database. 
