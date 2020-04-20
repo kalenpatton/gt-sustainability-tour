@@ -252,8 +252,18 @@ function getIntro(callback) {
             'Accept': 'application/json'
         }
     }).then(response => response.json())
-        .then(response=>callback(response));
+        .then(response => callback(response));
 }
-const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser, getIntro};
+
+function postIntro(newIntro) {
+    return fetch('/info', {
+        method: 'PUT',
+        body: JSON.stringify({ "information": newIntro }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });  
+}
+const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser, getIntro,postIntro};
 
 export default APIHandler;
