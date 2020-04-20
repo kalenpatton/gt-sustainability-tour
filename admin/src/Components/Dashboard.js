@@ -90,14 +90,15 @@ export default class Dashboard extends Component {
         this.setState({isIntroModalOpen:false});
     };
 
-    introChange=(event)=>{
+    introChange = (event) => {
+        
         this.setState({info: event.target.value});
     };
 
-    saveIntro=(newIntro)=>{
+    saveIntro=()=>{
         //need to replace this with database opertion
         console.log(`save ${this.state.info} to database`);
-        
+        APIHandler.postIntro(this.state.info);
 
     };
 
