@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Campus Sustainability Tour
+## Release Notes - Version 1.0
+### NEW FEATURES
+*Campus Sustainability Tour*
+- Added a default tour route available from application startup
+- Added confirmation windows to several non-reversible actions
+- Added new setting to only display tour locations that match specified filters
+- Added an error popup if the audio fails to load
+- Updated the look of the home page, map header, map footer, and various buttons
+- Replaced hard-coded location information with real information provided by the Georgia Tech Office of Campus Sustainability
 
-## Available Scripts
+*Administrator Panel*
+- Added stop reordering to allow for modifying the default tour route
+- Added ability to add and delete existing administrator accounts for users with existing superadmin accounts
+- Added ability to change the password of the logged-in account
+- Added confirmation windows to several non-reversible actions
+	
+### BUG FIXES
+- Reworked buggy route reordering to provide better user experience
+- Fixed location description and transcript not correctly displaying new lines
+- Location detail view scaling has been adjusted to prevent squished windows
+- Next stop indicator now indicates the first stop instead of “N/A”
+	
+### KNOWN BUGS
+- There is no way to log out of the administrator panel. The logged-in user’s session will expire when the browser is closed or one hour has passed since the log in. 
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Install  Guide - Version 1.0
+### PREREQUISITES:
+- Install Node.js (version 13.0.0 or above) 
+- Install npm (version 6.14 or above)
+- MySQL Server (version 8 or above), configured to use legacy type password support and running on port 3306
+### DEPENDENCIES:
+- See package.json in client/, admin/, and backend/ directories for a full listing
+### DOWNLOAD:
+- https://github.com/kalenpatton/gt-sustainability-tour
+### INSTALLATION: 
+- Run “npm install” in the admin, backend, and client directories.
+- Execute the “database/db_generate_table_and_insert.sql” script to setup the MySQL database. 
+- Rename the “.envTEMPLATE” file to simply “.env”, and fill in the required fields.
+### RUNNING APPLICATION:
+- For user access, run “npm start” in the backend and client directories from separate terminals.
+  - For the backend to function correctly, MySQL server should also be running.
+  - Connect to “localhost:3000” if the app does not launch automatically
+- For administrator access, run “npm start” in the backend and admin directories from separate terminals.
+  - Connect to “localhost:3002” if the app does not launch automatically
+### TROUBLESHOOTING:
+- “ERR! code ELIFECYCLE”  errors when running npm commands: This is due to outdated node package or npm. Try upgrading your node.js and npm, and then clean the cache. (npm cache clean --force)
+- Unable to run npm commands due to permission: Add  “sudo” before the command and enter the password of your device
+- Errors regarding dependencies: Delete node_modules (or clean the cache) and rerun “npm install”
+- ER_NOT_SUPPORTED_AUTH_MODE: Reconfigure your MySQL server to use legacy type password support
