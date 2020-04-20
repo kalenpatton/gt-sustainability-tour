@@ -45,6 +45,7 @@ class RoutingList extends React.Component{
                 <Reorder
                     reorderId='routes'
                     onReorder={this.onReorder.bind(this)}
+                    lock='horizontal'
                     autoScroll={true}
                     draggedClassName="onDrag"
 

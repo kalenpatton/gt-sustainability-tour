@@ -94,9 +94,9 @@ router.post('/', withAuth, upload.any(), async (req, res) => {
   var site_id = -1;
 
   // Insert location data into locations table
-  let queryString = "INSERT INTO locations (name, description, transcript, latitude, longitude, filters, stop_num) VALUES (?, ?, ?, ?, ?, ?, ?); SELECT LAST_INSERT_ID() AS `newId`"
+  let queryString = "INSERT INTO locations (name, description, transcript, latitude, longitude, filters, stop_num) VALUES (?, ?, ?, ?, ?, ?, 0); SELECT LAST_INSERT_ID() AS `newId`"
   connection.query(queryString,
-                  [location.name, location.description, location.transcript, location.latitude, location.longitude, location.filters, location.stop_num],
+                  [location.name, location.description, location.transcript, location.latitude, location.longitude, location.filters],
                   (err, result, fields) => {
     if (err) {
       console.log("Failed to create location\n\t" + err);
@@ -127,7 +127,6 @@ router.post('/', withAuth, upload.any(), async (req, res) => {
 	    "latitude":30.000,
 	    "longitude":-84.000,
       "filters":null,
-      "stop_num":null,
 
       "imageList":[1,2,3,-1,-1],
       "newImages":[img1, img2],
@@ -145,9 +144,9 @@ router.put('/:loc_id', withAuth, upload.any(), async (req, res) => {
   console.log("Updating location with ID " + locationId)
   // console.log("Updated location info: " + location)
 
-  const queryString = "UPDATE locations SET name = ?, description = ?, transcript = ?, latitude = ?, longitude = ?, filters = ?, stop_num = ? WHERE id = ?"
+  const queryString = "UPDATE locations SET name = ?, description = ?, transcript = ?, latitude = ?, longitude = ?, filters = ? WHERE id = ?"
   connection.query(queryString,
-                  [location.name, location.description, location.transcript, location.latitude, location.longitude, location.filters, location.stop_num, locationId],
+                  [location.name, location.description, location.transcript, location.latitude, location.longitude, location.filters, locationId],
                   (err, result) => {
     if (err) {
       console.log("Failed to update location\n\t" + err)

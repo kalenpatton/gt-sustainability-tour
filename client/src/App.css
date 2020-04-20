@@ -30,7 +30,7 @@ button {
 
 .bigButton {
     box-shadow: 0px 4px 3px -3px #424242;
-    background-color:var(--gt-gold);
+    background-color:var(--gt-buzzgold);
     border-radius:28px;
     border: 1px solid var(--gt-drk-gold);
     display:inline-block;
@@ -42,7 +42,7 @@ button {
     text-decoration:none;
 }
 .bigButton:hover {
-    background-color:#bfb37c;
+    background-color:var(--light-buzzgold);
 }
 .bigButton:active {
     position:relative;
@@ -86,7 +86,7 @@ button {
     margin-right: 3px;
 }
 .brightBtn:hover {
-    background-color:var(--gt-buzzgold);
+    background-color:var(--light-buzzgold);
 }
 .brightBtn:active {
     position:relative;

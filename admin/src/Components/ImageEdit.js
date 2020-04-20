@@ -86,6 +86,7 @@ export default class ImageEdit extends React.Component {
                 <Reorder
                     reorderId='image-list'
                     onReorder={this.onReorder.bind(this)}
+                    lock='vertical'
                     disabled={this.state.disableReorder}
                     draggedClassName="image-list-dragged"
                     className='image-list'
