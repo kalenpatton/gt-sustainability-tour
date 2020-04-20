@@ -45,7 +45,7 @@ function convertToMapObject(response) {
 function parseFilters(filters) {
     let filters_list = []
 
-    if (filters != null || filters === "" || filters === "null") {
+    if (!(filters === null || filters === "" || filters === "null")) {
         filters_list = filters.split(',')
     } else {
         filters_list = null
@@ -72,7 +72,7 @@ function getFilters(callback){
                     label:element.filter,
                     value:element.id,
                 }
-            
+
                 filterList.push(curr);
             });
             console.log(filterList);
