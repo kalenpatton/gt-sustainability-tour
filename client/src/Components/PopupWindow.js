@@ -58,6 +58,10 @@ class PopupWindow extends React.Component{
         return (<ul className='desc'>{output}</ul>)
     };
 
+    onPlayError = () => {
+        alert("Error playing audio file")
+    }
+
 
     render(){
         return(
@@ -91,7 +95,7 @@ class PopupWindow extends React.Component{
                     muted={false}
                     onClickNext={null}
                     onClickPrevious={null}
-                    onPlayError={null}
+                    onPlayError={this.onPlayError}
                     preload="auto"
                     progressJumpStep={5000}
                     progressUpdateInterval={20}

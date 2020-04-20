@@ -44,7 +44,7 @@ function getFilters(callback) {
                     label:element.filter,
                     value:element.id,
                 }
-            
+
                 filterList.push(curr);
             });
             console.log(filterList);
@@ -106,7 +106,7 @@ function putSite(site, callback) {
     for (var i = 0; i < site.imageList.length; i++) {
         formData.append("imageList[]", site.imageList[i]);
     }
-    //adds the images and captions to specific image list. 
+    //adds the images and captions to specific image list.
     for (var i = 0; i < site.newImgs.length; i++) {
 
         formData.append(`newImgs[]`, site.newImgs[i]);
@@ -152,7 +152,7 @@ function postLogin(email, password, callback) {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(formatLoginResponse)
+    }).then(formatJsonErrResponse)
     .then(callback)
 }
 
@@ -164,7 +164,7 @@ function postPassChange(password, newPassword, callback) {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(formatLoginResponse)
+    }).then(formatJsonErrResponse)
     .then(callback)
 }
 
@@ -176,7 +176,7 @@ function postAddUser(email, password, callback) {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(formatLoginResponse)
+    }).then(formatJsonErrResponse)
     .then(callback)
 }
 
@@ -188,7 +188,7 @@ function deleteUser(email, callback) {
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(formatLoginResponse)
+    }).then(formatJsonErrResponse)
     .then(callback)
 }
 
@@ -204,10 +204,27 @@ function checkToken(callback) {
         }).then(callback)
 }
 
+function postRouteUpdate(route, callback) {
+    let ids = [];
+    let stop_nums = [];
+    route.forEach((site, i)=>{
+        ids.push(site.id);
+        stop_nums.push(i+1)
+    })
+    return fetch('/locations/defaultroute', {
+        method: 'POST',
+        body: JSON.stringify({ ids, stop_nums }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(formatJsonErrResponse)
+    .then(callback)
+}
+
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
-    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters}) =>
-        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude]}));
+    let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters, stop_num}) =>
+        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude], stop_num}));
     return map_response;
 }
 
@@ -223,8 +240,10 @@ function parseDescription(description) {
 function parseFilters(filters) {
     let filters_list = []
 
-    if (filters != null) {
+    if (filters != null || filters === "" || filters === "null") {
         filters_list = filters.split(',')
+    } else {
+        filters_list = null
     }
 
     return filters_list
@@ -235,7 +254,7 @@ function formatImageList(response) {
     imageList_response = imageList_response.map(({id, site_id, index, caption}) => (id));
     return imageList_response;
 }
-async function formatLoginResponse(response) {
+async function formatJsonErrResponse(response) {
     if (response.ok) {
         return ({ok: true})
     }
@@ -243,6 +262,27 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
+function getIntro(callback) {
+    fetch('/info', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }).then(response => response.json())
+        .then(response => callback(response));
+}
+
+function postIntro(newIntro) {
+    return fetch('/info', {
+        method: 'PUT',
+        body: JSON.stringify({ "information": newIntro }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+}
+const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite,
+    getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser,
+    deleteUser, getIntro, postIntro, postRouteUpdate};
 
 export default APIHandler;

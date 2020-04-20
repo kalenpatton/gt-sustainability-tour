@@ -12,7 +12,7 @@ CREATE TABLE `locations` (
   `transcript` varchar(8000) NOT NULL DEFAULT 'No transcript provided.',
   `latitude` float NOT NULL,
   `longitude` float NOT NULL,
-  `filters` varchar(45) DEFAULT NULL,
+  `filters` varchar(100) DEFAULT NULL,
   `stop_num` INT UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -80,7 +80,7 @@ Tech Green is a nod to sustainable practices and demonstrates Georgia Tech\'s co
 By capturing rainwater runoff, the cistern system substantially reduces the amount of stormwater Georgia Tech feeds into the city\'s stormwater sewer system. In addition to collecting runoff from Tech Green, the system captures condensate from the mechanical system at Clough Commons and nearby Buildings.\n\n
 Much of the water captured in the reservoir system is sent to Clough Commons for treatment. The treatment system uses ultraviolet lighting and a variety of filtering mechanisms to eliminate microorganisms. Once treated, the nonpotable water can then be reused. Clough Commons uses the reclaimed water for toilet flushing and water-efficient landscaping. The cistern system is the largest of its kind in the U.S. and holds enough water to supply irrigation and toilet water for clough commons and the surrounding landscaped area for up to 28 days without rain.\n\n',
 33.7746,-84.3973,
-NULL,4),
+"Grounds,Water",4),
 
 (2,'Clough Undergraduate Learning Commons',
 'The G. Wayne Clough Undergraduate Learning Commons opened its doors to the Georgia Tech community on August 20, 2011.\n
@@ -94,7 +94,7 @@ The building\'s rooftop has a solar panel system with 360 solar panels and 30 so
 The Clough Commons project also incorporated green space into its design with an 18,000-square-foot rooftop garden with native plants that help preserve the natural ecosystem.\n\n
 The project also included water efficiency techniques such as installing a 1.4 million gallon cistern. The cistern captures runoff water for flushing toilets and irrigating the landscape. The cistern system is buried below Tech Green next to the center.\n\n',
 33.7746,-84.3964,
-NULL,2),
+"Buildings and Infrastructure",2),
 
 (3,'Student Community Garden (Georgia Tech Community Garden)',
 'Garden was initiated by Students Organizing for Sustainability (S.O.S) in 2012.\n
@@ -104,7 +104,7 @@ All produce is grown without the use of chemical fertilizers.\n',
 The Georgia Tech Community Garden is located on the southeast side of the Instructional Center lawn and is a resource available to everyone on campus. The garden supplies a variety of produce all grown without the use of chemical fertilizers. Current crops include beets, broccoli, cabbage, carrots, garlic, green onions, kohlrabi, leeks, lettuce, onions, peas, radishes, spinach, sweet peas, sweet potatoes, swiss chard and turnips.\n\n
 The project was established to bring awareness to sustainable food systems and urban agriculture. The community garden serves as a call to action for students, faculty and administrators to become involved in growing their own food, while also having a positive impact on their community and environment.\n\n',
 33.7751,-84.4004,
-NULL,5),
+"Grounds",5),
 
 (4,'The Kendeda Building for Innovative Sustainable Design',
 'The Kendeda Building for Innovative Sustainable Design was established with a gift of $30 million to Georgia Tech from The Kendeda Fund.\n
@@ -144,7 +144,7 @@ Treated rainwater is the source of all potable (drinkable) water in the building
 Greywater is used water that doesn\'t have organic matter in it. Once greywater is used in sinks, showers, and water fountains, it is collected and pumped to the south side of the site near Ferst Drive. It then flows through constructed wetlands where plants and organisms treat the water through natural processes on site. Water then slowly infiltrates back into the soil.\n
 Toilet water/waste is the only source of blackwater on site. The solution for treating blackwater is to use composting toilets. Composting toilets use very little water to capture waste and compost organic matter on site. The use of composting toilets significantly reduced the total water needs for the building and prevented the need to build a wastewater treatment plant on site. The waste from these toilets collects in composters in the basement where it can turn into useful and nutrient-rich fertilizers. The fertilizer will then be hauled off site and reused in a beneficial way.\n',
 33.7785,-84.3996,
-NULL,9),
+"Buildings and Infrastructure,Energy and Emissions,Water,Materials Management",9),
 
 (5,'West Village Dining Commons',
 'The West Village Dining Commons is a highly flexible, 50,000 SF dining, lounge and educational facility that seats over 600 students and includes over 10,000 SF of multi-use academic space.\n
@@ -160,7 +160,7 @@ Electric lighting installed in a manner that allows changes appropriate to seaso
 A cistern located on site is used for irrigation\n
 Reclaimed and repurposed materials were used in the construction of the building.\n',
 33.7796,-84.4046,
-NULL,7),
+"Buildings and Infrastructure",7),
 
 (6,'The Eco Commons',
 'The overall Eco Commons Project envisions 80 acres of green spaces across campus that follow what were the original naturally occurring stream paths of this region before being urbanized.\n
@@ -180,13 +180,13 @@ NULL,8),
 'No description provided',
 'The Campus Recreation Center (CRC) is a 300,659 sq. ft. facility that was completed in August 2004. This state of the art facility is a unique expansion of the existing swimming and diving venue built for the 1996 Olympic Games. The facility has 2,856 solar panels lining its rooftop and is the largest solar array on Georgia Tech\'s Campus.',
 33.7755,-84.4034,
-NULL,6),
+"Energy and Emissions",6),
 
 (8,'Kendeda Solar Installation',
 'No description provided',
 'The Kendeda Building was completed in 2019 and is the first academic and research building in the Southeast designed to be certified under the Living Building Challenge. The building\'s 330 kW (DC) solar canopy is comprised of 917 PV panels and is expected to generate over 455,000 kWh per year which will support the building\'s energy demands including lighting, HVAC system, water system, and plug loads.  The PV array is designed to generate 42 Energy Use Intensity (EUI) kBTU/SF/YR which will offset the building\'s 30 EUI kBTU/SF/YR. By harnessing more energy than the building consumes, the systems create a net positive energy facility on an annual basis.\n',
 33.7786,-84.3998,
-NULL,10),
+"Energy and Emissions",10),
 
 (9,'"The First Graduate" Sculpture',
 'The sculpture depicts Ronald L. Yancey, EE 1965, the first African American to graduate from the Georgia Institute of Technology.\n
@@ -199,7 +199,7 @@ Artist Marin Dawe created the sculpture.',
 Though Tech exempted seniors from final exams at the time, Yancey was required to take 18 exams in his five classes during his last three weeks of school. He would prove successful and graduated with a degree in electrical engineering in 1965, becoming the Institute\'s first black graduate.\n\n
 This significant event is commemorated in the piece, The First Graduate, through the generosity of Betsy and Bo Godbold. The First Graduate sits on the interior steps of Clough Undergraduate Commons and was created by artist Marin Dawe. \n',
 33.7748,-84.3965,
-NULL,3),
+"Equity",3),
 
 (10,'"Continuing the Conversation" Sculpture',
 'The sculpture depicts Rosa Parks at two points in her life, at 42 years old, the age when her actions inspired the boycott, and at 92 years old, her age when she died.\n
@@ -208,7 +208,7 @@ The sculpture was brought to campus through the Arts@Tech initiative. \n
 Artist Marin Dawe created the sculpture. \n',
 'Rosa Parks launched a seminal moment in the civil rights movement through a single act of courage. Parks refused to give up her seat on a segregated city bus in Montgomery, Alabama. That bold act sparked the bus boycott, which catapulted Martin Luther King Jr. into the national spotlight and galvanized the civil rights movement. Her strength motivated many to follow in her footsteps and now her presence, through a sculpture on Georgia Tech\'s campus, will inspire generations to come. The bronze and granite sculpture installation, located in Harrison Square, depicts Rosa Parks at two stages in her life. Continuing the Conversation depicts Parks at age 42 in 1955--the year her courageous act of refusing to give up her seat for a white passenger on a Montgomery bus helped launch the yearlong Montgomery bus boycott--and at the age she died, 92. The two sit across from one another, with an empty seat between as an invitation for others to join them in conversation and action. Martin Dawe of Cherrylion Studios, an Atlanta-based artist, was chosen to create the sculpture. \n',
 33.7729,-84.3953,
-NULL,1),
+"Equity",1),
 
 (11,'Krone Engineered Biosystems Building',
 'Georgia Tech\'s Krone Engineered Biosystems Building (EBB) provides 218,880 square feet of flexible interdisciplinary laboratory space.\n
@@ -234,7 +234,7 @@ Percentage of floor area or percentage of occupant work stations with direct vie
 Peak measured CO2 levels during full occupancy: 588ppm\n
 Annual daylighting performance: 35 of regularly occupied area achieving at least 300 lux at least 50 percent of the annual occupied hours.\n',
 33.7807,-84.3985,
-NULL,11);
+"Buildings and Infrastructure",11);
 UNLOCK TABLES;
 
 /* Data for table `users` */

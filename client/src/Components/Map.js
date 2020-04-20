@@ -7,6 +7,7 @@ import PopupWindow from './PopupWindow';
 import RoutingMachine from './RoutingMachine';
 import LocateControl from './LocateControl';
 import APIHandler from './APIHandler';
+import Icons from './LeafletIcon';
 
 import {connect} from "react-redux";
 
@@ -227,7 +228,7 @@ class Map extends React.Component {
             let site = this.state.sites[i];
             let isNextStop = this.mapHandler.isNextStop(site)
             markers.push(
-                <Marker position={site.position} key={i}>
+                <Marker position={site.position} key={i} icon={isNextStop ? Icons.brightIcon : Icons.defaultIcon}>
                     <Popup>   {/* Popup for any custom information. */}
                         <div className="center-text">
                             <p>{site.name}</p>
