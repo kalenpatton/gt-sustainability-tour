@@ -38,7 +38,7 @@
     padding-top: 30px;
     padding-bottom: 5px;
     margin: 0 auto;
-    margin-top: 100px;
+    margin-top: 85px;
 }
 
 #home-description{
@@ -54,7 +54,7 @@
 #start{
     background-color: #EAAA00;
     border-radius: 25px;
-    border: solid 3px #003057;
+    border: solid 3px #3b3b3b;
     width: 180px;
     height: 55px;
     font-weight: bold;
