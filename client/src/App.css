@@ -86,7 +86,7 @@ button {
     margin-right: 3px;
 }
 .brightBtn:hover {
-    background-color:#bfb37c;
+    background-color:var(--gt-buzzgold);
 }
 .brightBtn:active {
     position:relative;

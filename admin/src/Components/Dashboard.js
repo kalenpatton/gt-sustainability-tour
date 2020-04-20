@@ -8,6 +8,7 @@ import PopupWindow from './PopupWindow';
 import APIHandler from './APIHandler';
 import PasswordEditPopup from './PasswordEditPopup';
 import ManageAdminsPopup from './ManageAdminsPopup';
+import EditRoutePopup from './EditRoutePopup';
 
 export default class Dashboard extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ export default class Dashboard extends Component {
             isModalOpen: false,
             isIntroModalOpen:false,
             isPassEditOpen:false,
+            isEditRouteOpen:false,
             isManageAdminsOpen:false,
 
             //the site currently in focus in the popup window
@@ -76,6 +78,16 @@ export default class Dashboard extends Component {
         this.setState({isPassEditOpen:false});
     };
 
+    openEditRoute=()=>{
+        this.setState({isEditRouteOpen:true});
+    };
+    closeEditRoute=()=>{
+        this.setState({isEditRouteOpen:false});
+    };
+    saveEditRoute=()=>{
+        this.setState({isEditRouteOpen:false});
+        APIHandler.getLocations(this.updateOnLocationLoad)
+    };
     openManageAdmins=()=>{
         this.setState({isManageAdminsOpen:true});
     };
@@ -91,7 +103,7 @@ export default class Dashboard extends Component {
     };
 
     introChange = (event) => {
-        
+
         this.setState({info: event.target.value});
     };
 
@@ -156,7 +168,17 @@ export default class Dashboard extends Component {
                     <div className="toolbar">
                         <button onClick={this.handleAddStop} className="optionBtn">Add Site</button>
 
+                        <button onClick={this.openEditRoute} className="optionBtn">Edit Default Route</button>
+
                         <button onClick={this.handleEditIntro} className="optionBtn">Edit Intro</button>
+
+                        <Modal
+                            open={this.state.isEditRouteOpen}
+                            onClose={this.closeEditRoute}>
+                            <EditRoutePopup
+                                sites = {this.state.sites}
+                                onSave = {this.saveEditRoute}/>
+                        </Modal>
 
                         <Modal
                             open={this.state.isIntroModalOpen}

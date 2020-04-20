@@ -43,6 +43,12 @@
     height: 300px;
 }
 
+.pick-route-map {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+
 .popupwindow {
     height: 100%;
     width: 100%;
@@ -130,4 +136,15 @@
 th, td {
     text-align: left;
     padding-right: 10px;
+}
+
+.route-list-item {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+
+.delete-list-item {
+    position: absolute;
+    right:0px;
 }

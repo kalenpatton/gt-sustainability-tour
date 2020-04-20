@@ -212,4 +212,42 @@ router.delete('/:loc_id', withAuth, (req, res) => {
   })
 })
 
+/* POST new default route
+
+  req.body should be json of format:
+  {
+      "ids":[1,2,3,...]
+      "stop_nums":[2,1,-1,...] // use stop_num = 0 indicate that a stop is not in the default.
+  }
+
+  Any unmodified fields should include their existing value
+*/
+router.post('/defaultroute', withAuth, (req, res) => {
+  const ids = req.body.ids
+  const stop_nums = req.body.stop_nums
+
+  const queryString = "UPDATE locations SET stop_num = 0"
+  connection.query(queryString, (err, result) => {
+    if (err) {
+      console.log("error setgin")
+      res.status(500).json({
+        error: err.toString()
+      }); // Internal Server Error
+      return;
+    }
+    let success = true;
+    try {
+      ids.forEach((id, i) => {
+        const queryString = "UPDATE locations SET stop_num = ? WHERE id = ?"
+        connection.query(queryString, [stop_nums[i], id])
+      });
+      res.sendStatus(200);
+    } catch (e) {
+      res.status(500).json({
+        error: e.toString()
+      }); // Internal Server Error
+    }
+  });
+})
+
 module.exports = router
