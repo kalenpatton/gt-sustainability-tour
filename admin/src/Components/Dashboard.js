@@ -21,7 +21,7 @@ export default class Dashboard extends Component {
 
             //the site currently in focus in the popup window
             focusedSite : null,
-            info:"",
+            info: APIHandler.getIntro(this.introCallBack),
         };
 
         this.state.focusedSite = this.state.sites[0];
@@ -46,23 +46,6 @@ export default class Dashboard extends Component {
         return location_arr;
     };
 
-    //called before render, fetch data from backend
-    componentDidMount(){
-        //fetch information about the intro
-        // NOTE: this should be moved to APIHandler
-        fetch('/info',{
-            headers : {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-             }}).then(response => response.json())
-        .then(response => {
-            //console.log(response);
-            this.setState({info:response.info})
-        })
-
-        //fetch other data...
-        //...
-    };
 
     openModal = (site) => {
         this.setState({
@@ -111,11 +94,17 @@ export default class Dashboard extends Component {
         this.setState({info: event.target.value});
     };
 
-    saveIntro=()=>{
+    saveIntro=(newIntro)=>{
         //need to replace this with database opertion
         console.log(`save ${this.state.info} to database`);
+        
 
     };
+
+    introCallBack = (response) => {
+        //console.log(response);
+        this.setState({info:response.information})
+    }
 
 
     //the site handlers
@@ -172,7 +161,7 @@ export default class Dashboard extends Component {
                             open={this.state.isIntroModalOpen}
                             onClose={this.closeIntroModal}
                             className="centered editSiteModal">
-                            <input value={this.state.info} onChange={this.introChange} style={{height:300,width:300,display:'block',margin:10}}></input>
+                            <textarea value={this.state.info} onChange={this.introChange} style={{ height: 300, width: 300, display: 'block', margin: 10 }}/>
                             <button className="optionBtn centered" onClick={this.saveIntro}>save</button>
                         </Modal>
                         <Modal
