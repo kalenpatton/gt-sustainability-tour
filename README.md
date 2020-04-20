@@ -26,25 +26,25 @@
 
 ## Install  Guide - Version 1.0
 ### PREREQUISITES:
-- Install Node.js (version 13.0.0 or above) 
-- Install npm (version 6.14 or above)
-- MySQL Server (version 8 or above), configured to use legacy type password support and running on port 3306
+- Install Node.js version 13.0.0 or above (https://nodejs.org/en/).
+- Install npm version 6.14 or above (installed with Node.js).
+- MySQL Server version 8 or above, configured to use legacy type password support and running on port 3306 (https://dev.mysql.com/downloads/mysql/).
 ### DEPENDENCIES:
-- See package.json in client/, admin/, and backend/ directories for a full listing
+- See package.json in client/, admin/, and backend/ directories for a full listing. These dependencies will be automatically installed during installation.
 ### DOWNLOAD:
 - https://github.com/kalenpatton/gt-sustainability-tour/archive/master.zip
 ### INSTALLATION: 
 - Run “npm install” in the admin, backend, and client directories.
-- Execute the “database/db_generate_table_and_insert.sql” script to setup the MySQL database. 
-- Rename the “.envTEMPLATE” file to simply “.env”, and fill in the required fields.
+- Execute the “database/db_generate_table_and_insert.sql” script to set up the MySQL database. 
+- Rename the “.envTEMPLATE” file to “.env”, and fill in the required fields.
 ### RUNNING APPLICATION:
 - For user access, run “npm start” in the backend and client directories from separate terminals.
   - For the backend to function correctly, MySQL server should also be running.
-  - Connect to “localhost:3000” if the app does not launch automatically
+  - Connect to “localhost:3000” if the app does not launch automatically.
 - For administrator access, run “npm start” in the backend and admin directories from separate terminals.
-  - Connect to “localhost:3002” if the app does not launch automatically
+  - Connect to “localhost:3002” if the app does not launch automatically.
 ### TROUBLESHOOTING:
-- “ERR! code ELIFECYCLE”  errors when running npm commands: This is due to outdated node package or npm. Try upgrading your node.js and npm, and then clean the cache. (npm cache clean --force)
-- Unable to run npm commands due to permission: Add  “sudo” before the command and enter the password of your device
-- Errors regarding dependencies: Delete node_modules (or clean the cache) and rerun “npm install”
-- ER_NOT_SUPPORTED_AUTH_MODE: Reconfigure your MySQL server to use legacy type password support
+- “ERR! code ELIFECYCLE”  errors when running npm commands: This is due to outdated node package or npm. Try upgrading your node.js and npm, and then clean the cache. (npm cache clean --force).
+- Unable to run npm commands due to permission: Add  “sudo” before the command and enter the password of your device.
+- Errors regarding dependencies: Delete node_modules (or clean the cache) and rerun “npm install”.
+- ER_NOT_SUPPORTED_AUTH_MODE: Reconfigure your MySQL server to use legacy type password support.
