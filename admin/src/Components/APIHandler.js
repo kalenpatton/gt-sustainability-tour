@@ -223,8 +223,10 @@ function parseDescription(description) {
 function parseFilters(filters) {
     let filters_list = []
 
-    if (filters != null) {
+    if (filters != null || filters === "" || filters === "null") {
         filters_list = filters.split(',')
+    } else {
+        filters_list = null
     }
 
     return filters_list
@@ -243,6 +245,25 @@ async function formatLoginResponse(response) {
     response.ok = false
     return response
 }
-const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser};
+function getIntro(callback) {
+    fetch('/info', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }).then(response => response.json())
+        .then(response => callback(response));
+}
+
+function postIntro(newIntro) {
+    return fetch('/info', {
+        method: 'PUT',
+        body: JSON.stringify({ "information": newIntro }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });  
+}
+const APIHandler = { getUsers, getFilters, getLocations, postSite, putSite, deleteSite, getImageList, postAudio, postLogin, checkToken, postPassChange, postAddUser, deleteUser, getIntro,postIntro};
 
 export default APIHandler;
