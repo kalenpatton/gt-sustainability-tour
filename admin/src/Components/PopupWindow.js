@@ -7,7 +7,9 @@ class PopupWindow extends React.Component{
     // Required props:
     // onSaveSite
     // site
+
     constructor(props) {
+        
         super(props);
         this.isNewStop = this.props.site ? false : true;
         this.audioRef = React.createRef();
@@ -17,17 +19,15 @@ class PopupWindow extends React.Component{
             position: [33.775620, -84.396286],
             description: '',
             transcript: '',
-            filters: ''
-            
+            filters:''
         };
         if (!this.isNewStop) this.state = {...this.props.site};
         // Remove later. Just for dev
         this.state.imageList = [];
         APIHandler.getImageList(this.props.site, this.updateOnImageListLoad);
         // for (let i=1; i<=5; i++) this.sta e.imageList.push(i);
-        APIHandler.getFilters(this.props.site, this.updateOnfilterListLoad);
+        APIHandler.getFilters(this.updateOnfilterListLoad);
         console.log('hello!');
-        console.log(this.state.filters.toString());
         this.saveSite = this.props.onSaveSite;
 
     }
@@ -53,7 +53,11 @@ class PopupWindow extends React.Component{
             description: this.state.description,
             transcript: this.state.transcript,
             imageList: imageList,
-            newImgs: newImgs
+            newImgs: newImgs,
+            filters: function() {
+                var dropdown = document.getElementById('filterz');
+                return dropdown.options[dropdown.selectedIndex].value;
+            }
         };
 
         if (this.audioRef.current.value !== '') {
@@ -63,6 +67,8 @@ class PopupWindow extends React.Component{
         this.saveSite(newSite, this.isNewStop);
     };
 
+
+
     // update the list of images after fetching the from backend
     updateOnImageListLoad = (imageList) => {
         this.setState({
@@ -70,12 +76,25 @@ class PopupWindow extends React.Component{
         });
     };
     //udate the list of filters after fetching 
-    updateOnfilterListLoad = (filters) => {
-        this.setState({
-            filters: filters
-        });
+    updateOnfilterListLoad = (f) => {
+        var dropdownlist = 'Filters :';
+        console.log(f);
+        dropdownlist += '<select>'
 
+        for (var i = 0; i < f.length; i++) {
+           dropdownlist += "<option value=" + f[i].value 
+            + ">" + f[i].label + " </option>";
+        }
+        dropdownlist += '</select>'
+        document.getElementById('filterz').innerHTML =dropdownlist;
+        this.setState({
+            filters : f
+        });
     };
+
+    createfiltersdropdown = (filt) => {
+
+    }
     handleInputChange = (event) => {
         const { value, name } = event.target;
         this.setState({
@@ -111,11 +130,8 @@ class PopupWindow extends React.Component{
                                     value={this.state.description}
                                     onChange={this.handleInputChange}/>
                             </div>
-                            <div> 
-                                {'Filters : '} 
-                                <select id='filterz'>
-
-                                </select>
+                            <div id='filterz'> 
+                                {'Filters : '}
                             </div>
                             <div>
                                 <LocationSelect
