@@ -25,7 +25,7 @@ export default class Login extends React.Component {
         const{ email, password } = this.state;
         APIHandler.postLogin(email, password, (res) => {
             if (res.ok) {
-                this.props.history.push('/dashboard');
+                this.props.history.push('/admindash');
             } else {
                 this.setState({errorText:res.error});
             }
