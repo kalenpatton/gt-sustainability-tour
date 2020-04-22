@@ -37,7 +37,7 @@ export default function withAuth(ComponentToProtect) {
                 return null;
             }
             if (redirect) {
-                return <Redirect to="/login" />;
+                return <Redirect to="/adminlogin" />;
             }
             return <ComponentToProtect {...this.props} email={this.state.email} usertype={this.state.usertype} />;
         }

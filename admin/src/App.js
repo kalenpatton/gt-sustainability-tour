@@ -19,20 +19,19 @@ function App() {
             <div className="App">
 
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Route path="/dashboard" component={withAuth(Dashboard)} />
+                    <Route path="/adminlogin" component={Login} />
+                    <Route path="/admindash" component={withAuth(Dashboard)} />
                 </Switch>
             </div>
         </Router>
     );
 }
 
-function Home() {
-    // TODO: Check if user has a session token. For now, just go to login
-    return (
-        <Redirect to="/login"/>
-    );
-}
+// function Home() {
+//     // TODO: Check if user has a session token. For now, just go to login
+//     return (
+//         <Redirect to="/admin/login"/>
+//     );
+// }
 
 export default App;
