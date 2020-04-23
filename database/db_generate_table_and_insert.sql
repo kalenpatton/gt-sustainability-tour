@@ -148,7 +148,7 @@ Toilet water/waste is the only source of blackwater on site. The solution for tr
 
 (5,'West Village Dining Commons',
 'The West Village Dining Commons is a highly flexible, 50,000 SF dining, lounge and educational facility that seats over 600 students and includes over 10,000 SF of multi-use academic space.\n
-A composting program began with the building’s opening in Fall 2017. The composting program diverts over 50% of waste from the landfill.\n
+A composting program began with the building\'s opening in Fall 2017. The composting program diverts over 50% of waste from the landfill.\n
 A cistern located on site is used for irrigation.\n
 Current energy model calculates 265 EUI a 61% reduction against baseline requirements.',
 'The West Village Dining Commons is a flexible, 50,000 SF dining, lounge and educational facility that seats over 600 students and includes over 10,000 SF of multi-use academic space. The program includes seven food venues, back of house kitchens, four classrooms, faculty and staff offices, two large meeting rooms, and ample dining and study rooms. Flexible open seating is used for student lounge and study areas both inside and outside creating a vibrant, hybrid, multi-purpose gathering place. In addition to connecting a very complicated and steep site, this project’s unique challenges included the desire to draw the Georgia Tech community to the underutilized West Campus where students, faculty, and visitors, can better connect to each other and rejuvenate on campus. \n\n
