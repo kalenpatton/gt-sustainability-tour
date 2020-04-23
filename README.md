@@ -35,14 +35,14 @@
 - https://github.com/kalenpatton/gt-sustainability-tour/archive/master.zip
 ### INSTALLATION: 
 - Run “npm install” in the admin, backend, and client directories.
+- Run "npm run build" in the admin and client directories.
 - Execute the “database/db_generate_table_and_insert.sql” script to set up the MySQL database. 
 - Rename the “.envTEMPLATE” file to “.env”, and fill in the required fields.
 ### RUNNING APPLICATION:
-- For user access, run “npm start” in the backend and client directories from separate terminals.
-  - For the backend to function correctly, MySQL server should also be running.
-  - Connect to “localhost:3000” if the app does not launch automatically.
-- For administrator access, run “npm start” in the backend and admin directories from separate terminals.
-  - Connect to “localhost:3002” if the app does not launch automatically.
+- Run “npm start” in the backend directory.
+  - For the application to function correctly, MySQL server should also be running.
+- Connect to “localhost:PORT" from a browser to connect to access the client, where PORT is the variable set in .env
+- Connect to “localhost:PORT/adminlogin" from a browser to access the administrator panel, where PORT is the variable set in .env.
 ### TROUBLESHOOTING:
 - “ERR! code ELIFECYCLE”  errors when running npm commands: This is due to outdated node package or npm. Try upgrading your node.js and npm, and then clean the cache. (npm cache clean --force).
 - Unable to run npm commands due to permission: Add  “sudo” before the command and enter the password of your device.
