@@ -13,6 +13,7 @@ class PopupWindow extends React.Component{
         super(props);
         this.isNewStop = this.props.site ? false : true;
         this.audioRef = React.createRef();
+        this.filtersnum = 1;
         this.state = {
             id: -1,
             name: '',
@@ -27,7 +28,6 @@ class PopupWindow extends React.Component{
         APIHandler.getImageList(this.props.site, this.updateOnImageListLoad);
         // for (let i=1; i<=5; i++) this.sta e.imageList.push(i);
         APIHandler.getFilters(this.updateOnfilterListLoad);
-        console.log('hello!');
         this.saveSite = this.props.onSaveSite;
 
     }
@@ -54,12 +54,10 @@ class PopupWindow extends React.Component{
             transcript: this.state.transcript,
             imageList: imageList,
             newImgs: newImgs,
-            filters: function() {
-                var dropdown = document.getElementById('filterz');
-                return dropdown.options[dropdown.selectedIndex].value;
-            }
-        };
+            //attempts to pull for multiple ids.
 
+            filters : this.getFilterData()
+        };
         if (this.audioRef.current.value !== '') {
             newSite.audio = this.audioRef.current.files[0]
         }
@@ -75,26 +73,63 @@ class PopupWindow extends React.Component{
             imageList: imageList
         });
     };
-    //udate the list of filters after fetching 
+    //update the list of filters after fetching 
+    // in addition, creates the dropdown tabs with multiple ids. 
+    /*
+    dropdownlist is necessary for creating the multiple selectboxes.
+    f is the current filters list. This is so we can populate the boxes with the 
+    correct selected filter. 
+    */
     updateOnfilterListLoad = (f) => {
-        var dropdownlist = 'Filters :';
-        console.log(f);
-        dropdownlist += '<select>'
-
-        for (var i = 0; i < f.length; i++) {
-           dropdownlist += "<option value=" + f[i].value 
-            + ">" + f[i].label + " </option>";
+        var currentfilters = this.state.filters;
+        var dropdownlist = '';
+        if (currentfilters.length > 0) {
+            this.filtersnum = currentfilters.length;  
+        } else {
+            this.filtersnum = 1;
         }
-        dropdownlist += '</select>'
-        document.getElementById('filterz').innerHTML =dropdownlist;
+
+            console.log("this.filtersnum: " + this.filtersnum);
+        for (var i = 0; i < this.filtersnum; i++) {
+
+            dropdownlist += ' <div> Filters : <select id=\"filtered'
+            + i + '\">'
+
+            for (var j = 0; j < f.length; j++) {
+                if (currentfilters[i] === f[j].label) {
+                dropdownlist += "<option value=\"" + f[j].label 
+                + "\"selected>" + f[j].label + "</option>";
+                } else {
+                dropdownlist += "<option value=\"" + f[j].label 
+                + "\">" + f[j].label + "</option>";
+                }
+            }
+        dropdownlist += '</select> </div>'
+
+        
+        }
+        document.getElementById('filterz').insertAdjacentHTML('beforeend', dropdownlist);
         this.setState({
             filters : f
         });
     };
+    
+    //Get filter Data attempts to get the values of the dropdown, and adds them to the database.
+    getFilterData = () => {
+                    var totalfilters = "";
+                for (var i = 0; i < this.filtersnum; i++) {
+                     var string = "filtered" + i;
+                     var adding = document.getElementById(string);
+                        totalfilters += adding.options[adding.selectedIndex].value;
+                        if (this.filtersnum - i > 1) {
+                            totalfilters += ",";
+                        }
+                }
+                console.log("NANI??!?!?!");
+                console.log(totalfilters);
+                return totalfilters;
+            };
 
-    createfiltersdropdown = (filt) => {
-
-    }
     handleInputChange = (event) => {
         const { value, name } = event.target;
         this.setState({
@@ -131,7 +166,6 @@ class PopupWindow extends React.Component{
                                     onChange={this.handleInputChange}/>
                             </div>
                             <div id='filterz'> 
-                                {'Filters : '}
                             </div>
                             <div>
                                 <LocationSelect

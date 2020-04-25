@@ -72,7 +72,7 @@ function postSite(site, callback) {
     formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
-    formData.append("filters", null);
+    formData.append("filters", site.filters);
 
     for (var i = 0; i < site.newImgs.length; i++) {
         formData.append(`newImgs[]`, site.newImgs[i]);
@@ -99,7 +99,7 @@ function putSite(site, callback) {
     formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
-    formData.append("filters", null);
+    formData.append("filters", site.filters);
 
 
     //adds the image list
