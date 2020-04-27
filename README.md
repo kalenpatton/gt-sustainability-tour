@@ -34,6 +34,7 @@
 ### DOWNLOAD:
 - https://github.com/kalenpatton/gt-sustainability-tour/archive/master.zip
 ### INSTALLATION: 
+- Extract the downloaded archive.
 - Run “npm install” in the admin, backend, and client directories.
 - Run "npm run build" in the admin and client directories.
 - Execute the “database/db_generate_table_and_insert.sql” script to set up the MySQL database. 
