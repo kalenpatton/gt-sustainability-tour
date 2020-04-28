@@ -23,6 +23,7 @@
 	
 ### KNOWN BUGS
 - There is no way to log out of the administrator panel. The logged-in user’s session will expire when the browser is closed or one hour has passed since the log in. 
+- Typographic characters are not supported. When editing or adding sites in the adminstrator panel, apostrophes and quotes should be typed directly into the text box and not copied from a word processor.
 
 ## Install  Guide - Version 1.0
 ### PREREQUISITES:
