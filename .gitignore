@@ -33,3 +33,4 @@ yarn-error.log*
 
 /backend/public/images
 /backend/public/audio
+backend/.envTEMPLATE

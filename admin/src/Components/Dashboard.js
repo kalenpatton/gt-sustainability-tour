@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import Map from "./Map";
 import Modal from 'react-responsive-modal';
 import PopupWindow from './PopupWindow';
+import PopupWindowFilters from './PopupWindowFilters';
 import APIHandler from './APIHandler';
 import PasswordEditPopup from './PasswordEditPopup';
 import ManageAdminsPopup from './ManageAdminsPopup';
@@ -20,6 +21,7 @@ export default class Dashboard extends Component {
             isPassEditOpen:false,
             isEditRouteOpen:false,
             isManageAdminsOpen:false,
+            isEditFilterOpen:false,
 
             //the site currently in focus in the popup window
             focusedSite : null,
@@ -77,7 +79,14 @@ export default class Dashboard extends Component {
     closePassEdit=()=>{
         this.setState({isPassEditOpen:false});
     };
-
+   
+    openEditFilter=()=>{
+        this.setState({isEditFilterOpen:true});
+    };
+    closeEditFilter=()=>{
+        this.setState({isEditFilterOpen:false});
+    };
+    
     openEditRoute=()=>{
         this.setState({isEditRouteOpen:true});
     };
@@ -134,7 +143,7 @@ export default class Dashboard extends Component {
     };
 
     handleEditFilters = () =>{
-        console.log('call to backend to get filters');
+        this.openEditFilter();
     };
 
     onSaveSite = (site, isNew) => {
@@ -203,6 +212,14 @@ export default class Dashboard extends Component {
                         </Modal>
 
                         <button onClick={this.handleEditFilters} className="optionBtn">Edit Filters</button>
+                <Modal
+                    open={this.state.isEditFilterOpen}
+                    onClose={this.closeEditFilter}
+                    className="centered editSiteModal">
+                    <PopupWindowFilters
+                        site = {this.state.focusedSite}
+                        />
+                </Modal>
                     </div>
                 </header>
                 <div className="map-container">

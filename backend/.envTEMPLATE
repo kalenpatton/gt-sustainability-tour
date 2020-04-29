@@ -1,6 +1,0 @@
-DB_HOST=
-DB_USER=
-DB_PASS=
-SECRET=anythingworks
-NODE_ENV=production
-PORT=

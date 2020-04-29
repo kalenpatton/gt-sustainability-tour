@@ -26,10 +26,10 @@ updateOnfilterListLoad = (f) => {
     };
 
 generatetable = (filterz) => {
-    var table = "<tr>";
+    var table = "";
     for (var i = 0; i < filterz.length; i++) {
-        table += "<td contenteditable=\"true\">" + filterz[i].label 
-        + "</td> </tr> <tr>"
+        table += "<tr> <td contenteditable=\"true\">" + filterz[i].label 
+        + "</td> </tr> "
     }
 };
 
@@ -37,7 +37,7 @@ render(){
         return(
             <div className="popupwindow">
                 <table style="width:100%" id="filters"> 
-                <tr> 
+                <tr>
                     <th>
                         Filters
                     </th> 
