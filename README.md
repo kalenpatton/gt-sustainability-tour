@@ -23,6 +23,7 @@
 	
 ### KNOWN BUGS
 - There is no way to log out of the administrator panel. The logged-in user’s session will expire when the browser is closed or one hour has passed since the log in. 
+- Typographic characters are not supported. When editing or adding sites in the adminstrator panel, apostrophes and quotes should be typed directly into the text box and not copied from a word processor.
 
 ## Install  Guide - Version 1.0
 ### PREREQUISITES:
@@ -34,6 +35,7 @@
 ### DOWNLOAD:
 - https://github.com/kalenpatton/gt-sustainability-tour/archive/master.zip
 ### INSTALLATION: 
+- Extract the downloaded archive.
 - Run “npm install” in the admin, backend, and client directories.
 - Run "npm run build" in the admin and client directories.
 - Execute the “database/db_generate_table_and_insert.sql” script to set up the MySQL database. 

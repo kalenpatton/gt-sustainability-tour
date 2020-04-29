@@ -1,6 +1,6 @@
 // Handles adding/deleting of admin users
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
 const saltRounds = 10;
