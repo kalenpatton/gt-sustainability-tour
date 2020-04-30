@@ -79,14 +79,14 @@ export default class Dashboard extends Component {
     closePassEdit=()=>{
         this.setState({isPassEditOpen:false});
     };
-   
+
     openEditFilter=()=>{
         this.setState({isEditFilterOpen:true});
     };
     closeEditFilter=()=>{
         this.setState({isEditFilterOpen:false});
     };
-    
+
     openEditRoute=()=>{
         this.setState({isEditRouteOpen:true});
     };
@@ -179,7 +179,7 @@ export default class Dashboard extends Component {
 
                         <button onClick={this.openEditRoute} className="optionBtn">Edit Default Route</button>
 
-                        <button onClick={this.handleEditIntro} className="optionBtn">Edit Intro</button>
+                        {/*<button onClick={this.handleEditIntro} className="optionBtn">Edit Intro</button>*/}
 
                         <Modal
                             open={this.state.isEditRouteOpen}

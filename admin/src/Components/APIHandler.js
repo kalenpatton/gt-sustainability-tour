@@ -168,10 +168,10 @@ function postPassChange(password, newPassword, callback) {
 }
 
 // POST an add admin request
-function postAddUser(email, password, callback) {
+function postAddUser(email, password, type, callback) {
     return fetch('/users/register', {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, type }),
         headers: {
             'Content-Type': 'application/json'
         }

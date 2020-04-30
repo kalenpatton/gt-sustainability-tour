@@ -49,6 +49,7 @@ class Map extends React.Component {
 
     }
 
+    // get a set of selected filters. update selectedfilters in state.
     filterOut=()=>{
         var selectedFilters = new Set();
         //redux
@@ -134,28 +135,51 @@ class Map extends React.Component {
         var selected=this.filterOut();
 
         var newSites=[];
+        var newRoute=[];
         for(let i=0;i<this.state.allSites.length;i++){
+            let site = this.state.allSites[i];
 
-            var filterList = this.state.allSites[i].filters
+            var filterList = site.filters
             if (filterList == null) {
-                newSites.push(this.state.allSites[i]);
+                newSites.push(site);
             } else {
                 for(let j=0;j<filterList.length;j++){
                     if(selected.has(filterList[j])){
-                        newSites.push(this.state.allSites[i]);
+                        newSites.push(site);
                         break;
                     }
                 }
             }
         }
 
-        console.log("all sites:");
-        console.log(this.state.allSites);
-        console.log("new sites:");
-        console.log(newSites);
+        for(let i=0;i<this.state.routeList.length;i++){
+            let site = this.state.routeList[i];
+
+            var filterList = site.filters
+            if (filterList == null) {
+                newRoute.push(site);
+            } else {
+                for(let j=0;j<filterList.length;j++){
+                    if(selected.has(filterList[j])){
+                        newRoute.push(site);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // console.log("all sites:");
+        // console.log(this.state.allSites);
+        // console.log("new sites:");
+        console.log("New Route:")
+        console.log(newRoute);
         this.setState(
-            { sites: newSites },
-            console.log("filtered sites updated")
+            {
+                sites: newSites ,
+                routeList: newRoute,
+                routeSet: new Set(newRoute)
+            },
+            this.changeShowNextStop
         );
 
     }
@@ -305,7 +329,7 @@ class Map extends React.Component {
                         animate={true}
                         easeLinearity={0.35}
                         //onClick={this.handleClick}
-                        maxBounds={ [[33.75,-84.41],[33.8, -84.38]]} //southWest,northEast
+                        maxBounds={ [[33.75,-84.42],[33.8, -84.38]]} //southWest,northEast
                         maxBoundsViscosity={1.0}
                         ref={this.saveMap}
             >
@@ -313,6 +337,7 @@ class Map extends React.Component {
                 <TileLayer
                 //s z,x,y are all used for leaflet and aren't defined by us.
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
                 />
 
                 {/* Functions for modifying the map here */}

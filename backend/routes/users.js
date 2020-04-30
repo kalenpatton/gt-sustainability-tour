@@ -39,10 +39,10 @@ router.post('/register', withAuth, (req, res) => {
     })
   }
   console.log("Adding new user.")
-  const { email, password } = req.body;
+  const { email, password, type } = req.body;
 
   const userHandler = new UserHandler(connection);
-  userHandler.add(email, password, (err) => {
+  userHandler.add(email, password, type, (err) => {
     if (err) {
       res.status(500).json({
         error: `Error registerting new user: ${err}`
