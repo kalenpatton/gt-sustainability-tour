@@ -6,6 +6,7 @@ export default class AddAdminPopup extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+            type: 'admin',
             email: '',
             password: '',
             verifypassword: '',
@@ -27,7 +28,7 @@ export default class AddAdminPopup extends React.Component{
             this.setError("Password must be at least 8 characters.");
             return;
         }
-        APIHandler.postAddUser(this.state.email, this.state.password, (res) => {
+        APIHandler.postAddUser(this.state.email, this.state.password, this.state.type, (res) => {
             if (res.ok) {
                 alert("Admin added!")
                 this.props.onSave();
@@ -54,6 +55,18 @@ export default class AddAdminPopup extends React.Component{
                 <h2>Add Admin Account</h2>
                 <form onSubmit={this.onSubmit}>
                     <div className='left-text'>
+                        <div>
+                            {'User Type: '}
+                            <select
+                                id="admin-type"
+                                name="type"
+                                value={this.state.type}
+                                onChange={this.handleInputChange}
+                                required>
+                                <option value={"admin"}>{"admin"}</option>
+                                <option value={"superadmin"}>{"superadmin"}</option>
+                            </select>
+                        </div>
                         <div>
                             {'Email: '}
                             <input

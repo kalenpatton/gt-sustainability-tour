@@ -83,6 +83,7 @@ class Map extends React.Component {
                 <TileLayer
                 //s z,x,y are all used for leaflet and aren't defined by us.
                     url='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+                    attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
                 />
 
                 {/* Add a bunch of things to the map here */}

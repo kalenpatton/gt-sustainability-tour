@@ -13,14 +13,14 @@ class UserHandler {
   }
 
   // add email/password pair to database
-  add(email, password, callback) {
+  add(email, password, type, callback) {
     bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
       if (err) {
         return callback(err);
       }
-      const queryString = "INSERT INTO users (email, password) values(?, ?)";
+      const queryString = "INSERT INTO users (email, password, usertype) values(?, ?, ?)";
       this.connection.query(queryString,
-                      [email, hashedPassword],
+                      [email, hashedPassword, type],
                       (err, rows, fields) => {
         if (err) {
           return callback(err);
