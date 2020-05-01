@@ -138,6 +138,14 @@ th, td {
     padding-right: 10px;
 }
 
+.table#filters th {
+    background-color: #a4925a 
+}
+
+.table#filters td {
+    background-color: #a4925a 
+}
+
 .route-list-item {
     position: relative;
     width: 100%;

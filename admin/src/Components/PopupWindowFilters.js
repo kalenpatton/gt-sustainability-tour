@@ -11,7 +11,8 @@ class PopupWindowFilters extends React.Component{
     constructor(props) {
     	super(props);
     	this.state = {
-            filters:''
+            filters:'',
+            offset: 1 //offset is the rows previous to the data. only need to edit the data.
         };
         APIHandler.getFilters(this.updateOnfilterListLoad);
 
@@ -25,26 +26,50 @@ updateOnfilterListLoad = (f) => {
         });
     };
 
-generatetable = (filterz) => {
-    var table = "";
-    for (var i = 0; i < filterz.length; i++) {
-        table += "<tr> <td contenteditable=\"true\">" + filterz[i].label 
-        + "</td> </tr> "
+createdeletebutton = (filterz) => {
+
+    //start is where the data starts in the filters table
+    for (var start = 0; start < filterz.length; 
+        start++) { 
+            var idofbutton = "filterbutton" + start; //gets id of button
+             // document.getElementById(idofbutton).onclick =  
+             //     document.getElementById("filterd").deleteRow(start + this.state.offset);
+                                                    //^^^^^^^^^^^^^^^^^^^ THIS GENERATES THE ERROR
+                 //adds the deleterowfunction for the button onclick. 
     }
+}
+
+addfilterrow = () => {
+    
+}
+//Creates table of filters for the user to edit and delete.
+generatetable = (filterz) => {
+    var table = [];
+    for (var i = 0; i < filterz.length; i++) {
+        var idofbutton = "filterbutton" + (i + this.state.offset); 
+        table.push(<tr> <td contenteditable="true"> {filterz[i].label}
+        </td> <button id={idofbutton}> Delete </button> </tr>)
+    }
+    return table;
 };
 
 render(){
         return(
             <div className="popupwindow">
-                <table style="width:100%" id="filters"> 
+                <table id="filterd"> 
                 <tr>
                     <th>
                         Filters
-                    </th> 
+                    </th>
                 </tr>
                     {this.generatetable(this.state.filters)}
+                    {this.createdeletebutton(this.state.filters)}
                 </table>
+                <button id='addfilter' onClick={this.addfilterrow()}> 
+                    Add Filter
+                </button>
             </div>
+            
             );
         }
     }
