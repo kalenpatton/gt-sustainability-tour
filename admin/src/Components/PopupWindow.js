@@ -10,7 +10,7 @@ class PopupWindow extends React.Component{
     // site
 
     constructor(props) {
-        
+
         super(props);
         this.isNewStop = this.props.site ? false : true;
         this.audioRef = React.createRef();
@@ -84,7 +84,7 @@ class PopupWindow extends React.Component{
             imageList: imageList
         });
     };
-    
+
     updateOnfilterListLoad = (f) => {
         console.log("filters loaded");
         console.log(f);
@@ -116,7 +116,7 @@ class PopupWindow extends React.Component{
 
         return matchingFilters;
     }
-    
+
     //Get filter Data attempts to get the values of the dropdown, and adds them to the database.
     getFilterData = () => {
         var totalfilters = "";
@@ -191,6 +191,15 @@ class PopupWindow extends React.Component{
                                     onChange={(e, newList) => this.setState({imageList: newList})}
                                 />
 
+                                {'Filters: '}
+                                <div className='form-in'>
+                                    <Select
+                                    value={this.state.selectedFilters}
+                                    options={this.state.allFilters}
+                                    isMulti
+                                    onChange={this.handleFilterChange}
+                                    />
+                                </div>
                                 {'Audio: '}
                                 <div>
                                     <input
@@ -206,19 +215,10 @@ class PopupWindow extends React.Component{
                                 <div>
                                     {'Audio Transcript: '}
                                     <textarea
-                                        className='form-desc-in'
+                                        className='form-trans-in'
                                         name='transcript'
                                         value={this.state.transcript}
                                         onChange={this.handleInputChange}/>
-                                </div>
-                                {'Filters: '}
-                                <div>
-                                    <Select
-                                    value={this.state.selectedFilters}
-                                    options={this.state.allFilters}
-                                    isMulti
-                                    onChange={this.handleFilterChange}
-                                    />
                                 </div>
                             </div>
                         </div>
