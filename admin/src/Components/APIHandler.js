@@ -63,11 +63,19 @@ function getImageList(site, callback) {
         .then(callback);
 }
 
+// removes bullet points from description because they are automatically inserted at line breaks
+function parseDescription(description) {
+
+    let bullet_regex = /•/g;
+    description = description.replace(bullet_regex, "");
+    return description;
+}
+
 // POSTs a new site to the database
 function postSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
-    formData.append("description", site.description);
+    formData.append("description", parseDescription(site.description));
     formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
@@ -94,7 +102,7 @@ function postSite(site, callback) {
 function putSite(site, callback) {
     const formData = new FormData();
     formData.append("name", site.name);
-    formData.append("description", site.description);
+    formData.append("description", parseDescription(site.description));
     formData.append("transcript", site.transcript);
     formData.append("latitude", site.position[0]);
     formData.append("longitude", site.position[1]);
@@ -223,16 +231,8 @@ function postRouteUpdate(route, callback) {
 // Convert json object to a format that matches what Map expects
 function convertToMapObject(response) {
     let map_response = response.map(({id, name, description, transcript, latitude, longitude, filters, stop_num}) =>
-        ({id, name, description: parseDescription(description), transcript, filters: parseFilters(filters), position: [latitude, longitude], stop_num}));
+        ({id, name, description: description, transcript, filters: parseFilters(filters), position: [latitude, longitude], stop_num}));
     return map_response;
-}
-
-// replaces temp characters with utf ones
-function parseDescription(description) {
-    // perhaps some way to insert newlines to the description?
-    let bullet_dash_regex = /- /g
-    description = description.replace(bullet_dash_regex, "\u2022 ")
-    return description
 }
 
 // converts filters field into a list of filters
