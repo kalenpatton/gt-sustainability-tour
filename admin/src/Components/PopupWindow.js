@@ -102,6 +102,10 @@ class PopupWindow extends React.Component{
         console.log(allFilters);
         let matchingFilters = [];
 
+        if (currFilters === undefined) {
+            return matchingFilters;
+        }
+
         allFilters.forEach(filter => {
 
             currFilters.forEach(currFilter => {
