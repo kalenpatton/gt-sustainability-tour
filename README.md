@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/42721682/97894249-49c84800-1d00-11eb-8289-8171ecb2d193.png)
+
+
 # Campus Sustainability Tour
 ## Release Notes - Version 1.0
 ### NEW FEATURES
